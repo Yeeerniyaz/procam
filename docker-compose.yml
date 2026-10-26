@@ -1,0 +1,10 @@
+services:
+  proelectric-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: proelectric-web:latest
+    container_name: proelectric-web
+    restart: unless-stopped
+    ports:
+      - "8085:80"

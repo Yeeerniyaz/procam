@@ -1,0 +1,133 @@
+@import 'tailwindcss';
+
+/*
+ * ProElectric design tokens — light minimalism.
+ * Tailwind's default slate/blue palette maps 1:1 to the brand palette:
+ *   bg        #FFFFFF  (white)
+ *   surface   #F8FAFC  (slate-50)  / #F1F5F9 (slate-100)
+ *   text      #0F172A  (slate-900) / #475569 (slate-600)
+ *   accent    #2563EB  (blue-600)  / #1D4ED8 (blue-700, hover)
+ *   border    #E2E8F0  (slate-200)
+ */
+@theme {
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-tap-highlight-color: transparent;
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-white font-sans text-slate-900 antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-blue-600/15 text-slate-900;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Reusable design primitives (declared as utilities so they can be composed with @apply). */
+@utility container-page {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+}
+
+@utility section {
+  @apply py-20 sm:py-24 lg:py-28;
+}
+
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold tracking-wide text-blue-600 uppercase shadow-sm;
+}
+
+@utility section-title {
+  @apply mt-4 text-3xl font-bold tracking-tight text-balance text-slate-900 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15];
+}
+
+@utility section-subtitle {
+  @apply mt-4 text-base leading-relaxed text-pretty text-slate-600 sm:text-lg;
+}
+
+@utility btn {
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl text-center px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60 sm:text-base;
+}
+
+@utility btn-primary {
+  @apply btn bg-blue-600 text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 hover:shadow-md hover:shadow-blue-600/25 active:scale-[0.98];
+}
+
+@utility btn-secondary {
+  @apply btn border border-slate-200 bg-white text-slate-900 shadow-sm hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98];
+}
+
+@utility card {
+  @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+}
+
+@utility field {
+  @apply block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-sm transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 focus:outline-none aria-invalid:border-red-400 aria-invalid:focus:border-red-500 aria-invalid:focus:ring-red-500/10;
+}
+
+@keyframes rec-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rec {
+  animation: rec-pulse 1.6s ease-in-out infinite;
+}
+
+@utility animate-scan {
+  animation: scan 4s linear infinite;
+}
+
+@utility animate-float-in {
+  animation: float-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rec,
+  .animate-scan,
+  .animate-float-in {
+    animation: none;
+  }
+}
