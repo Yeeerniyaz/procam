@@ -3,7 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: proelectric-web:latest
     container_name: proelectric-web
     restart: unless-stopped
     ports:
