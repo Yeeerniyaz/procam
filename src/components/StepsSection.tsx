@@ -21,14 +21,14 @@ export default function StepsSection() {
           {/* connector line (desktop) */}
           <div
             aria-hidden="true"
-            className="absolute top-[3.25rem] right-[12.5%] left-[12.5%] hidden h-px bg-gradient-to-r from-blue-200 via-slate-200 to-blue-200 lg:block"
+            className="absolute top-[3.25rem] right-[12.5%] left-[12.5%] hidden h-px bg-gradient-to-r from-orange-200/60 via-slate-200 to-orange-200/60 lg:block"
           />
           {s.items.map((step, i) => {
             const Icon = icons[i];
             return (
-              <li key={step.title} className="card relative p-6">
+              <li key={step.title} className="card relative p-6 transition duration-200 hover:border-orange-200/80">
                 <div className="flex items-center justify-between">
-                  <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm shadow-blue-600/30">
+                  <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500 text-white shadow-sm shadow-orange-500/25">
                     <Icon size={21} />
                   </span>
                   <span className="text-4xl font-extrabold tracking-tight text-slate-100 tabular-nums">

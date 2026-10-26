@@ -21,7 +21,7 @@ function LanguageSwitcher({ className = '' }: { className?: string }) {
             type="button"
             onClick={() => setLang(code)}
             aria-pressed={active}
-            className={`min-w-[2.5rem] cursor-pointer rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide transition focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:outline-none ${
+            className={`min-w-[2.5rem] cursor-pointer rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide transition focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${
               active ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-900'
             }`}
           >
@@ -95,16 +95,16 @@ export default function Header() {
 
           <a
             href={PHONES.main.tel}
-            className="hidden items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold whitespace-nowrap text-slate-900 transition hover:text-blue-600 xl:flex"
+            className="hidden items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold whitespace-nowrap text-slate-900 transition hover:text-orange-600 xl:flex"
           >
-            <Phone size={16} className="text-blue-600" />
+            <Phone size={16} className="text-orange-500" />
             {PHONES.main.short}
           </a>
 
           <a
             href={PHONES.main.tel}
             aria-label={PHONES.main.short}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-blue-600 shadow-sm sm:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-orange-500 shadow-sm sm:hidden"
           >
             <Phone size={17} />
           </a>
@@ -144,7 +144,7 @@ export default function Header() {
             </ul>
             <div className="mt-4 grid gap-3 border-t border-slate-200 pt-4 sm:grid-cols-2">
               <a href={PHONES.main.tel} className="btn-secondary">
-                <Phone size={17} className="text-blue-600" />
+                <Phone size={17} className="text-orange-500" />
                 {PHONES.main.short}
               </a>
               <a href={`#${SECTION_IDS.callback}`} onClick={() => setOpen(false)} className="btn-primary">

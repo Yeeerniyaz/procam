@@ -1,19 +1,19 @@
 @import 'tailwindcss';
 
 /*
- * ProElectric design tokens — light minimalism.
- * Tailwind's default slate/blue palette maps 1:1 to the brand palette:
+ * ProElectric design tokens — clean minimalism with warm orange accent.
+ * Palette:
  *   bg        #FFFFFF  (white)
  *   surface   #F8FAFC  (slate-50)  / #F1F5F9 (slate-100)
  *   text      #0F172A  (slate-900) / #475569 (slate-600)
- *   accent    #2563EB  (blue-600)  / #1D4ED8 (blue-700, hover)
+ *   accent    #F97316  (orange-500) / #EA580C (orange-600)
  *   border    #E2E8F0  (slate-200)
  */
 @theme {
   --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  --color-brand: #2563eb;
-  --color-brand-hover: #1d4ed8;
+  --color-brand: #f97316;
+  --color-brand-hover: #ea580c;
 }
 
 @layer base {
@@ -31,7 +31,7 @@
   }
 
   ::selection {
-    @apply bg-blue-600/15 text-slate-900;
+    @apply bg-orange-500/15 text-slate-900;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -51,7 +51,7 @@
 }
 
 @utility eyebrow {
-  @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold tracking-wide text-blue-600 uppercase shadow-sm;
+  @apply inline-flex items-center gap-2 rounded-full border border-orange-200/60 bg-orange-50/60 px-3 py-1 text-xs font-semibold tracking-wide text-orange-600 uppercase shadow-none;
 }
 
 @utility section-title {
@@ -63,23 +63,23 @@
 }
 
 @utility btn {
-  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl text-center px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60 sm:text-base;
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl text-center px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60 sm:text-base;
 }
 
 @utility btn-primary {
-  @apply btn bg-blue-600 text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 hover:shadow-md hover:shadow-blue-600/25 active:scale-[0.98];
+  @apply btn bg-orange-500 text-white shadow-sm shadow-orange-500/20 hover:bg-orange-600 hover:shadow-md hover:shadow-orange-500/25 active:scale-[0.98];
 }
 
 @utility btn-secondary {
-  @apply btn border border-slate-200 bg-white text-slate-900 shadow-sm hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98];
+  @apply btn border border-slate-200/80 bg-white text-slate-900 shadow-none hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98];
 }
 
 @utility card {
-  @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+  @apply rounded-2xl border border-slate-200/80 bg-white shadow-[0_1px_3px_0_rgba(0,0,0,0.03)];
 }
 
 @utility field {
-  @apply block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-sm transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 focus:outline-none aria-invalid:border-red-400 aria-invalid:focus:border-red-500 aria-invalid:focus:ring-red-500/10;
+  @apply block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 focus:outline-none aria-invalid:border-red-400 aria-invalid:focus:border-red-500 aria-invalid:focus:ring-red-500/10;
 }
 
 @keyframes rec-pulse {

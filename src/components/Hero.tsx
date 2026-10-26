@@ -35,18 +35,18 @@ function SurveillanceMock() {
   return (
     <div className="relative mx-auto w-full max-w-xl animate-float-in [animation-delay:150ms]">
       {/* glow */}
-      <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-blue-100 via-white to-sky-100 blur-2xl" />
+      <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-orange-100/50 via-amber-50/20 to-transparent blur-3xl" />
 
       {/* NVR monitor */}
-      <div className="card overflow-hidden p-2 shadow-xl shadow-slate-900/5">
+      <div className="card overflow-hidden p-2 shadow-lg shadow-slate-900/[0.04]">
         <div className="flex items-center justify-between px-3 py-2.5">
           <div className="flex items-center gap-2">
             <span className="flex gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-              <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-              <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
+              <span className="h-2 w-2 rounded-full bg-slate-300" />
+              <span className="h-2 w-2 rounded-full bg-slate-300" />
+              <span className="h-2 w-2 rounded-full bg-slate-300" />
             </span>
-            <span className="ml-2 text-xs font-semibold text-slate-500">{m.device}</span>
+            <span className="ml-2 font-mono text-[11px] font-medium tracking-wide text-slate-500 uppercase">{m.device}</span>
           </div>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
@@ -73,8 +73,8 @@ function SurveillanceMock() {
 
               {/* detection box on camera 2 */}
               {i === 1 && (
-                <div className="absolute top-[34%] left-[24%] h-[42%] w-[16%] rounded-sm border-2 border-blue-400 shadow-[0_0_0_1px_rgba(37,99,235,0.3)]">
-                  <span className="absolute -top-[18px] left-[-2px] rounded-sm bg-blue-500 px-1 py-px text-[9px] font-semibold whitespace-nowrap text-white">
+                <div className="absolute top-[34%] left-[24%] h-[42%] w-[16%] rounded-sm border-2 border-orange-400 shadow-[0_0_0_1px_rgba(249,115,22,0.3)]">
+                  <span className="absolute -top-[18px] left-[-2px] rounded-sm bg-orange-500 px-1 py-px text-[9px] font-semibold whitespace-nowrap text-white">
                     {m.detect} 98%
                   </span>
                   <div className="absolute inset-x-[30%] top-[8%] h-[22%] rounded-full bg-white/25" />
@@ -104,8 +104,8 @@ function SurveillanceMock() {
       </div>
 
       {/* push notification */}
-      <div className="card absolute -bottom-10 -left-2 flex w-[18.5rem] max-w-[calc(100%-1rem)] items-start gap-3 p-3 shadow-lg shadow-slate-900/10 animate-float-in [animation-delay:500ms] sm:-left-8">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white">
+      <div className="card absolute -bottom-10 -left-2 flex w-[18.5rem] max-w-[calc(100%-1rem)] items-start gap-3 p-3 shadow-md shadow-slate-900/[0.06] animate-float-in [animation-delay:500ms] sm:-left-8">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-500 text-white">
           <BellRing size={17} />
         </span>
         <div className="min-w-0">
@@ -118,8 +118,8 @@ function SurveillanceMock() {
       </div>
 
       {/* night vision chip */}
-      <div className="card absolute -top-4 -right-2 hidden items-center gap-2 px-3 py-2 shadow-lg shadow-slate-900/10 animate-float-in [animation-delay:700ms] sm:flex">
-        <Moon size={15} className="text-blue-600" />
+      <div className="card absolute -top-4 -right-2 hidden items-center gap-2 px-3 py-2 shadow-md shadow-slate-900/[0.06] animate-float-in [animation-delay:700ms] sm:flex">
+        <Moon size={15} className="text-orange-500" />
         <span className="text-xs font-semibold text-slate-700">ColorVu · 24/7</span>
       </div>
     </div>
@@ -135,7 +135,7 @@ export default function Hero() {
       {/* background grid */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_40%,transparent_100%)] bg-[size:48px_48px] opacity-60"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_40%,transparent_100%)] bg-[size:48px_48px] opacity-40"
       />
 
       <div className="container-page grid items-center gap-16 pt-10 pb-24 sm:pt-16 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pt-20 lg:pb-32">
