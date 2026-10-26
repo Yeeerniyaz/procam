@@ -35,7 +35,7 @@ function SurveillanceMock() {
   return (
     <div className="relative mx-auto w-full max-w-xl animate-float-in [animation-delay:150ms]">
       {/* glow */}
-      <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-orange-100/50 via-amber-50/20 to-transparent blur-3xl" />
+      <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-slate-200/50 via-slate-100/30 to-transparent blur-3xl" />
 
       {/* NVR monitor */}
       <div className="card overflow-hidden p-2 shadow-lg shadow-slate-900/[0.04]">
@@ -73,8 +73,8 @@ function SurveillanceMock() {
 
               {/* detection box on camera 2 */}
               {i === 1 && (
-                <div className="absolute top-[34%] left-[24%] h-[42%] w-[16%] rounded-sm border-2 border-orange-400 shadow-[0_0_0_1px_rgba(249,115,22,0.3)]">
-                  <span className="absolute -top-[18px] left-[-2px] rounded-sm bg-orange-500 px-1 py-px text-[9px] font-semibold whitespace-nowrap text-white">
+                <div className="absolute top-[34%] left-[24%] h-[42%] w-[16%] rounded-sm border-2 border-slate-400 shadow-[0_0_0_1px_rgba(71,85,105,0.3)]">
+                  <span className="absolute -top-[18px] left-[-2px] rounded-sm bg-slate-800 px-1 py-px text-[9px] font-semibold whitespace-nowrap text-white">
                     {m.detect} 98%
                   </span>
                   <div className="absolute inset-x-[30%] top-[8%] h-[22%] rounded-full bg-white/25" />
@@ -105,7 +105,7 @@ function SurveillanceMock() {
 
       {/* push notification */}
       <div className="card absolute -bottom-10 -left-2 flex w-[18.5rem] max-w-[calc(100%-1rem)] items-start gap-3 p-3 shadow-md shadow-slate-900/[0.06] animate-float-in [animation-delay:500ms] sm:-left-8">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-500 text-white">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white">
           <BellRing size={17} />
         </span>
         <div className="min-w-0">
@@ -119,7 +119,7 @@ function SurveillanceMock() {
 
       {/* night vision chip */}
       <div className="card absolute -top-4 -right-2 hidden items-center gap-2 px-3 py-2 shadow-md shadow-slate-900/[0.06] animate-float-in [animation-delay:700ms] sm:flex">
-        <Moon size={15} className="text-orange-500" />
+        <Moon size={15} className="text-slate-600" />
         <span className="text-xs font-semibold text-slate-700">ColorVu · 24/7</span>
       </div>
     </div>

@@ -142,7 +142,7 @@ export default function CallbackForm() {
               const Icon = bulletIcons[i] ?? CheckCircle2;
               return (
                 <li key={b} className="flex items-center gap-3 text-slate-700">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
                     <Icon size={19} />
                   </span>
                   <span className="font-medium">{b}</span>
@@ -153,9 +153,9 @@ export default function CallbackForm() {
 
           <a
             href={PHONES.main.tel}
-            className="mt-10 inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-orange-200/80 hover:bg-white hover:shadow-sm"
+            className="mt-10 inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-slate-300 hover:bg-white hover:shadow-sm"
           >
-            <Phone size={20} className="text-orange-500" />
+            <Phone size={20} className="text-slate-700" />
             <span className="text-lg font-bold tracking-tight text-slate-900">{PHONES.main.display}</span>
           </a>
         </div>
@@ -169,7 +169,7 @@ export default function CallbackForm() {
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
               <label htmlFor={ids.name} className="mb-2 block text-sm font-semibold text-slate-800">
-                {f.nameLabel} <span className="text-orange-500">*</span>
+                {f.nameLabel} <span className="text-slate-500">*</span>
               </label>
               <input
                 id={ids.name}
@@ -194,7 +194,7 @@ export default function CallbackForm() {
 
             <div>
               <label htmlFor={ids.phone} className="mb-2 block text-sm font-semibold text-slate-800">
-                {f.phoneLabel} <span className="text-orange-500">*</span>
+                {f.phoneLabel} <span className="text-slate-500">*</span>
               </label>
               <input
                 id={ids.phone}

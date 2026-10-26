@@ -23,9 +23,9 @@ export default function AdvantagesSection() {
             return (
               <article
                 key={item.title}
-                className="card group flex flex-col p-6 transition duration-300 hover:-translate-y-0.5 hover:border-orange-200/80 hover:shadow-md"
+                className="card group flex flex-col p-6 transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-600 transition duration-200 group-hover:bg-orange-500 group-hover:text-white">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-700 transition duration-200 group-hover:bg-slate-900 group-hover:text-white">
                   <Icon size={22} />
                 </span>
                 <h3 className="mt-6 text-lg font-semibold tracking-tight text-slate-900">{item.title}</h3>

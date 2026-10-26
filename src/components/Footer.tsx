@@ -24,13 +24,13 @@ export default function Footer() {
           <div className="mt-14 grid gap-5 md:grid-cols-3">
             {/* Main phone */}
             <div className="card flex flex-col p-6 sm:p-7">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500 text-white shadow-sm shadow-orange-500/25">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm shadow-slate-900/20">
                 <Phone size={20} />
               </span>
               <p className="mt-5 text-sm font-medium text-slate-500">{c.mainPhone}</p>
               <a
                 href={PHONES.main.tel}
-                className="mt-1 text-xl font-bold tracking-tight whitespace-nowrap text-slate-900 transition hover:text-orange-600"
+                className="mt-1 text-xl font-bold tracking-tight whitespace-nowrap text-slate-900 transition hover:text-slate-600"
               >
                 {PHONES.main.display}
               </a>
@@ -53,19 +53,19 @@ export default function Footer() {
 
             {/* Extra phone */}
             <div className="card flex flex-col p-6 sm:p-7">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
                 <Phone size={20} />
               </span>
               <p className="mt-5 text-sm font-medium text-slate-500">{c.extraPhone}</p>
               <a
                 href={PHONES.extra.tel}
-                className="mt-1 text-xl font-bold tracking-tight whitespace-nowrap text-slate-900 transition hover:text-orange-600"
+                className="mt-1 text-xl font-bold tracking-tight whitespace-nowrap text-slate-900 transition hover:text-slate-600"
               >
                 {PHONES.extra.display}
               </a>
               <div className="mt-auto pt-6">
                 <a href={PHONES.extra.tel} className="btn-secondary w-full px-3 py-2.5 sm:text-sm">
-                  <Phone size={16} className="text-orange-500" />
+                  <Phone size={16} className="text-slate-700" />
                   {c.call}
                 </a>
               </div>
@@ -73,7 +73,7 @@ export default function Footer() {
 
             {/* Area & socials */}
             <div className="card flex flex-col p-6 sm:p-7">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
                 <MapPin size={20} />
               </span>
               <p className="mt-5 text-sm font-medium text-slate-500">{c.area}</p>

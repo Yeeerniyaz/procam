@@ -20,7 +20,7 @@ export default function SocialLinks({ className = '' }: { className?: string }) 
               aria-label={label}
               title={label}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-none transition hover:-translate-y-0.5 hover:border-orange-200/80 hover:text-orange-600 hover:shadow-sm focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-none transition hover:-translate-y-0.5 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:outline-none"
             >
               <Icon size={18} />
             </a>
