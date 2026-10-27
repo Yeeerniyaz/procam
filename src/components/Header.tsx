@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Menu, Phone, X } from 'lucide-react';
-import { PHONES, SECTION_IDS } from '../config/contacts';
+import { PHONES } from '../config/contacts';
 import { LANGS } from '../i18n/translations';
 import { useLanguage } from '../i18n/LanguageContext';
 import Logo from './Logo';
@@ -60,21 +60,21 @@ export default function Header() {
   }, [open]);
 
   const links = [
-    { href: `#${SECTION_IDS.equipment}`, label: t.nav.equipment, tag: '01' },
-    { href: `#${SECTION_IDS.advantages}`, label: t.nav.advantages, tag: '02' },
-    { href: `#${SECTION_IDS.steps}`, label: t.nav.steps, tag: '03' },
-    { href: `#${SECTION_IDS.contacts}`, label: t.nav.contacts, tag: '04' },
+    { href: '#hardware', label: t.nav.equipment, tag: '01' },
+    { href: '#advantages', label: t.nav.advantages, tag: '02' },
+    { href: '#steps', label: t.nav.steps, tag: '03' },
+    { href: '#contacts', label: t.nav.contacts, tag: '04' },
   ];
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-200 border-b ${
+      className={`sticky top-0 z-50 h-16 w-full backdrop-blur-xl transition-all border-b ${
         scrolled || open
-          ? 'border-zinc-200/80 bg-white/70 backdrop-blur-xl shadow-xs'
-          : 'border-zinc-200/40 bg-white/40 backdrop-blur-md'
+          ? 'border-zinc-200/90 bg-white/90 shadow-xs'
+          : 'border-zinc-200/70 bg-white/85'
       }`}
     >
-      <div className="container-open flex h-16 lg:h-18 items-center justify-between gap-4">
+      <div className="max-w-[1440px] mx-auto h-full px-4 sm:px-8 lg:px-16 flex items-center justify-between gap-4">
         {/* Left: Brand + Monospace Badge */}
         <div className="flex items-center gap-3 sm:gap-4 shrink-0">
           <Logo tagline={t.nav.brandTagline} />
@@ -85,24 +85,21 @@ export default function Header() {
           </span>
         </div>
 
-        {/* Center: Minimalist Nav Links with Underline Animation */}
-        <nav className="hidden lg:block shrink-0" aria-label="Main Navigation">
-          <ul className="flex items-center gap-5 xl:gap-7">
-            {links.map((l) => (
-              <li key={l.href} className="shrink-0">
-                <a
-                  href={l.href}
-                  className="group relative py-1 text-xs xl:text-sm font-medium text-zinc-600 transition-colors duration-150 hover:text-zinc-950 whitespace-nowrap shrink-0 inline-flex items-center"
-                >
-                  <span className="mr-1 font-mono text-[10px] text-zinc-400 group-hover:text-zinc-950 transition-colors">
-                    {l.tag}.
-                  </span>
-                  {l.label}
-                  <span className="absolute bottom-0 left-0 right-0 h-[1.5px] scale-x-0 bg-zinc-950 transition-transform duration-200 origin-left group-hover:scale-x-100" />
-                </a>
-              </li>
-            ))}
-          </ul>
+        {/* Center: Desktop Nav */}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 shrink-0" aria-label="Main Navigation">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="group relative py-1 text-xs xl:text-sm font-medium text-zinc-600 hover:text-zinc-950 transition-colors whitespace-nowrap shrink-0 inline-flex items-center"
+            >
+              <span className="mr-1 font-mono text-[10px] text-zinc-400 group-hover:text-zinc-950 transition-colors">
+                {l.tag}.
+              </span>
+              {l.label}
+              <span className="absolute bottom-0 left-0 right-0 h-[1.5px] scale-x-0 bg-zinc-950 transition-transform duration-200 origin-left group-hover:scale-x-100" />
+            </a>
+          ))}
         </nav>
 
         {/* Right: Lang Switcher + Phone + Monolith Pill CTA */}
@@ -112,16 +109,16 @@ export default function Header() {
           {/* Primary phone in font-mono */}
           <a
             href={PHONES.main.tel}
-            className="hidden items-center gap-2 rounded-full border border-zinc-200/80 bg-white/60 px-3.5 py-1.5 font-mono text-xs font-medium text-zinc-900 transition-all hover:border-zinc-950 hover:bg-white xl:flex whitespace-nowrap shrink-0"
+            className="hidden lg:flex items-center gap-2 rounded-full border border-zinc-200 hover:border-zinc-950 px-4 py-2 font-mono text-xs xl:text-sm text-zinc-900 transition whitespace-nowrap shrink-0"
           >
             <Phone size={13} className="text-zinc-500 shrink-0" />
-            <span>{PHONES.main.display}</span>
+            <span>+7 (706) 606-63-23</span>
           </a>
 
           {/* Sharp solid black pill button */}
           <a
-            href={`#${SECTION_IDS.callback}`}
-            className="hidden items-center justify-center rounded-full bg-zinc-950 px-6 py-2.5 text-xs sm:text-sm font-medium text-white transition-all duration-200 hover:bg-zinc-800 active:scale-[0.98] lg:inline-flex shadow-xs whitespace-nowrap shrink-0"
+            href="#contacts"
+            className="hidden lg:inline-flex items-center justify-center rounded-full bg-zinc-950 text-white hover:bg-zinc-800 text-xs xl:text-sm font-medium px-5 py-2.5 transition whitespace-nowrap shrink-0 shadow-xs"
           >
             {t.nav.cta}
           </a>
@@ -133,7 +130,7 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? t.nav.menuClose : t.nav.menuOpen}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950 lg:hidden shrink-0"
+            className="w-10 h-10 rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950 flex items-center justify-center lg:hidden shrink-0 cursor-pointer"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -171,7 +168,7 @@ export default function Header() {
 
             <div className="flex flex-col gap-3 pt-2">
               <a
-                href={PHONES.main.tel}
+                href="tel:+77066066323"
                 className="flex items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white py-3.5 font-mono text-sm font-medium text-zinc-900 transition hover:border-zinc-950"
               >
                 <Phone size={15} />
@@ -187,7 +184,7 @@ export default function Header() {
               </a>
 
               <a
-                href={`#${SECTION_IDS.callback}`}
+                href="#contacts"
                 onClick={() => setOpen(false)}
                 className="w-full py-4 rounded-full bg-zinc-950 text-white text-center font-medium transition hover:bg-zinc-800 active:scale-[0.99] shadow-xs"
               >

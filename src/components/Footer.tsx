@@ -1,5 +1,5 @@
 import { MapPin, Phone } from 'lucide-react';
-import { PHONES, SECTION_IDS, WHATSAPP_URL } from '../config/contacts';
+import { PHONES, WHATSAPP_URL } from '../config/contacts';
 import { useLanguage } from '../i18n/LanguageContext';
 import { WhatsAppIcon } from './icons/BrandIcons';
 import Logo from './Logo';
@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-white border-t border-zinc-200 overflow-hidden">
       {/* Contact Zones Section */}
-      <section id={SECTION_IDS.contacts} className="section-open relative z-10">
+      <section className="section-open relative z-10">
         <div className="container-open">
           {/* Header */}
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 pb-8 sm:pb-12 lg:pb-14 border-b border-zinc-200">
@@ -150,7 +150,7 @@ export default function Footer() {
           <Logo />
 
           <p className="font-mono text-xs text-zinc-500 text-center">
-            © {year} PROCAM · {t.footer.tagline}
+            © {year} ProCam. {t.footer.tagline}
           </p>
 
           <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400">

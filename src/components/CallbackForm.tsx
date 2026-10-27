@@ -1,6 +1,6 @@
 import { type ChangeEvent, type FormEvent, useId, useState } from 'react';
-import { ArrowRight, CheckCircle2, Clock, Headset, Phone, Send, ShieldCheck } from 'lucide-react';
-import { buildWhatsAppUrl, PHONES, SECTION_IDS, WHATSAPP_URL } from '../config/contacts';
+import { ArrowRight, CheckCircle2, Phone, Send, Tag } from 'lucide-react';
+import { buildWhatsAppUrl, PHONES, WHATSAPP_URL } from '../config/contacts';
 import { OBJECT_TYPE_KEYS, objectTypeForMessage, type ObjectTypeKey } from '../i18n/translations';
 import { useLanguage } from '../i18n/LanguageContext';
 import { WhatsAppIcon } from './icons/BrandIcons';
@@ -35,10 +35,6 @@ export const formatPhone = (input: string): string => {
 
 const isPhoneValid = (value: string) => normalizeDigits(value).length === 11;
 
-/* ------------------------------------------------------------------ */
-/* WhatsApp message & link handler                                     */
-/* ------------------------------------------------------------------ */
-
 interface FormState {
   name: string;
   phone: string;
@@ -46,14 +42,24 @@ interface FormState {
   comment: string;
 }
 
-const buildMessage = ({ name, phone, objectType, comment }: FormState): string =>
-  [
-    'Здравствуйте, ProCam! Заявка с сайта на обратный звонок:',
+const buildMessage = (
+  { name, phone, objectType, comment }: FormState,
+  tags: string[]
+): string => {
+  const parts = [
+    'Здравствуйте, ProCam! Заявка с сайта на расчёт системы видеонаблюдения:',
     `👤 Имя: ${name.trim()}`,
     `📞 Телефон: ${phone}`,
     `🏢 Объект: ${objectTypeForMessage(objectType)}`,
-    `💬 Комментарий: ${comment.trim() || 'Без комментария'}`,
-  ].join('\n');
+  ];
+  if (tags.length > 0) {
+    parts.push(`🏷️ Параметры: ${tags.join(', ')}`);
+  }
+  if (comment.trim()) {
+    parts.push(`💬 Комментарий: ${comment.trim()}`);
+  }
+  return parts.join('\n');
+};
 
 const openWhatsApp = (url: string) => {
   const win = window.open(url, '_blank');
@@ -63,10 +69,6 @@ const openWhatsApp = (url: string) => {
     window.location.href = url;
   }
 };
-
-/* ------------------------------------------------------------------ */
-/* Component                                                           */
-/* ------------------------------------------------------------------ */
 
 type Errors = Partial<Record<'name' | 'phone', true>>;
 
@@ -86,8 +88,15 @@ export default function CallbackForm() {
   };
 
   const [form, setForm] = useState<FormState>(initialState);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+  };
 
   const update =
     <K extends keyof FormState>(key: K) =>
@@ -101,33 +110,28 @@ export default function CallbackForm() {
       }
     };
 
-  const validate = (state: FormState): Errors => {
+  const validate = (): boolean => {
     const next: Errors = {};
-    if (state.name.trim().length < 2) next.name = true;
-    if (!isPhoneValid(state.phone)) next.phone = true;
-    return next;
+    if (!form.name.trim()) next.name = true;
+    if (!isPhoneValid(form.phone)) next.phone = true;
+    setErrors(next);
+    return Object.keys(next).length === 0;
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const nextErrors = validate(form);
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) {
-      const firstInvalid = nextErrors.name ? ids.name : ids.phone;
-      document.getElementById(firstInvalid)?.focus();
-      return;
-    }
-    openWhatsApp(buildWhatsAppUrl(buildMessage(form)));
+    if (!validate()) return;
+    const msg = buildMessage(form, selectedTags);
+    const url = buildWhatsAppUrl(msg);
+    openWhatsApp(url);
     setSent(true);
   };
 
-  const bulletIcons = [Headset, ShieldCheck, Clock];
-
   return (
-    <section id={SECTION_IDS.callback} className="py-14 sm:py-20 lg:py-28 bg-[#FAFAFA] relative">
-      <div className="container-open">
-        {/* Striking Zinc-950 Dark Monolith Island */}
-        <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] bg-zinc-950 text-white p-6 sm:p-12 lg:p-20 mx-0 border border-zinc-800 shadow-2xl">
+    <section id="contacts" className="min-h-screen flex flex-col justify-center py-16 lg:py-24 bg-architectural-grid">
+      <div className="container-open w-full">
+        {/* Striking Zinc-950 Dark Monolith Card */}
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] bg-zinc-950 text-white p-6 sm:p-12 lg:p-16 border border-zinc-800 shadow-2xl">
           {/* Subtle architectural dot grid inside monolith */}
           <div
             aria-hidden="true"
@@ -140,38 +144,35 @@ export default function CallbackForm() {
               <div>
                 <div className="flex items-center gap-2">
                   <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
-                    // 04 · DISPATCH LINK
+                    {f.eyebrow}
                   </span>
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="font-mono text-xs text-emerald-400">ONLINE</span>
+                  <span className="font-mono text-xs text-emerald-400">ONLINE · 5 МИНУТ</span>
                 </div>
 
                 <h2 className="mt-4 text-2xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight text-white">
                   {f.title}
                 </h2>
 
-                <p className="mt-3 sm:mt-4 text-sm sm:text-lg text-zinc-400 font-normal leading-relaxed">
+                <p className="mt-3 sm:mt-4 text-sm sm:text-base text-zinc-400 font-normal leading-relaxed">
                   {f.subtitle}
                 </p>
 
                 {/* Bullets */}
-                <ul className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
-                  {f.bullets.map((b, idx) => {
-                    const Icon = bulletIcons[idx] ?? CheckCircle2;
-                    return (
-                      <li key={b} className="flex items-center gap-3 text-xs sm:text-sm text-zinc-300">
-                        <span className="flex h-6 w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300">
-                          <Icon size={13} />
-                        </span>
-                        <span>{b}</span>
-                      </li>
-                    );
-                  })}
+                <ul className="mt-6 space-y-3">
+                  {f.bullets.map((b) => (
+                    <li key={b} className="flex items-center gap-2.5 text-xs sm:text-sm text-zinc-300">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-emerald-400">
+                        <CheckCircle2 size={13} />
+                      </span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              {/* Contact Callouts */}
-              <div className="mt-8 sm:mt-12 space-y-3 pt-6 sm:pt-8 border-t border-zinc-800/80">
+              {/* Clickable Phone Cards & Instant Indicator */}
+              <div className="mt-8 sm:mt-12 space-y-3 pt-6 border-t border-zinc-800/80">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 block">
                   [DIRECT_LINES // ALMATY]
                 </span>
@@ -179,17 +180,17 @@ export default function CallbackForm() {
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3">
                   <a
                     href={PHONES.main.tel}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 font-mono text-xs sm:text-sm text-white transition hover:border-zinc-500"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/90 px-4 py-2.5 font-mono text-xs sm:text-sm text-white transition hover:border-zinc-500 hover:bg-zinc-800"
                   >
-                    <Phone size={14} className="text-zinc-400" />
-                    <span>{PHONES.main.display}</span>
+                    <Phone size={14} className="text-emerald-400 shrink-0" />
+                    <span>+7 (706) 606-63-23</span>
                   </a>
 
                   <a
                     href="tel:+77776066323"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 font-mono text-xs sm:text-sm text-zinc-300 transition hover:border-zinc-500"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/90 px-4 py-2.5 font-mono text-xs sm:text-sm text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800"
                   >
-                    <Phone size={14} className="text-zinc-400" />
+                    <Phone size={14} className="text-zinc-400 shrink-0" />
                     <span>+7 (777) 606-63-23</span>
                   </a>
                 </div>
@@ -209,14 +210,42 @@ export default function CallbackForm() {
               </div>
             </div>
 
-            {/* Right Side: Minimalist Bottom-Bordered Form */}
+            {/* Right Side: Smart Form + Quick-Tag Chips */}
             <div className="lg:col-span-7">
               <form
                 noValidate
                 onSubmit={onSubmit}
-                className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-5 sm:p-8 lg:p-10 backdrop-blur-md"
+                className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-8 backdrop-blur-md"
               >
-                <div className="grid gap-6 sm:grid-cols-2">
+                {/* Interactive Quick-Tag Pills */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 mb-2.5">
+                    <Tag size={13} className="text-emerald-400" />
+                    <span>{f.quickTagsTitle}</span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {f.quickTags.map((tag) => {
+                      const selected = selectedTags.includes(tag);
+                      return (
+                        <button
+                          key={tag}
+                          type="button"
+                          onClick={() => toggleTag(tag)}
+                          className={`cursor-pointer px-3 py-1.5 rounded-full font-mono text-xs transition active:scale-95 border ${
+                            selected
+                              ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 font-semibold shadow-xs'
+                              : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-white'
+                          }`}
+                        >
+                          {selected ? `✓ ${tag}` : `+ ${tag}`}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-2">
                   {/* Name field */}
                   <div>
                     <label htmlFor={ids.name} className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-1">
@@ -311,7 +340,7 @@ export default function CallbackForm() {
                     <textarea
                       id={ids.comment}
                       name="comment"
-                      rows={3}
+                      rows={2}
                       maxLength={500}
                       value={form.comment}
                       onChange={update('comment')}
@@ -321,23 +350,19 @@ export default function CallbackForm() {
                   </div>
                 </div>
 
-                {/* Submit button: High-contrast white pill button */}
-                <button type="submit" className="btn-pill-white mt-8 w-full text-base">
+                {/* Submit button */}
+                <button type="submit" className="btn-pill-white mt-6 w-full text-base font-semibold cursor-pointer">
                   <Send size={16} />
                   <span>{f.submit}</span>
                 </button>
 
-                <p className="mt-4 text-center font-mono text-xs text-zinc-500">
+                <p className="mt-3.5 text-center font-mono text-[11px] text-zinc-500">
                   {f.note}
                 </p>
 
                 {sent && (
-                  <div
-                    role="status"
-                    className="mt-4 flex items-start gap-2.5 rounded-xl border border-emerald-500/30 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-300"
-                  >
-                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-400" />
-                    <span>{f.success}</span>
+                  <div className="mt-4 rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-3 text-xs text-emerald-300 text-center font-mono">
+                    {f.success}
                   </div>
                 )}
               </form>

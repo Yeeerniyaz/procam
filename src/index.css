@@ -12,20 +12,23 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: 4rem;
     -webkit-tap-highlight-color: transparent;
     color-scheme: light;
     overflow-x: hidden;
     max-width: 100vw;
+    background-color: #FAFAFA;
+    color: #09090B;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   body {
-    background-color: #fafafa;
-    color: #09090b;
+    background-color: #FAFAFA;
+    color: #09090B;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: 'cv11', 'ss01', 'zero';
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
     max-width: 100vw;
@@ -41,6 +44,12 @@
       scroll-behavior: auto;
     }
   }
+}
+
+.bg-architectural-grid {
+  background-color: #FAFAFA;
+  background-image: radial-gradient(#D4D4D8 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* Subtle architectural dot-matrix pattern */
