@@ -49,14 +49,8 @@ function CameraHudViewfinder() {
 
   return (
     <div className="relative mx-auto w-full select-none">
-      {/* Background Architectural Glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-b from-zinc-200/50 via-zinc-100/30 to-transparent blur-2xl"
-      />
-
       {/* Main HUD Chassis */}
-      <div className="relative rounded-2xl border border-zinc-300/80 bg-white shadow-xl shadow-zinc-950/5">
+      <div className="relative rounded-2xl border border-zinc-300/80 bg-white shadow-xl shadow-zinc-950/5 overflow-hidden">
         {/* Top Header Bar */}
         <div className="flex items-center justify-between border-b border-zinc-200/80 px-4 py-3 sm:px-5">
           <div className="flex items-center gap-3">
@@ -66,7 +60,7 @@ function CameraHudViewfinder() {
               <span className="h-2 w-2 rounded-full bg-zinc-300" />
             </span>
             <span className="font-mono text-xs font-semibold tracking-wider text-zinc-900">
-              NVR // {m.device}
+              HIKVISION // NVR_4CH
             </span>
           </div>
 
@@ -203,26 +197,26 @@ function CameraHudViewfinder() {
             );
           })}
         </div>
+      </div>
 
-        {/* Floating Notification Monolith Toast */}
-        <div className="absolute -bottom-8 -left-2 right-2 sm:-left-6 sm:right-auto sm:w-[22rem] z-20 rounded-xl border border-zinc-800 bg-zinc-950 p-3.5 text-white shadow-2xl">
-          <div className="flex items-start gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-zinc-800 text-emerald-400">
-              <Eye size={18} />
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center justify-between gap-1">
-                <p className="truncate text-xs font-semibold text-white">
-                  {m.alertTitle}
-                </p>
-                <span className="font-mono text-[10px] text-zinc-400">
-                  {m.alertTime}
-                </span>
-              </div>
-              <p className="truncate text-[11px] text-zinc-400">
-                {m.alertPlace} · Hik-Connect Push
+      {/* Floating Notification Monolith Toast */}
+      <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950 p-3.5 text-white shadow-lg">
+        <div className="flex items-start gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-zinc-800 text-emerald-400">
+            <Eye size={18} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center justify-between gap-1">
+              <p className="truncate text-xs font-semibold text-white">
+                {m.alertTitle}
               </p>
+              <span className="font-mono text-[10px] text-zinc-400">
+                {m.alertTime}
+              </span>
             </div>
+            <p className="truncate text-[11px] text-zinc-400">
+              {m.alertPlace} · Hik-Connect Push
+            </p>
           </div>
         </div>
       </div>
@@ -260,8 +254,16 @@ export default function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
           {/* Left Column (7 cols): Giant Editorial Headline + Actions */}
           <div className="lg:col-span-7">
-            <h1 className="text-4xl sm:text-6xl lg:text-[4.75rem] xl:text-[5.25rem] font-medium tracking-tighter leading-[0.96] text-zinc-950 text-balance">
-              {h.title}
+            <h1 className="text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight font-semibold text-zinc-950 text-balance">
+              {h.title.split(/(IP[-‑][^\s]+)/).map((part, i) =>
+                part.startsWith('IP') ? (
+                  <span key={i} className="whitespace-nowrap">
+                    {part}
+                  </span>
+                ) : (
+                  part
+                )
+              )}
             </h1>
 
             <p className="mt-8 max-w-2xl text-lg sm:text-xl font-normal leading-relaxed text-zinc-600 text-pretty">
@@ -285,34 +287,32 @@ export default function Hero() {
                 <span>{h.secondaryCta}</span>
               </a>
             </div>
-
-            {/* Architectural Highlights Strip */}
-            <div className="mt-16 border-t border-zinc-200 pt-8">
-              <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-                {h.highlights.map((item, idx) => {
-                  const hudLabels = ['[RES_4K_60FPS]', '[F1.0_COLORVU]', '[POE_IEEE_802.3AF]', '[APP_HIK_CONNECT]'];
-                  return (
-                    <div key={item.value} className="flex flex-col">
-                      <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">
-                        {hudLabels[idx] || `[SPEC_0${idx + 1}]`}
-                      </span>
-                      <span className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950">
-                        {item.value}
-                      </span>
-                      <span className="mt-1 text-xs sm:text-sm text-zinc-500 font-normal">
-                        {item.label}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
           {/* Right Column (5 cols): Live Camera Viewfinder UI */}
           <div className="lg:col-span-5 lg:pl-2">
             <CameraHudViewfinder />
           </div>
+        </div>
+
+        {/* Full-width 4-column Bottom Metrics Row */}
+        <div className="border-t border-zinc-200 pt-8 mt-16 grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {h.highlights.map((item, idx) => {
+            const hudLabels = ['[RES_4K_60FPS]', '[F1.0_COLORVU]', '[POE_IEEE_802.3AF]', '[APP_HIK_CONNECT]'];
+            return (
+              <div key={item.value} className="flex flex-col">
+                <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">
+                  {hudLabels[idx] || `[SPEC_0${idx + 1}]`}
+                </span>
+                <span className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950">
+                  {item.value}
+                </span>
+                <span className="mt-1 text-xs sm:text-sm text-zinc-500 font-normal">
+                  {item.label}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

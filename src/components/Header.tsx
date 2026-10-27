@@ -11,7 +11,7 @@ function LanguageSwitcher({ className = '' }: { className?: string }) {
     <div
       role="group"
       aria-label={t.nav.langLabel}
-      className={`inline-flex items-center rounded-full border border-zinc-200 bg-zinc-100/90 p-0.5 ${className}`}
+      className={`inline-flex items-center rounded-full border border-zinc-200 bg-zinc-100/90 p-0.5 whitespace-nowrap shrink-0 ${className}`}
     >
       {LANGS.map((code) => {
         const active = lang === code;
@@ -76,29 +76,29 @@ export default function Header() {
     >
       <div className="container-open flex h-18 items-center justify-between gap-4">
         {/* Left: Brand + Monospace Badge */}
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-3 sm:gap-4 shrink-0">
           <Logo tagline={t.nav.brandTagline} />
-          <div className="hidden h-5 w-px bg-zinc-200 md:block" />
-          <span className="hidden font-mono text-[11px] uppercase tracking-widest text-zinc-400 select-none md:inline-flex items-center gap-1.5">
+          <div className="hidden h-5 w-px bg-zinc-200 2xl:block" />
+          <span className="hidden font-mono text-[11px] uppercase tracking-widest text-zinc-400 select-none 2xl:flex items-center gap-1.5 whitespace-nowrap shrink-0">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
             [CCTV // ALMATY]
           </span>
         </div>
 
         {/* Center: Minimalist Nav Links with Underline Animation */}
-        <nav className="hidden lg:block" aria-label="Main Navigation">
-          <ul className="flex items-center gap-1 xl:gap-2">
+        <nav className="hidden lg:block shrink-0" aria-label="Main Navigation">
+          <ul className="flex items-center gap-5 xl:gap-7">
             {links.map((l) => (
-              <li key={l.href}>
+              <li key={l.href} className="shrink-0">
                 <a
                   href={l.href}
-                  className="group relative px-3 py-2 text-sm font-medium text-zinc-600 transition-colors duration-150 hover:text-zinc-950"
+                  className="group relative py-1 text-xs xl:text-sm font-medium text-zinc-600 transition-colors duration-150 hover:text-zinc-950 whitespace-nowrap shrink-0 inline-flex items-center"
                 >
                   <span className="mr-1 font-mono text-[10px] text-zinc-400 group-hover:text-zinc-950 transition-colors">
                     {l.tag}.
                   </span>
                   {l.label}
-                  <span className="absolute bottom-1 left-3 right-3 h-[1.5px] scale-x-0 bg-zinc-950 transition-transform duration-200 origin-left group-hover:scale-x-100" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[1.5px] scale-x-0 bg-zinc-950 transition-transform duration-200 origin-left group-hover:scale-x-100" />
                 </a>
               </li>
             ))}
@@ -106,15 +106,15 @@ export default function Header() {
         </nav>
 
         {/* Right: Lang Switcher + Phone + Monolith Pill CTA */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          <LanguageSwitcher />
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <LanguageSwitcher className="shrink-0" />
 
           {/* Primary phone in font-mono */}
           <a
             href={PHONES.main.tel}
-            className="hidden items-center gap-2 rounded-full border border-zinc-200/80 bg-white/60 px-3.5 py-1.5 font-mono text-xs font-medium text-zinc-900 transition-all hover:border-zinc-950 hover:bg-white xl:flex"
+            className="hidden items-center gap-2 rounded-full border border-zinc-200/80 bg-white/60 px-3.5 py-1.5 font-mono text-xs font-medium text-zinc-900 transition-all hover:border-zinc-950 hover:bg-white xl:flex whitespace-nowrap shrink-0"
           >
-            <Phone size={13} className="text-zinc-500" />
+            <Phone size={13} className="text-zinc-500 shrink-0" />
             <span>{PHONES.main.display}</span>
           </a>
 
@@ -122,7 +122,7 @@ export default function Header() {
           <a
             href={PHONES.main.tel}
             aria-label={PHONES.main.short}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950 sm:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950 sm:hidden shrink-0"
           >
             <Phone size={15} />
           </a>
@@ -130,7 +130,7 @@ export default function Header() {
           {/* Sharp solid black pill button */}
           <a
             href={`#${SECTION_IDS.callback}`}
-            className="hidden items-center justify-center rounded-full bg-zinc-950 px-6 py-2.5 text-xs sm:text-sm font-medium text-white transition-all duration-200 hover:bg-zinc-800 active:scale-[0.98] sm:inline-flex shadow-xs"
+            className="hidden items-center justify-center rounded-full bg-zinc-950 px-6 py-2.5 text-xs sm:text-sm font-medium text-white transition-all duration-200 hover:bg-zinc-800 active:scale-[0.98] sm:inline-flex shadow-xs whitespace-nowrap shrink-0"
           >
             {t.nav.cta}
           </a>
@@ -142,7 +142,7 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? t.nav.menuClose : t.nav.menuOpen}
-            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950 lg:hidden"
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950 lg:hidden shrink-0"
           >
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
