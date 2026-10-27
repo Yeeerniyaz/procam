@@ -124,17 +124,17 @@ export default function CallbackForm() {
   const bulletIcons = [Headset, ShieldCheck, Clock];
 
   return (
-    <section id={SECTION_IDS.callback} className="py-16 sm:py-24 bg-[#FAFAFA] relative">
+    <section id={SECTION_IDS.callback} className="py-14 sm:py-20 lg:py-28 bg-[#FAFAFA] relative">
       <div className="container-open">
         {/* Striking Zinc-950 Dark Monolith Island */}
-        <div className="relative overflow-hidden rounded-[2rem] bg-zinc-950 text-white p-8 sm:p-14 lg:p-20 border border-zinc-800 shadow-2xl">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] bg-zinc-950 text-white p-6 sm:p-12 lg:p-20 mx-0 border border-zinc-800 shadow-2xl">
           {/* Subtle architectural dot grid inside monolith */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 bg-blueprint-dots-dark opacity-40 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_0%,#000_20%,transparent_100%)]"
           />
 
-          <div className="relative z-10 grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
+          <div className="relative z-10 grid gap-10 lg:grid-cols-12 lg:gap-16 items-start">
             {/* Left Side: Monolith Intro & Contacts */}
             <div className="lg:col-span-5 flex flex-col justify-between h-full">
               <div>
@@ -146,22 +146,22 @@ export default function CallbackForm() {
                   <span className="font-mono text-xs text-emerald-400">ONLINE</span>
                 </div>
 
-                <h2 className="mt-4 text-3xl sm:text-5xl font-medium tracking-tighter leading-tight text-white">
+                <h2 className="mt-4 text-2xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight text-white">
                   {f.title}
                 </h2>
 
-                <p className="mt-4 text-base sm:text-lg text-zinc-400 font-normal leading-relaxed">
+                <p className="mt-3 sm:mt-4 text-sm sm:text-lg text-zinc-400 font-normal leading-relaxed">
                   {f.subtitle}
                 </p>
 
                 {/* Bullets */}
-                <ul className="mt-8 space-y-4">
+                <ul className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
                   {f.bullets.map((b, idx) => {
                     const Icon = bulletIcons[idx] ?? CheckCircle2;
                     return (
-                      <li key={b} className="flex items-center gap-3 text-sm text-zinc-300">
-                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300">
-                          <Icon size={14} />
+                      <li key={b} className="flex items-center gap-3 text-xs sm:text-sm text-zinc-300">
+                        <span className="flex h-6 w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300">
+                          <Icon size={13} />
                         </span>
                         <span>{b}</span>
                       </li>
@@ -171,26 +171,26 @@ export default function CallbackForm() {
               </div>
 
               {/* Contact Callouts */}
-              <div className="mt-12 space-y-3 pt-8 border-t border-zinc-800/80">
+              <div className="mt-8 sm:mt-12 space-y-3 pt-6 sm:pt-8 border-t border-zinc-800/80">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 block">
                   [DIRECT_LINES // ALMATY]
                 </span>
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3">
                   <a
                     href={PHONES.main.tel}
-                    className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 font-mono text-sm text-white transition hover:border-zinc-500"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 font-mono text-xs sm:text-sm text-white transition hover:border-zinc-500"
                   >
                     <Phone size={14} className="text-zinc-400" />
                     <span>{PHONES.main.display}</span>
                   </a>
 
                   <a
-                    href={PHONES.extra.tel}
-                    className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 font-mono text-sm text-zinc-300 transition hover:border-zinc-500"
+                    href="tel:+77776066323"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 font-mono text-xs sm:text-sm text-zinc-300 transition hover:border-zinc-500"
                   >
                     <Phone size={14} className="text-zinc-400" />
-                    <span>{PHONES.extra.display}</span>
+                    <span>+7 (777) 606-63-23</span>
                   </a>
                 </div>
 
@@ -201,9 +201,9 @@ export default function CallbackForm() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 font-mono text-xs text-emerald-400 hover:text-emerald-300 transition"
                   >
-                    <WhatsAppIcon size={14} className="text-emerald-400" />
-                    <span>ЧАТ В WHATSAPP (БЫСТРЫЙ ОТВЕТ ЗА 5 МИНУТ)</span>
-                    <ArrowRight size={12} />
+                    <WhatsAppIcon size={14} className="text-emerald-400 shrink-0" />
+                    <span className="break-words">ЧАТ В WHATSAPP (БЫСТРЫЙ ОТВЕТ ЗА 5 МИНУТ)</span>
+                    <ArrowRight size={12} className="shrink-0" />
                   </a>
                 </div>
               </div>
@@ -214,7 +214,7 @@ export default function CallbackForm() {
               <form
                 noValidate
                 onSubmit={onSubmit}
-                className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-10 backdrop-blur-md"
+                className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-5 sm:p-8 lg:p-10 backdrop-blur-md"
               >
                 <div className="grid gap-6 sm:grid-cols-2">
                   {/* Name field */}
@@ -234,7 +234,7 @@ export default function CallbackForm() {
                       placeholder={f.namePlaceholder}
                       aria-invalid={errors.name ? true : undefined}
                       aria-describedby={errors.name ? ids.nameErr : undefined}
-                      className="monolith-input"
+                      className="monolith-input text-base"
                     />
                     {errors.name && (
                       <p id={ids.nameErr} role="alert" className="mt-1.5 font-mono text-xs text-red-400">
@@ -262,7 +262,7 @@ export default function CallbackForm() {
                       placeholder={f.phonePlaceholder}
                       aria-invalid={errors.phone ? true : undefined}
                       aria-describedby={errors.phone ? ids.phoneErr : undefined}
-                      className="monolith-input font-mono"
+                      className="monolith-input font-mono text-base"
                     />
                     {errors.phone && (
                       <p id={ids.phoneErr} role="alert" className="mt-1.5 font-mono text-xs text-red-400">
@@ -282,7 +282,7 @@ export default function CallbackForm() {
                         name="objectType"
                         value={form.objectType}
                         onChange={update('objectType')}
-                        className="monolith-input appearance-none pr-10 cursor-pointer text-white [&>option]:bg-zinc-900 [&>option]:text-white"
+                        className="monolith-input appearance-none pr-10 cursor-pointer text-base text-white [&>option]:bg-zinc-900 [&>option]:text-white"
                       >
                         {OBJECT_TYPE_KEYS.map((key) => (
                           <option key={key} value={key}>
@@ -316,13 +316,13 @@ export default function CallbackForm() {
                       value={form.comment}
                       onChange={update('comment')}
                       placeholder={f.commentPlaceholder}
-                      className="monolith-input resize-none"
+                      className="monolith-input resize-none text-base"
                     />
                   </div>
                 </div>
 
                 {/* Submit button: High-contrast white pill button */}
-                <button type="submit" className="btn-pill-white mt-8 w-full">
+                <button type="submit" className="btn-pill-white mt-8 w-full text-base">
                   <Send size={16} />
                   <span>{f.submit}</span>
                 </button>

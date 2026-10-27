@@ -52,20 +52,20 @@ function CameraHudViewfinder() {
       {/* Main HUD Chassis */}
       <div className="relative rounded-2xl border border-zinc-300/80 bg-white shadow-xl shadow-zinc-950/5 overflow-hidden">
         {/* Top Header Bar */}
-        <div className="flex items-center justify-between border-b border-zinc-200/80 px-4 py-3 sm:px-5">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-zinc-300" />
-              <span className="h-2 w-2 rounded-full bg-zinc-300" />
-              <span className="h-2 w-2 rounded-full bg-zinc-300" />
+        <div className="flex items-center justify-between border-b border-zinc-200/80 px-3 py-2.5 sm:px-5 sm:py-3">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <span className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+              <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-zinc-300" />
+              <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-zinc-300" />
+              <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-zinc-300" />
             </span>
-            <span className="font-mono text-xs font-semibold tracking-wider text-zinc-900">
+            <span className="font-mono text-[11px] sm:text-xs font-semibold tracking-wider text-zinc-900 truncate">
               HIKVISION // NVR_4CH
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-800">
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2 sm:px-2.5 py-0.5 font-mono text-[9px] sm:text-[10px] font-semibold text-emerald-800">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
               {m.live.toUpperCase()}
             </span>
@@ -88,19 +88,19 @@ function CameraHudViewfinder() {
           />
 
           {/* Viewfinder Corner Brackets ┌ ┐ └ ┘ */}
-          <div className="pointer-events-none absolute inset-4 z-10 sm:inset-6">
+          <div className="pointer-events-none absolute inset-3 sm:inset-6 z-10">
             {/* Top-left bracket */}
-            <div className="absolute top-0 left-0 h-6 w-6 border-t-2 border-l-2 border-white/60" />
+            <div className="absolute top-0 left-0 h-4 w-4 sm:h-6 sm:w-6 border-t-2 border-l-2 border-white/60" />
             {/* Top-right bracket */}
-            <div className="absolute top-0 right-0 h-6 w-6 border-t-2 border-r-2 border-white/60" />
+            <div className="absolute top-0 right-0 h-4 w-4 sm:h-6 sm:w-6 border-t-2 border-r-2 border-white/60" />
             {/* Bottom-left bracket */}
-            <div className="absolute bottom-0 left-0 h-6 w-6 border-b-2 border-l-2 border-white/60" />
+            <div className="absolute bottom-0 left-0 h-4 w-4 sm:h-6 sm:w-6 border-b-2 border-l-2 border-white/60" />
             {/* Bottom-right bracket */}
-            <div className="absolute bottom-0 right-0 h-6 w-6 border-b-2 border-r-2 border-white/60" />
+            <div className="absolute bottom-0 right-0 h-4 w-4 sm:h-6 sm:w-6 border-b-2 border-r-2 border-white/60" />
 
             {/* Central Optical Reticle Crosshair */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30">
-              <div className="relative h-12 w-12">
+              <div className="relative h-10 w-10 sm:h-12 sm:w-12">
                 <div className="absolute top-1/2 left-0 right-0 h-px bg-white" />
                 <div className="absolute top-0 bottom-0 left-1/2 w-px bg-white" />
                 <div className="absolute inset-2 rounded-full border border-white" />
@@ -109,14 +109,14 @@ function CameraHudViewfinder() {
           </div>
 
           {/* Top HUD Overlay Stats */}
-          <div className="absolute top-4 left-4 right-4 z-10 flex items-start justify-between text-white sm:top-6 sm:left-6 sm:right-6">
+          <div className="absolute top-3 left-3 right-3 sm:top-6 sm:left-6 sm:right-6 z-10 flex items-start justify-between text-white">
             {/* REC badge */}
-            <div className="flex items-center gap-2 rounded-md bg-zinc-900/80 px-2 py-1 backdrop-blur-md">
-              <span className="h-2 w-2 rounded-full bg-red-500 animate-rec" />
-              <span className="font-mono text-[10px] font-semibold tracking-wider text-red-400 sm:text-xs">
+            <div className="flex items-center gap-1.5 sm:gap-2 rounded-md bg-zinc-900/80 px-2 py-1 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-red-500 animate-rec shrink-0" />
+              <span className="font-mono text-[9px] sm:text-xs font-semibold tracking-wider text-red-400">
                 REC
               </span>
-              <span className="font-mono text-[10px] font-medium tracking-tight text-white/90 sm:text-xs">
+              <span className="font-mono text-[9px] sm:text-xs font-medium tracking-tight text-white/90">
                 {timeStr}:{frame}
               </span>
             </div>
@@ -126,7 +126,7 @@ function CameraHudViewfinder() {
               <span className="rounded bg-zinc-900/80 px-1.5 py-0.5 backdrop-blur-md text-emerald-400">
                 {current.res} · {current.codec}
               </span>
-              <span className="text-zinc-400">
+              <span className="text-zinc-400 hidden sm:block">
                 {current.bitrate} · PoE 48V
               </span>
             </div>
@@ -142,34 +142,34 @@ function CameraHudViewfinder() {
               <div className="absolute -bottom-1 -right-1 h-2 w-2 border-b-2 border-r-2 border-emerald-400" />
 
               {/* Tag header */}
-              <div className="absolute -top-6 left-0 flex items-center gap-1.5 bg-emerald-500 px-1.5 py-0.5 text-zinc-950 font-mono text-[9px] font-bold uppercase tracking-wider rounded-xs">
+              <div className="absolute -top-5 sm:-top-6 left-0 flex items-center gap-1 sm:gap-1.5 bg-emerald-500 px-1.5 py-0.5 text-zinc-950 font-mono text-[8px] sm:text-[9px] font-bold uppercase tracking-wider rounded-xs">
                 <Cpu size={10} />
                 <span>AI {m.detect || 'HUMAN'}: 99.4%</span>
               </div>
 
               {/* Vector targeting lines */}
               <div className="absolute inset-x-0 top-1/3 h-px bg-emerald-400/20" />
-              <div className="absolute bottom-1 right-1 font-mono text-[8px] text-emerald-400/70">
+              <div className="absolute bottom-1 right-1 font-mono text-[8px] text-emerald-400/70 hidden sm:block">
                 [X: 342 Y: 198]
               </div>
             </div>
           </div>
 
           {/* Bottom HUD Metadata Bar */}
-          <div className="absolute bottom-3 left-4 right-4 z-10 flex items-center justify-between font-mono text-[9px] sm:text-[11px] text-white/80 sm:bottom-4 sm:left-6 sm:right-6">
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-white">[{current.code}]</span>
-              <span className="text-zinc-300 font-sans font-medium">{current.name}</span>
+          <div className="absolute bottom-2.5 left-3 right-3 sm:bottom-4 sm:left-6 sm:right-6 z-10 flex items-center justify-between font-mono text-[9px] sm:text-[11px] text-white/80">
+            <div className="flex items-center gap-1.5 sm:gap-2 truncate mr-2">
+              <span className="font-bold text-white shrink-0">[{current.code}]</span>
+              <span className="text-zinc-300 font-sans font-medium truncate">{current.name}</span>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               <span className="hidden sm:inline text-zinc-400">{dateStr}</span>
               <span className="text-emerald-400">● 30 FPS</span>
             </div>
           </div>
         </div>
 
-        {/* 4-Channel Architectural Selector Row */}
-        <div className="grid grid-cols-4 divide-x divide-zinc-200 border-t border-zinc-200 bg-zinc-50/70 text-xs">
+        {/* 4-Channel Architectural Selector Row (Clean 2x2 grid on mobile, 4 columns on sm+) */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 border-t border-zinc-200 bg-zinc-50/70 text-xs">
           {camMeta.map((cam, idx) => {
             const active = idx === activeCam;
             return (
@@ -177,7 +177,13 @@ function CameraHudViewfinder() {
                 key={cam.code}
                 type="button"
                 onClick={() => setActiveCam(idx)}
-                className={`flex flex-col p-2.5 text-left transition-all duration-150 cursor-pointer ${
+                className={`flex flex-col p-2 sm:p-2.5 text-left transition-all duration-150 cursor-pointer ${
+                  idx % 2 === 1 ? 'border-l border-zinc-200' : ''
+                } ${
+                  idx >= 2 ? 'border-t sm:border-t-0 border-zinc-200' : ''
+                } ${
+                  idx > 0 ? 'sm:border-l sm:border-zinc-200' : ''
+                } ${
                   active
                     ? 'bg-white shadow-xs font-semibold text-zinc-950'
                     : 'text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800'
@@ -187,7 +193,7 @@ function CameraHudViewfinder() {
                   <span className="font-mono text-[10px] text-zinc-400">0{idx + 1}</span>
                   {active && <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />}
                 </div>
-                <span className="mt-1 truncate font-medium text-zinc-900 text-[11px] sm:text-xs">
+                <span className="mt-0.5 sm:mt-1 truncate font-medium text-zinc-900 text-[11px] sm:text-xs">
                   {cam.name}
                 </span>
                 <span className="hidden font-mono text-[9px] text-zinc-400 sm:block">
@@ -199,22 +205,22 @@ function CameraHudViewfinder() {
         </div>
       </div>
 
-      {/* Floating Notification Monolith Toast */}
-      <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950 p-3.5 text-white shadow-lg">
+      {/* Floating Notification Monolith Toast (Relative cleanly below card on mobile, full width) */}
+      <div className="relative mt-3 sm:mt-4 w-full rounded-xl border border-zinc-800 bg-zinc-950 p-3 sm:p-3.5 text-white shadow-lg">
         <div className="flex items-start gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-zinc-800 text-emerald-400">
-            <Eye size={18} />
+          <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg bg-zinc-800 text-emerald-400">
+            <Eye size={16} />
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-1">
               <p className="truncate text-xs font-semibold text-white">
                 {m.alertTitle}
               </p>
-              <span className="font-mono text-[10px] text-zinc-400">
+              <span className="font-mono text-[10px] text-zinc-400 shrink-0">
                 {m.alertTime}
               </span>
             </div>
-            <p className="truncate text-[11px] text-zinc-400">
+            <p className="truncate text-[10px] sm:text-[11px] text-zinc-400">
               {m.alertPlace} · Hik-Connect Push
             </p>
           </div>
@@ -231,7 +237,7 @@ export default function Hero() {
   return (
     <section
       id={SECTION_IDS.hero}
-      className="relative overflow-hidden pt-12 pb-24 sm:pt-16 sm:pb-32 lg:pt-20 lg:pb-36"
+      className="relative overflow-hidden pt-8 pb-14 sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-32"
     >
       {/* Background Architectural Dot-matrix Grid */}
       <div
@@ -241,20 +247,20 @@ export default function Hero() {
 
       <div className="container-open">
         {/* Top Status Monospace Pill */}
-        <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-zinc-300/80 bg-white/80 px-4 py-1.5 shadow-xs backdrop-blur-sm">
-          <span className="relative flex h-2 w-2">
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-300/80 bg-white/80 px-3 py-1 sm:px-4 sm:py-1.5 shadow-xs backdrop-blur-sm max-w-full">
+          <span className="relative flex h-2 w-2 shrink-0">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
-          <span className="font-mono text-xs font-semibold tracking-wider text-zinc-900 uppercase">
+          <span className="font-mono text-[10px] sm:text-xs font-semibold tracking-wider text-zinc-900 uppercase truncate">
             SYSTEMS ONLINE // HIKVISION & DAHUA
           </span>
         </div>
 
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
           {/* Left Column (7 cols): Giant Editorial Headline + Actions */}
           <div className="lg:col-span-7">
-            <h1 className="text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight font-semibold text-zinc-950 text-balance">
+            <h1 className="text-[32px] leading-[1.1] sm:text-5xl lg:text-[56px] xl:text-[64px] font-semibold tracking-tight break-words text-zinc-950 text-balance">
               {h.title.split(/(IP[-‑][^\s]+)/).map((part, i) =>
                 part.startsWith('IP') ? (
                   <span key={i} className="whitespace-nowrap">
@@ -266,24 +272,27 @@ export default function Hero() {
               )}
             </h1>
 
-            <p className="mt-8 max-w-2xl text-lg sm:text-xl font-normal leading-relaxed text-zinc-600 text-pretty">
+            <p className="mt-5 sm:mt-8 max-w-2xl text-base sm:text-xl font-normal leading-relaxed text-zinc-600 text-pretty">
               {h.subtitle}
             </p>
 
             {/* Action Buttons Row */}
-            <div className="mt-10 flex flex-col gap-3.5 sm:flex-row sm:items-center">
-              <a href={`#${SECTION_IDS.callback}`} className="btn-pill-black text-base group">
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <a
+                href={`#${SECTION_IDS.callback}`}
+                className="btn-pill-black w-full sm:w-auto justify-center py-3.5 px-6 text-sm sm:text-base group"
+              >
                 <span>{h.primaryCta}</span>
-                <ArrowRight size={17} className="transition-transform duration-200 group-hover:translate-x-1" />
+                <ArrowRight size={17} className="transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
               </a>
 
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-pill-outline text-base"
+                className="btn-pill-outline w-full sm:w-auto justify-center py-3.5 px-6 text-sm sm:text-base"
               >
-                <WhatsAppIcon size={19} className="text-zinc-950" />
+                <WhatsAppIcon size={19} className="text-zinc-950 shrink-0" />
                 <span>{h.secondaryCta}</span>
               </a>
             </div>
@@ -296,15 +305,15 @@ export default function Hero() {
         </div>
 
         {/* Full-width 4-column Bottom Metrics Row */}
-        <div className="border-t border-zinc-200 pt-8 mt-16 grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="border-t border-zinc-200 pt-8 mt-10 grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4">
           {h.highlights.map((item, idx) => {
             const hudLabels = ['[RES_4K_60FPS]', '[F1.0_COLORVU]', '[POE_IEEE_802.3AF]', '[APP_HIK_CONNECT]'];
             return (
-              <div key={item.value} className="flex flex-col">
-                <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">
+              <div key={item.value} className="flex flex-col min-w-0">
+                <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider truncate mb-1">
                   {hudLabels[idx] || `[SPEC_0${idx + 1}]`}
                 </span>
-                <span className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950">
+                <span className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950 truncate">
                   {item.value}
                 </span>
                 <span className="mt-1 text-xs sm:text-sm text-zinc-500 font-normal">

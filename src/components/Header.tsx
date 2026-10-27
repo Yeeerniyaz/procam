@@ -74,7 +74,7 @@ export default function Header() {
           : 'border-zinc-200/40 bg-white/40 backdrop-blur-md'
       }`}
     >
-      <div className="container-open flex h-18 items-center justify-between gap-4">
+      <div className="container-open flex h-16 lg:h-18 items-center justify-between gap-4">
         {/* Left: Brand + Monospace Badge */}
         <div className="flex items-center gap-3 sm:gap-4 shrink-0">
           <Logo tagline={t.nav.brandTagline} />
@@ -106,7 +106,7 @@ export default function Header() {
         </nav>
 
         {/* Right: Lang Switcher + Phone + Monolith Pill CTA */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
           <LanguageSwitcher className="shrink-0" />
 
           {/* Primary phone in font-mono */}
@@ -118,19 +118,10 @@ export default function Header() {
             <span>{PHONES.main.display}</span>
           </a>
 
-          {/* Mobile phone tap icon */}
-          <a
-            href={PHONES.main.tel}
-            aria-label={PHONES.main.short}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950 sm:hidden shrink-0"
-          >
-            <Phone size={15} />
-          </a>
-
           {/* Sharp solid black pill button */}
           <a
             href={`#${SECTION_IDS.callback}`}
-            className="hidden items-center justify-center rounded-full bg-zinc-950 px-6 py-2.5 text-xs sm:text-sm font-medium text-white transition-all duration-200 hover:bg-zinc-800 active:scale-[0.98] sm:inline-flex shadow-xs whitespace-nowrap shrink-0"
+            className="hidden items-center justify-center rounded-full bg-zinc-950 px-6 py-2.5 text-xs sm:text-sm font-medium text-white transition-all duration-200 hover:bg-zinc-800 active:scale-[0.98] lg:inline-flex shadow-xs whitespace-nowrap shrink-0"
           >
             {t.nav.cta}
           </a>
@@ -142,31 +133,34 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? t.nav.menuClose : t.nav.menuOpen}
-            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950 lg:hidden shrink-0"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950 lg:hidden shrink-0"
           >
-            {open ? <X size={18} /> : <Menu size={18} />}
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {open && (
-        <div id="mobile-menu" className="border-t border-zinc-200 bg-white/95 backdrop-blur-2xl lg:hidden">
-          <nav className="container-open py-6" aria-label="Mobile Navigation">
-            <div className="mb-4 flex items-center justify-between border-b border-zinc-100 pb-3">
+        <div
+          id="mobile-menu"
+          className="fixed inset-x-0 top-16 max-h-[calc(100dvh-4rem)] overflow-y-auto bg-white/95 backdrop-blur-xl border-b border-zinc-200 p-6 flex flex-col gap-6 z-50 shadow-xl lg:hidden"
+        >
+          <nav className="flex flex-col gap-6" aria-label="Mobile Navigation">
+            <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
               <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
                 [MENU // SECTIONS]
               </span>
               <span className="font-mono text-xs text-zinc-400">ALMATY · 24/7</span>
             </div>
 
-            <ul className="flex flex-col divide-y divide-zinc-100">
+            <ul className="flex flex-col">
               {links.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="flex items-center justify-between py-3.5 text-base font-medium text-zinc-800 transition hover:text-zinc-950"
+                    className="flex items-center justify-between py-2 text-xl font-medium border-b border-zinc-100 text-zinc-800 transition hover:text-zinc-950"
                   >
                     <span>{l.label}</span>
                     <span className="font-mono text-xs text-zinc-400">/{l.tag}</span>
@@ -175,19 +169,27 @@ export default function Header() {
               ))}
             </ul>
 
-            <div className="mt-6 flex flex-col gap-3 border-t border-zinc-100 pt-6">
+            <div className="flex flex-col gap-3 pt-2">
               <a
                 href={PHONES.main.tel}
-                className="flex items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white py-3 font-mono text-sm font-medium text-zinc-900 transition hover:border-zinc-950"
+                className="flex items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white py-3.5 font-mono text-sm font-medium text-zinc-900 transition hover:border-zinc-950"
               >
                 <Phone size={15} />
-                {PHONES.main.display}
+                +7 (706) 606-63-23
+              </a>
+
+              <a
+                href="tel:+77776066323"
+                className="flex items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white py-3.5 font-mono text-sm font-medium text-zinc-900 transition hover:border-zinc-950"
+              >
+                <Phone size={15} />
+                +7 (777) 606-63-23
               </a>
 
               <a
                 href={`#${SECTION_IDS.callback}`}
                 onClick={() => setOpen(false)}
-                className="btn-pill-black w-full justify-center text-sm"
+                className="w-full py-4 rounded-full bg-zinc-950 text-white text-center font-medium transition hover:bg-zinc-800 active:scale-[0.99] shadow-xs"
               >
                 {t.nav.cta}
               </a>

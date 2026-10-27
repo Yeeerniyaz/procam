@@ -16,7 +16,7 @@ export default function Footer() {
       <section id={SECTION_IDS.contacts} className="section-open relative z-10">
         <div className="container-open">
           {/* Header */}
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 pb-14 border-b border-zinc-200">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 pb-8 sm:pb-12 lg:pb-14 border-b border-zinc-200">
             <div>
               <div className="flex items-center gap-3">
                 <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
@@ -27,7 +27,7 @@ export default function Footer() {
                   ALMATY · 24/7
                 </span>
               </div>
-              <h2 className="mt-4 text-4xl sm:text-6xl font-medium tracking-tighter leading-tight text-zinc-950">
+              <h2 className="mt-4 text-2xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-zinc-950">
                 {c.title}
               </h2>
             </div>
@@ -39,7 +39,7 @@ export default function Footer() {
           {/* Open Architectural Contact Zones */}
           <div className="grid grid-cols-1 md:grid-cols-3 border-b border-zinc-200 divide-y md:divide-y-0 md:divide-x divide-zinc-200">
             {/* Zone 1: Main Dispatch Line */}
-            <div className="p-8 sm:p-10 flex flex-col justify-between hover:bg-zinc-50/60 transition-colors duration-200">
+            <div className="p-5 sm:p-8 lg:p-10 flex flex-col justify-between hover:bg-zinc-50/60 transition-colors duration-200">
               <div>
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
@@ -48,16 +48,16 @@ export default function Footer() {
                   <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 </div>
 
-                <p className="mt-6 text-sm font-medium text-zinc-500">{c.mainPhone}</p>
+                <p className="mt-5 sm:mt-6 text-sm font-medium text-zinc-500">{c.mainPhone}</p>
                 <a
                   href={PHONES.main.tel}
-                  className="mt-2 block font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950 hover:text-zinc-700 transition"
+                  className="mt-2 block font-mono text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-zinc-950 hover:text-zinc-700 transition truncate"
                 >
                   {PHONES.main.display}
                 </a>
               </div>
 
-              <div className="mt-8 flex flex-col sm:flex-row gap-2.5">
+              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-2.5">
                 <a
                   href={PHONES.main.tel}
                   className="btn-pill-black flex-1 py-3 text-xs uppercase tracking-wider font-mono justify-center"
@@ -78,7 +78,7 @@ export default function Footer() {
             </div>
 
             {/* Zone 2: Backup Line */}
-            <div className="p-8 sm:p-10 flex flex-col justify-between hover:bg-zinc-50/60 transition-colors duration-200">
+            <div className="p-5 sm:p-8 lg:p-10 flex flex-col justify-between hover:bg-zinc-50/60 transition-colors duration-200">
               <div>
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
@@ -87,18 +87,18 @@ export default function Footer() {
                   <span className="h-2 w-2 rounded-full bg-zinc-300" />
                 </div>
 
-                <p className="mt-6 text-sm font-medium text-zinc-500">{c.extraPhone}</p>
+                <p className="mt-5 sm:mt-6 text-sm font-medium text-zinc-500">{c.extraPhone}</p>
                 <a
-                  href={PHONES.extra.tel}
-                  className="mt-2 block font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950 hover:text-zinc-700 transition"
+                  href="tel:+77776066323"
+                  className="mt-2 block font-mono text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-zinc-950 hover:text-zinc-700 transition truncate"
                 >
-                  {PHONES.extra.display}
+                  +7 (777) 606-63-23
                 </a>
               </div>
 
-              <div className="mt-8">
+              <div className="mt-6 sm:mt-8">
                 <a
-                  href={PHONES.extra.tel}
+                  href="tel:+77776066323"
                   className="btn-pill-outline w-full py-3 text-xs uppercase tracking-wider font-mono justify-center"
                 >
                   <Phone size={14} />
@@ -108,7 +108,7 @@ export default function Footer() {
             </div>
 
             {/* Zone 3: Coverage Area & Socials */}
-            <div className="p-8 sm:p-10 flex flex-col justify-between hover:bg-zinc-50/60 transition-colors duration-200">
+            <div className="p-5 sm:p-8 lg:p-10 flex flex-col justify-between hover:bg-zinc-50/60 transition-colors duration-200">
               <div>
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
@@ -117,13 +117,13 @@ export default function Footer() {
                   <MapPin size={15} className="text-zinc-400" />
                 </div>
 
-                <p className="mt-6 text-sm font-medium text-zinc-500">{c.area}</p>
-                <p className="mt-2 text-xl font-medium tracking-tight text-zinc-950">
+                <p className="mt-5 sm:mt-6 text-sm font-medium text-zinc-500">{c.area}</p>
+                <p className="mt-2 text-lg sm:text-xl font-medium tracking-tight text-zinc-950">
                   {c.areaValue}
                 </p>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-zinc-100">
+              <div className="mt-6 sm:mt-8 pt-6 border-t border-zinc-100">
                 <p className="mb-3 font-mono text-[11px] uppercase tracking-wider text-zinc-400">
                   {c.social}
                 </p>

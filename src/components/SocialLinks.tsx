@@ -10,7 +10,7 @@ const items = [
 
 export default function SocialLinks({ className = '' }: { className?: string }) {
   return (
-    <ul className={`flex items-center gap-2.5 ${className}`}>
+    <ul className={`flex flex-wrap items-center gap-2.5 ${className}`}>
       {items.map(({ key, label, href, Icon }) => {
         const external = href !== '#';
         return (
