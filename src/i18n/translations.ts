@@ -6,7 +6,7 @@ export type ObjectTypeKey = 'house' | 'apartment' | 'office' | 'warehouse' | 'ot
 
 const ru = {
   meta: {
-    title: 'ProElectric — монтаж IP-видеонаблюдения в Алматы',
+    title: 'ProCam — монтаж IP-видеонаблюдения в Алматы',
     htmlLang: 'ru',
   },
   nav: {
@@ -194,7 +194,7 @@ export type Dictionary = typeof ru;
 
 const kz: Dictionary = {
   meta: {
-    title: 'ProElectric — Алматыда IP-бейнебақылау орнату',
+    title: 'ProCam — Алматыда IP-бейнебақылау орнату',
     htmlLang: 'kk',
   },
   nav: {
@@ -382,7 +382,7 @@ export const translations: Record<Lang, Dictionary> = { ru, kz };
 
 /**
  * Object type labels used inside the WhatsApp message.
- * The message always goes to the ProElectric operator in Russian,
+ * The message always goes to the ProCam operator in Russian,
  * regardless of the visitor's selected UI language.
  */
 export const OBJECT_TYPE_KEYS: ObjectTypeKey[] = ['house', 'apartment', 'office', 'warehouse', 'other'];

@@ -10,7 +10,7 @@ const items = [
 
 export default function SocialLinks({ className = '' }: { className?: string }) {
   return (
-    <ul className={`flex items-center gap-2 ${className}`}>
+    <ul className={`flex items-center gap-2.5 ${className}`}>
       {items.map(({ key, label, href, Icon }) => {
         const external = href !== '#';
         return (
@@ -20,9 +20,9 @@ export default function SocialLinks({ className = '' }: { className?: string }) 
               aria-label={label}
               title={label}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-none transition hover:-translate-y-0.5 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:outline-none"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-950 hover:bg-zinc-950 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950"
             >
-              <Icon size={18} />
+              <Icon size={16} />
             </a>
           </li>
         );

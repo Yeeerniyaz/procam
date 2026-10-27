@@ -11,75 +11,122 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-50">
-      {/* Contacts */}
-      <section id={SECTION_IDS.contacts} className="section border-t border-slate-200">
-        <div className="container-page">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="eyebrow">{c.eyebrow}</span>
-            <h2 className="section-title">{c.title}</h2>
-            <p className="section-subtitle">{c.subtitle}</p>
+    <footer className="relative bg-white border-t border-zinc-200 overflow-hidden">
+      {/* Contact Zones Section */}
+      <section id={SECTION_IDS.contacts} className="section-open relative z-10">
+        <div className="container-open">
+          {/* Header */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 pb-14 border-b border-zinc-200">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
+                  // 05 · CONTACT & DISPATCH
+                </span>
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <span className="font-mono text-xs text-zinc-500 uppercase">
+                  ALMATY · 24/7
+                </span>
+              </div>
+              <h2 className="mt-4 text-4xl sm:text-6xl font-medium tracking-tighter leading-tight text-zinc-950">
+                {c.title}
+              </h2>
+            </div>
+            <p className="max-w-xl text-base sm:text-lg text-zinc-600 font-normal leading-relaxed">
+              {c.subtitle}
+            </p>
           </div>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
-            {/* Main phone */}
-            <div className="card flex flex-col p-6 sm:p-7">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm shadow-slate-900/20">
-                <Phone size={20} />
-              </span>
-              <p className="mt-5 text-sm font-medium text-slate-500">{c.mainPhone}</p>
-              <a
-                href={PHONES.main.tel}
-                className="mt-1 text-xl font-bold tracking-tight whitespace-nowrap text-slate-900 transition hover:text-slate-600"
-              >
-                {PHONES.main.display}
-              </a>
-              <div className="mt-6 grid grid-cols-2 gap-2">
-                <a href={PHONES.main.tel} className="btn-primary px-3 py-2.5 sm:text-sm">
-                  <Phone size={16} />
-                  {c.call}
+          {/* Open Architectural Contact Zones */}
+          <div className="grid grid-cols-1 md:grid-cols-3 border-b border-zinc-200 divide-y md:divide-y-0 md:divide-x divide-zinc-200">
+            {/* Zone 1: Main Dispatch Line */}
+            <div className="p-8 sm:p-10 flex flex-col justify-between hover:bg-zinc-50/60 transition-colors duration-200">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
+                    [PRIMARY_LINE]
+                  </span>
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                </div>
+
+                <p className="mt-6 text-sm font-medium text-zinc-500">{c.mainPhone}</p>
+                <a
+                  href={PHONES.main.tel}
+                  className="mt-2 block font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950 hover:text-zinc-700 transition"
+                >
+                  {PHONES.main.display}
+                </a>
+              </div>
+
+              <div className="mt-8 flex flex-col sm:flex-row gap-2.5">
+                <a
+                  href={PHONES.main.tel}
+                  className="btn-pill-black flex-1 py-3 text-xs uppercase tracking-wider font-mono justify-center"
+                >
+                  <Phone size={14} />
+                  <span>{c.call}</span>
                 </a>
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary px-3 py-2.5 sm:text-sm"
+                  className="btn-pill-outline flex-1 py-3 text-xs uppercase tracking-wider font-mono justify-center"
                 >
-                  <WhatsAppIcon size={17} className="text-[#25D366]" />
-                  WhatsApp
+                  <WhatsAppIcon size={15} />
+                  <span>WHATSAPP</span>
                 </a>
               </div>
             </div>
 
-            {/* Extra phone */}
-            <div className="card flex flex-col p-6 sm:p-7">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
-                <Phone size={20} />
-              </span>
-              <p className="mt-5 text-sm font-medium text-slate-500">{c.extraPhone}</p>
-              <a
-                href={PHONES.extra.tel}
-                className="mt-1 text-xl font-bold tracking-tight whitespace-nowrap text-slate-900 transition hover:text-slate-600"
-              >
-                {PHONES.extra.display}
-              </a>
-              <div className="mt-auto pt-6">
-                <a href={PHONES.extra.tel} className="btn-secondary w-full px-3 py-2.5 sm:text-sm">
-                  <Phone size={16} className="text-slate-700" />
-                  {c.call}
+            {/* Zone 2: Backup Line */}
+            <div className="p-8 sm:p-10 flex flex-col justify-between hover:bg-zinc-50/60 transition-colors duration-200">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
+                    [STANDBY_LINE]
+                  </span>
+                  <span className="h-2 w-2 rounded-full bg-zinc-300" />
+                </div>
+
+                <p className="mt-6 text-sm font-medium text-zinc-500">{c.extraPhone}</p>
+                <a
+                  href={PHONES.extra.tel}
+                  className="mt-2 block font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950 hover:text-zinc-700 transition"
+                >
+                  {PHONES.extra.display}
+                </a>
+              </div>
+
+              <div className="mt-8">
+                <a
+                  href={PHONES.extra.tel}
+                  className="btn-pill-outline w-full py-3 text-xs uppercase tracking-wider font-mono justify-center"
+                >
+                  <Phone size={14} />
+                  <span>{c.call}</span>
                 </a>
               </div>
             </div>
 
-            {/* Area & socials */}
-            <div className="card flex flex-col p-6 sm:p-7">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
-                <MapPin size={20} />
-              </span>
-              <p className="mt-5 text-sm font-medium text-slate-500">{c.area}</p>
-              <p className="mt-1 text-xl font-bold tracking-tight text-slate-900">{c.areaValue}</p>
-              <div className="mt-auto pt-6">
-                <p className="mb-3 text-sm font-medium text-slate-500">{c.social}</p>
+            {/* Zone 3: Coverage Area & Socials */}
+            <div className="p-8 sm:p-10 flex flex-col justify-between hover:bg-zinc-50/60 transition-colors duration-200">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
+                    [COVERAGE // GPS 43.2389° N]
+                  </span>
+                  <MapPin size={15} className="text-zinc-400" />
+                </div>
+
+                <p className="mt-6 text-sm font-medium text-zinc-500">{c.area}</p>
+                <p className="mt-2 text-xl font-medium tracking-tight text-zinc-950">
+                  {c.areaValue}
+                </p>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-zinc-100">
+                <p className="mb-3 font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+                  {c.social}
+                </p>
                 <SocialLinks />
               </div>
             </div>
@@ -87,14 +134,29 @@ export default function Footer() {
         </div>
       </section>
 
-      {/* Bottom bar */}
-      <div className="border-t border-slate-200 bg-white">
-        <div className="container-page flex flex-col items-center justify-between gap-5 py-8 sm:flex-row">
+      {/* Massive Watermark Typography */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none relative w-full overflow-hidden select-none py-4 text-center"
+      >
+        <span className="block font-sans text-[12.5vw] font-bold tracking-tighter leading-none text-zinc-100/90 whitespace-nowrap">
+          PROCAM
+        </span>
+      </div>
+
+      {/* Sub-Footer Bar */}
+      <div className="border-t border-zinc-200 bg-white relative z-10">
+        <div className="container-open flex flex-col sm:flex-row items-center justify-between gap-4 py-8">
           <Logo />
-          <p className="text-center text-sm text-slate-500">
-            © {year} ProElectric. {t.footer.tagline}
+
+          <p className="font-mono text-xs text-zinc-500 text-center">
+            © {year} PROCAM · {t.footer.tagline}
           </p>
-          <SocialLinks />
+
+          <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <span>ALMATY // HIKVISION // DAHUA</span>
+          </div>
         </div>
       </div>
     </footer>

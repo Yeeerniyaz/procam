@@ -1,29 +1,25 @@
 import { type ChangeEvent, type FormEvent, useId, useState } from 'react';
-import { CheckCircle2, Clock, Headset, Phone, Send, ShieldCheck } from 'lucide-react';
-import { buildWhatsAppUrl, PHONES, SECTION_IDS } from '../config/contacts';
+import { ArrowRight, CheckCircle2, Clock, Headset, Phone, Send, ShieldCheck } from 'lucide-react';
+import { buildWhatsAppUrl, PHONES, SECTION_IDS, WHATSAPP_URL } from '../config/contacts';
 import { OBJECT_TYPE_KEYS, objectTypeForMessage, type ObjectTypeKey } from '../i18n/translations';
 import { useLanguage } from '../i18n/LanguageContext';
+import { WhatsAppIcon } from './icons/BrandIcons';
 
 /* ------------------------------------------------------------------ */
 /* Phone helpers                                                       */
 /* ------------------------------------------------------------------ */
 
-/** Normalises any user input into up to 11 digits starting with "7". */
 const normalizeDigits = (input: string): string => {
   let digits = input.replace(/\D/g, '');
   if (!digits) return '';
-  // Pasted 10-digit local number, e.g. "7066066323"
   if (digits.length === 10 && !input.trim().startsWith('+')) digits = `7${digits}`;
-  // Full number pasted/typed after the "+7" prefix, e.g. "+7" + "87066066323"
   if (digits.length === 12 && (digits[1] === '7' || digits[1] === '8')) digits = `7${digits.slice(2)}`;
-  // Typing "8" right after the auto-inserted "+7" prefix (habit of the local "8 7xx" format)
   if (digits === '78') digits = '7';
   if (digits[0] === '8') digits = `7${digits.slice(1)}`;
   if (digits[0] !== '7') digits = `7${digits}`;
   return digits.slice(0, 11);
 };
 
-/** Progressive mask: +7 (XXX) XXX-XX-XX */
 export const formatPhone = (input: string): string => {
   const d = normalizeDigits(input);
   if (!d) return '';
@@ -40,7 +36,7 @@ export const formatPhone = (input: string): string => {
 const isPhoneValid = (value: string) => normalizeDigits(value).length === 11;
 
 /* ------------------------------------------------------------------ */
-/* WhatsApp message                                                    */
+/* WhatsApp message & link handler                                     */
 /* ------------------------------------------------------------------ */
 
 interface FormState {
@@ -52,7 +48,7 @@ interface FormState {
 
 const buildMessage = ({ name, phone, objectType, comment }: FormState): string =>
   [
-    'Здравствуйте, ProElectric! Заявка с сайта на обратный звонок:',
+    'Здравствуйте, ProCam! Заявка с сайта на обратный звонок:',
     `👤 Имя: ${name.trim()}`,
     `📞 Телефон: ${phone}`,
     `🏢 Объект: ${objectTypeForMessage(objectType)}`,
@@ -64,7 +60,6 @@ const openWhatsApp = (url: string) => {
   if (win) {
     win.opener = null;
   } else {
-    // Popup blocked — navigate in the current tab instead.
     window.location.href = url;
   }
 };
@@ -129,163 +124,226 @@ export default function CallbackForm() {
   const bulletIcons = [Headset, ShieldCheck, Clock];
 
   return (
-    <section id={SECTION_IDS.callback} className="section bg-white">
-      <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
-        {/* Intro */}
-        <div className="lg:pt-4">
-          <span className="eyebrow">{f.eyebrow}</span>
-          <h2 className="section-title">{f.title}</h2>
-          <p className="section-subtitle">{f.subtitle}</p>
+    <section id={SECTION_IDS.callback} className="py-16 sm:py-24 bg-[#FAFAFA] relative">
+      <div className="container-open">
+        {/* Striking Zinc-950 Dark Monolith Island */}
+        <div className="relative overflow-hidden rounded-[2rem] bg-zinc-950 text-white p-8 sm:p-14 lg:p-20 border border-zinc-800 shadow-2xl">
+          {/* Subtle architectural dot grid inside monolith */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-blueprint-dots-dark opacity-40 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_0%,#000_20%,transparent_100%)]"
+          />
 
-          <ul className="mt-8 grid gap-4">
-            {f.bullets.map((b, i) => {
-              const Icon = bulletIcons[i] ?? CheckCircle2;
-              return (
-                <li key={b} className="flex items-center gap-3 text-slate-700">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
-                    <Icon size={19} />
+          <div className="relative z-10 grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
+            {/* Left Side: Monolith Intro & Contacts */}
+            <div className="lg:col-span-5 flex flex-col justify-between h-full">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
+                    // 04 · DISPATCH LINK
                   </span>
-                  <span className="font-medium">{b}</span>
-                </li>
-              );
-            })}
-          </ul>
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="font-mono text-xs text-emerald-400">ONLINE</span>
+                </div>
 
-          <a
-            href={PHONES.main.tel}
-            className="mt-10 inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-slate-300 hover:bg-white hover:shadow-sm"
-          >
-            <Phone size={20} className="text-slate-700" />
-            <span className="text-lg font-bold tracking-tight text-slate-900">{PHONES.main.display}</span>
-          </a>
-        </div>
+                <h2 className="mt-4 text-3xl sm:text-5xl font-medium tracking-tighter leading-tight text-white">
+                  {f.title}
+                </h2>
 
-        {/* Form */}
-        <form
-          noValidate
-          onSubmit={onSubmit}
-          className="card relative p-6 shadow-md shadow-slate-900/[0.03] sm:p-8 lg:p-10"
-        >
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div>
-              <label htmlFor={ids.name} className="mb-2 block text-sm font-semibold text-slate-800">
-                {f.nameLabel} <span className="text-slate-500">*</span>
-              </label>
-              <input
-                id={ids.name}
-                name="name"
-                type="text"
-                autoComplete="name"
-                required
-                maxLength={60}
-                value={form.name}
-                onChange={update('name')}
-                placeholder={f.namePlaceholder}
-                aria-invalid={errors.name ? true : undefined}
-                aria-describedby={errors.name ? ids.nameErr : undefined}
-                className="field"
-              />
-              {errors.name && (
-                <p id={ids.nameErr} role="alert" className="mt-1.5 text-sm text-red-600">
-                  {f.errors.name}
+                <p className="mt-4 text-base sm:text-lg text-zinc-400 font-normal leading-relaxed">
+                  {f.subtitle}
                 </p>
-              )}
-            </div>
 
-            <div>
-              <label htmlFor={ids.phone} className="mb-2 block text-sm font-semibold text-slate-800">
-                {f.phoneLabel} <span className="text-slate-500">*</span>
-              </label>
-              <input
-                id={ids.phone}
-                name="phone"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                required
-                value={form.phone}
-                onChange={update('phone')}
-                onFocus={() => !form.phone && setForm((p) => ({ ...p, phone: '+7' }))}
-                onBlur={() => form.phone === '+7' && setForm((p) => ({ ...p, phone: '' }))}
-                placeholder={f.phonePlaceholder}
-                aria-invalid={errors.phone ? true : undefined}
-                aria-describedby={errors.phone ? ids.phoneErr : undefined}
-                className="field tabular-nums"
-              />
-              {errors.phone && (
-                <p id={ids.phoneErr} role="alert" className="mt-1.5 text-sm text-red-600">
-                  {f.errors.phone}
-                </p>
-              )}
-            </div>
+                {/* Bullets */}
+                <ul className="mt-8 space-y-4">
+                  {f.bullets.map((b, idx) => {
+                    const Icon = bulletIcons[idx] ?? CheckCircle2;
+                    return (
+                      <li key={b} className="flex items-center gap-3 text-sm text-zinc-300">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300">
+                          <Icon size={14} />
+                        </span>
+                        <span>{b}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
 
-            <div className="sm:col-span-2">
-              <label htmlFor={ids.objectType} className="mb-2 block text-sm font-semibold text-slate-800">
-                {f.objectTypeLabel}
-              </label>
-              <div className="relative">
-                <select
-                  id={ids.objectType}
-                  name="objectType"
-                  value={form.objectType}
-                  onChange={update('objectType')}
-                  className="field cursor-pointer appearance-none pr-10"
-                >
-                  {OBJECT_TYPE_KEYS.map((key) => (
-                    <option key={key} value={key}>
-                      {f.objectTypes[key]}
-                    </option>
-                  ))}
-                </select>
-                <svg
-                  aria-hidden="true"
-                  className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-slate-400"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
+              {/* Contact Callouts */}
+              <div className="mt-12 space-y-3 pt-8 border-t border-zinc-800/80">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 block">
+                  [DIRECT_LINES // ALMATY]
+                </span>
+
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                  <a
+                    href={PHONES.main.tel}
+                    className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 font-mono text-sm text-white transition hover:border-zinc-500"
+                  >
+                    <Phone size={14} className="text-zinc-400" />
+                    <span>{PHONES.main.display}</span>
+                  </a>
+
+                  <a
+                    href={PHONES.extra.tel}
+                    className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 font-mono text-sm text-zinc-300 transition hover:border-zinc-500"
+                  >
+                    <Phone size={14} className="text-zinc-400" />
+                    <span>{PHONES.extra.display}</span>
+                  </a>
+                </div>
+
+                <div className="pt-2">
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-xs text-emerald-400 hover:text-emerald-300 transition"
+                  >
+                    <WhatsAppIcon size={14} className="text-emerald-400" />
+                    <span>ЧАТ В WHATSAPP (БЫСТРЫЙ ОТВЕТ ЗА 5 МИНУТ)</span>
+                    <ArrowRight size={12} />
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div className="sm:col-span-2">
-              <label htmlFor={ids.comment} className="mb-2 block text-sm font-semibold text-slate-800">
-                {f.commentLabel} <span className="font-normal text-slate-400">({f.optional})</span>
-              </label>
-              <textarea
-                id={ids.comment}
-                name="comment"
-                rows={4}
-                maxLength={500}
-                value={form.comment}
-                onChange={update('comment')}
-                placeholder={f.commentPlaceholder}
-                className="field resize-none"
-              />
+            {/* Right Side: Minimalist Bottom-Bordered Form */}
+            <div className="lg:col-span-7">
+              <form
+                noValidate
+                onSubmit={onSubmit}
+                className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-10 backdrop-blur-md"
+              >
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {/* Name field */}
+                  <div>
+                    <label htmlFor={ids.name} className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-1">
+                      {f.nameLabel} <span className="text-red-400">*</span>
+                    </label>
+                    <input
+                      id={ids.name}
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      required
+                      maxLength={60}
+                      value={form.name}
+                      onChange={update('name')}
+                      placeholder={f.namePlaceholder}
+                      aria-invalid={errors.name ? true : undefined}
+                      aria-describedby={errors.name ? ids.nameErr : undefined}
+                      className="monolith-input"
+                    />
+                    {errors.name && (
+                      <p id={ids.nameErr} role="alert" className="mt-1.5 font-mono text-xs text-red-400">
+                        {f.errors.name}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Phone field */}
+                  <div>
+                    <label htmlFor={ids.phone} className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-1">
+                      {f.phoneLabel} <span className="text-red-400">*</span>
+                    </label>
+                    <input
+                      id={ids.phone}
+                      name="phone"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      required
+                      value={form.phone}
+                      onChange={update('phone')}
+                      onFocus={() => !form.phone && setForm((p) => ({ ...p, phone: '+7' }))}
+                      onBlur={() => form.phone === '+7' && setForm((p) => ({ ...p, phone: '' }))}
+                      placeholder={f.phonePlaceholder}
+                      aria-invalid={errors.phone ? true : undefined}
+                      aria-describedby={errors.phone ? ids.phoneErr : undefined}
+                      className="monolith-input font-mono"
+                    />
+                    {errors.phone && (
+                      <p id={ids.phoneErr} role="alert" className="mt-1.5 font-mono text-xs text-red-400">
+                        {f.errors.phone}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Object Type Select */}
+                  <div className="sm:col-span-2">
+                    <label htmlFor={ids.objectType} className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-1">
+                      {f.objectTypeLabel}
+                    </label>
+                    <div className="relative">
+                      <select
+                        id={ids.objectType}
+                        name="objectType"
+                        value={form.objectType}
+                        onChange={update('objectType')}
+                        className="monolith-input appearance-none pr-10 cursor-pointer text-white [&>option]:bg-zinc-900 [&>option]:text-white"
+                      >
+                        {OBJECT_TYPE_KEYS.map((key) => (
+                          <option key={key} value={key}>
+                            {f.objectTypes[key]}
+                          </option>
+                        ))}
+                      </select>
+                      <svg
+                        aria-hidden="true"
+                        className="pointer-events-none absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 text-zinc-500"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Comment Textarea */}
+                  <div className="sm:col-span-2">
+                    <label htmlFor={ids.comment} className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-1">
+                      {f.commentLabel} <span className="text-zinc-600">({f.optional})</span>
+                    </label>
+                    <textarea
+                      id={ids.comment}
+                      name="comment"
+                      rows={3}
+                      maxLength={500}
+                      value={form.comment}
+                      onChange={update('comment')}
+                      placeholder={f.commentPlaceholder}
+                      className="monolith-input resize-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Submit button: High-contrast white pill button */}
+                <button type="submit" className="btn-pill-white mt-8 w-full">
+                  <Send size={16} />
+                  <span>{f.submit}</span>
+                </button>
+
+                <p className="mt-4 text-center font-mono text-xs text-zinc-500">
+                  {f.note}
+                </p>
+
+                {sent && (
+                  <div
+                    role="status"
+                    className="mt-4 flex items-start gap-2.5 rounded-xl border border-emerald-500/30 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-300"
+                  >
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-400" />
+                    <span>{f.success}</span>
+                  </div>
+                )}
+              </form>
             </div>
           </div>
-
-          <button type="submit" className="btn-primary mt-7 w-full py-4 text-base">
-            <Send size={18} />
-            {f.submit}
-          </button>
-
-          <p className="mt-4 text-center text-sm leading-relaxed text-slate-500">{f.note}</p>
-
-          {sent && (
-            <p
-              role="status"
-              className="mt-4 flex items-start gap-2.5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800"
-            >
-              <CheckCircle2 size={18} className="mt-px shrink-0" />
-              {f.success}
-            </p>
-          )}
-        </form>
+        </div>
       </div>
     </section>
   );

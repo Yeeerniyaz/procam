@@ -2,7 +2,7 @@
   "name": "proelectric-web",
   "private": true,
   "version": "1.0.0",
-  "description": "ProElectric — professional IP video surveillance (CCTV) installation in Almaty. Static landing page.",
+  "description": "ProCam — professional IP video surveillance (CCTV) installation in Almaty. Static landing page.",
   "type": "module",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"

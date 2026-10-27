@@ -1,59 +1,6 @@
-import { Fragment, type ReactNode } from 'react';
-import { Camera, Check, ChevronRight, Info, Network, Server, Smartphone } from 'lucide-react';
+import { Camera, Check, Info, Network, Server, Shield, Smartphone } from 'lucide-react';
 import { SECTION_IDS } from '../config/contacts';
 import { useLanguage } from '../i18n/LanguageContext';
-
-interface BrandCardProps {
-  name: string;
-  tag: string;
-  badge: string;
-  description: string;
-  features: string[];
-  accent?: boolean;
-  className?: string;
-  children?: ReactNode;
-}
-
-function BrandCard({ name, tag, badge, description, features, accent, className = '', children }: BrandCardProps) {
-  return (
-    <article
-      className={`card group relative flex flex-col overflow-hidden p-6 transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md sm:p-8 ${className}`}
-    >
-      {accent && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-slate-200/40 blur-3xl"
-        />
-      )}
-      <div className="relative flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">{tag}</span>
-        <span
-          className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-            accent ? 'bg-slate-900 text-white shadow-sm shadow-slate-900/20' : 'bg-slate-100 text-slate-700'
-          }`}
-        >
-          {badge}
-        </span>
-      </div>
-
-      <h3 className="relative mt-5 text-2xl font-bold tracking-tight text-slate-900 sm:text-[1.7rem]">{name}</h3>
-      <p className="relative mt-3 leading-relaxed text-slate-600">{description}</p>
-
-      <ul className="relative mt-6 grid gap-3">
-        {features.map((f) => (
-          <li key={f} className="flex items-start gap-3 text-sm text-slate-700 sm:text-[15px]">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700">
-              <Check size={13} strokeWidth={3} />
-            </span>
-            {f}
-          </li>
-        ))}
-      </ul>
-
-      {children}
-    </article>
-  );
-}
 
 const flowIcons = [Camera, Network, Server, Smartphone];
 
@@ -62,51 +9,192 @@ export default function HardwareSection() {
   const hw = t.hardware;
 
   return (
-    <section id={SECTION_IDS.equipment} className="section border-y border-slate-200 bg-slate-50">
-      <div className="container-page">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="eyebrow">{hw.eyebrow}</span>
-          <h2 className="section-title">{hw.title}</h2>
-          <p className="section-subtitle">{hw.subtitle}</p>
+    <section id={SECTION_IDS.equipment} className="section-open bg-white relative">
+      <div className="container-open">
+        {/* Section Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 pb-14 border-b border-zinc-200">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
+                // 01 · SYSTEM HARDWARE
+              </span>
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span className="font-mono text-xs text-zinc-500 uppercase">
+                CERTIFIED VENDORS
+              </span>
+            </div>
+            <h2 className="mt-4 text-4xl sm:text-6xl font-medium tracking-tighter leading-tight text-zinc-950">
+              {hw.title}
+            </h2>
+          </div>
+          <p className="max-w-xl text-base sm:text-lg text-zinc-600 font-normal leading-relaxed">
+            {hw.subtitle}
+          </p>
         </div>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-3 lg:grid-rows-2">
-          <BrandCard {...hw.hikvision} accent className="lg:row-span-2">
-            {/* Ecosystem flow */}
-            <div className="relative mt-auto pt-8">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <div className="flex items-center justify-between gap-1">
-                  {hw.flow.map((label, i) => {
-                    const Icon = flowIcons[i];
-                    return (
-                      <Fragment key={label}>
-                        <div className="flex min-w-0 flex-1 flex-col items-center gap-2 text-center">
-                          <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/80 bg-white text-slate-700 shadow-sm">
-                            <Icon size={18} />
-                          </span>
-                          <span className="text-[10px] leading-tight font-semibold text-slate-600 sm:text-[11px]">
-                            {label}
-                          </span>
-                        </div>
-                        {i < hw.flow.length - 1 && (
-                          <ChevronRight size={14} className="mb-6 shrink-0 text-slate-300" />
-                        )}
-                      </Fragment>
-                    );
-                  })}
+        {/* Open Editorial Architectural Bento Grid (12 Columns) */}
+        <div className="grid grid-cols-1 divide-y divide-zinc-200 border-b border-zinc-200 lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
+          {/* ZONE 01: HIKVISION (5 cols) — Core Ecosystem Backbone */}
+          <div className="lg:col-span-5 p-8 sm:p-10 lg:p-12 flex flex-col justify-between bg-white hover:bg-zinc-50/50 transition-colors duration-200">
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-4xl sm:text-5xl font-medium tracking-tighter text-zinc-950">
+                  01
+                </span>
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+                    [NVR + IP CAMERAS]
+                  </span>
+                  <span className="rounded-full bg-zinc-950 px-3 py-1 font-mono text-[10px] font-semibold text-white uppercase tracking-wider">
+                    {hw.hikvision.badge}
+                  </span>
                 </div>
               </div>
+
+              <div className="mt-8">
+                <div className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-600 mb-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  CORE BACKBONE
+                </div>
+                <h3 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-950">
+                  {hw.hikvision.name}
+                </h3>
+                <p className="mt-4 text-base text-zinc-600 leading-relaxed">
+                  {hw.hikvision.description}
+                </p>
+              </div>
+
+              {/* Specs List */}
+              <ul className="mt-8 space-y-3.5">
+                {hw.hikvision.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3 text-sm text-zinc-800">
+                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-950">
+                      <Check size={11} strokeWidth={3} />
+                    </span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </BrandCard>
 
-          <BrandCard {...hw.hiwatch} className="lg:col-span-2" />
+            {/* Ecosystem Pipeline Flow */}
+            <div className="mt-12 pt-8 border-t border-zinc-100">
+              <span className="block font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-4">
+                [ECOSYSTEM // SIGNAL & POWER PIPELINE]
+              </span>
+              <div className="grid grid-cols-4 gap-2">
+                {hw.flow.map((label, idx) => {
+                  const Icon = flowIcons[idx];
+                  return (
+                    <div key={label} className="relative flex flex-col items-center text-center">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-50 text-zinc-800">
+                        <Icon size={16} />
+                      </div>
+                      <span className="mt-2 text-[10px] sm:text-[11px] font-medium leading-tight text-zinc-600">
+                        {label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
 
-          <BrandCard {...hw.dahua} className="lg:col-span-2">
-            <p className="relative mt-6 flex items-start gap-2.5 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
-              <Info size={16} className="mt-0.5 shrink-0 text-slate-500" />
-              {hw.dahua.note}
-            </p>
-          </BrandCard>
+          {/* ZONE 02: HIWATCH (4 cols) — Optimal Balance */}
+          <div className="lg:col-span-4 p-8 sm:p-10 lg:p-12 flex flex-col justify-between bg-white hover:bg-zinc-50/50 transition-colors duration-200">
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-4xl sm:text-5xl font-medium tracking-tighter text-zinc-950">
+                  02
+                </span>
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+                    [OFFICIAL SUB-BRAND]
+                  </span>
+                  <span className="rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 font-mono text-[10px] font-semibold text-zinc-800 uppercase tracking-wider">
+                    {hw.hiwatch.badge}
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <div className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500 mb-2">
+                  BALANCED DEPLOYMENT
+                </div>
+                <h3 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-950">
+                  {hw.hiwatch.name}
+                </h3>
+                <p className="mt-4 text-base text-zinc-600 leading-relaxed">
+                  {hw.hiwatch.description}
+                </p>
+              </div>
+
+              <ul className="mt-8 space-y-3.5">
+                {hw.hiwatch.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3 text-sm text-zinc-800">
+                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-950">
+                      <Check size={11} strokeWidth={3} />
+                    </span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-12 pt-8 border-t border-zinc-100">
+              <div className="flex items-center gap-2 text-xs font-mono text-zinc-500">
+                <Shield size={14} className="text-zinc-400" />
+                <span>100% COMPATIBLE WITH HIK-CONNECT</span>
+              </div>
+            </div>
+          </div>
+
+          {/* ZONE 03: DAHUA (3 cols) — Optical Endpoints */}
+          <div className="lg:col-span-3 p-8 sm:p-10 lg:p-12 flex flex-col justify-between bg-zinc-50/40 hover:bg-zinc-100/40 transition-colors duration-200">
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-4xl sm:text-5xl font-medium tracking-tighter text-zinc-950">
+                  03
+                </span>
+                <span className="rounded-full border border-zinc-200 bg-white px-2.5 py-1 font-mono text-[10px] font-semibold text-zinc-700 uppercase tracking-wider">
+                  {hw.dahua.badge}
+                </span>
+              </div>
+
+              <div className="mt-8">
+                <div className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500 mb-2">
+                  [IP CAMERAS ONLY]
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950">
+                  {hw.dahua.name}
+                </h3>
+                <p className="mt-4 text-sm text-zinc-600 leading-relaxed">
+                  {hw.dahua.description}
+                </p>
+              </div>
+
+              <ul className="mt-8 space-y-3">
+                {hw.dahua.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-700">
+                    <span className="mt-0.5 flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-zinc-200 text-zinc-800">
+                      <Check size={9} strokeWidth={3} />
+                    </span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Crucial Technical Architecture Note */}
+            <div className="mt-10 rounded-xl border border-zinc-300/80 bg-white p-4">
+              <div className="flex items-start gap-2.5">
+                <Info size={15} className="mt-0.5 shrink-0 text-zinc-700" />
+                <p className="text-xs leading-relaxed text-zinc-700 font-medium">
+                  {hw.dahua.note}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

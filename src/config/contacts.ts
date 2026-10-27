@@ -24,8 +24,8 @@ export const PHONES = {
   extra: {
     raw: PHONE_EXTRA,
     tel: `tel:+${PHONE_EXTRA}`,
-    display: '+7 (777) 606-63-23',
-    short: '+7 777 606 63 23',
+    display: '+7 (776) 606-63-23',
+    short: '+7 776 606 63 23',
   },
 } as const;
 
