@@ -1,0 +1,23 @@
+<svg width="340" height="64" viewBox="0 0 340 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <style>
+    .pro { font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 900; letter-spacing: -0.03em; }
+    .cam { font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 400; letter-spacing: -0.03em; }
+    .sub { font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  </style>
+
+  <g transform="translate(0, 0) scale(1.0)">
+  <rect width="64" height="64" rx="15" fill="#09090B"/>
+  <path d="M11 15L23 21L32 14L41 21L53 15L55 34C55 46.5 44.5 54.5 32 57C19.5 54.5 9 46.5 9 34L11 15Z" fill="#18181B" stroke="#E4E4E7" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M13 21L32 31L51 21" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="22" cy="34" r="7.5" fill="#09090B" stroke="#FFFFFF" stroke-width="2"/>
+  <circle cx="22" cy="34" r="3.5" fill="#09090B" stroke="#10B981" stroke-width="1.6"/>
+  <circle cx="23.5" cy="32.5" r="1.7" fill="#10B981"/>
+  <circle cx="42" cy="34" r="7.5" fill="#09090B" stroke="#FFFFFF" stroke-width="2"/>
+  <circle cx="42" cy="34" r="3.5" fill="#09090B" stroke="#10B981" stroke-width="1.6"/>
+  <circle cx="43.5" cy="32.5" r="1.7" fill="#10B981"/>
+  <path d="M32 37L28.5 44L32 50L35.5 44L32 37Z" fill="#E4E4E7"/>
+  </g>
+  <text x="80" y="36" font-size="32"><tspan class="pro" fill="#09090B">PRO</tspan><tspan class="cam" fill="#52525B">CAM</tspan></text>
+  <text x="81" y="54" font-size="11.5" class="sub" fill="#71717A">БЕЙНЕБАҚЫЛАУ ЖҮЙЕЛЕРІ</text>
+</svg>
