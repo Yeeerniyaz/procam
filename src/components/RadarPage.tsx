@@ -205,7 +205,7 @@ export default function RadarPage({ onBackHome }: RadarPageProps) {
                     c="teal.7"
                     style={{ fontFamily: 'var(--font-mono)' }}
                   >
-                    // УСТАНОВКА НА LINUX С ИКОНКОЙ В МЕНЮ (1 КОМАНДА):
+                    // БЫСТРАЯ УСТАНОВКА НА LINUX (1 КОМАНДА):
                   </Text>
                   <UnstyledButton
                     onClick={copyInstallCmd}
