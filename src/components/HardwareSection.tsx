@@ -1,8 +1,26 @@
 import { useState } from 'react';
-import { Camera, Check, Info, Layers, Network, Server, Smartphone } from 'lucide-react';
+import {
+  Alert,
+  Badge,
+  Box,
+  Card,
+  Container,
+  Grid,
+  Group,
+  List,
+  Paper,
+  Progress,
+  SegmentedControl,
+  SimpleGrid,
+  Stack,
+  Tabs,
+  Text,
+  ThemeIcon,
+  Title,
+} from '@mantine/core';
+import { Camera, Check, Info, Network, Server, Smartphone } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
-type BrandKey = 'hikvision' | 'hiwatch' | 'dahua';
 type FocalKey = '2.8' | '4.0' | '6.0';
 
 export default function HardwareSection() {
@@ -10,420 +28,407 @@ export default function HardwareSection() {
   const hw = t.hardware;
   const lab = hw.opticalLab;
 
-  const [activeBrand, setActiveBrand] = useState<BrandKey>('hikvision');
-  const [focal, setFocal] = useState<FocalKey>('2.8');
-
-  const lens = lab.lenses[focal];
-
-  const brandSpecs = {
-    hikvision: {
-      num: '01',
-      code: '[NVR + CAMERAS // CORE BACKBONE]',
-      name: hw.hikvision.name,
-      badge: hw.hikvision.badge,
-      description: hw.hikvision.description,
-      features: hw.hikvision.features,
-      protocol: 'HIKVISION PRIVATE P2P // H.265+',
-      camNode: 'Hikvision 4K',
-      nvrNode: 'Hikvision NVR',
-      isDahua: false,
-    },
-    hiwatch: {
-      num: '02',
-      code: '[NVR + CAMERAS // HIK ECOSYSTEM]',
-      name: hw.hiwatch.name,
-      badge: hw.hiwatch.badge,
-      description: hw.hiwatch.description,
-      features: hw.hiwatch.features,
-      protocol: 'HIK-CONNECT NATIVE // POE 48V',
-      camNode: 'HiWatch IP',
-      nvrNode: 'HiWatch NVR',
-      isDahua: false,
-    },
-    dahua: {
-      num: '03',
-      code: '[OPTICAL IP ENDPOINTS ONLY]',
-      name: hw.dahua.name,
-      badge: hw.dahua.badge,
-      description: hw.dahua.description,
-      features: hw.dahua.features,
-      protocol: 'ONVIF PROFILE S // RTSP STREAM',
-      camNode: 'Dahua IP Cam',
-      nvrNode: 'Hikvision NVR',
-      isDahua: true,
-    },
-  }[activeBrand];
+  const [lens, setLens] = useState<FocalKey>('2.8');
+  const currentLens = lab.lenses[lens];
 
   const fovSpecs: Record<
     FocalKey,
-    { angle: number; conePath: string; markerX: number; targetLabel: string }
+    { angle: number; conePath: string; markerX: number; progress: number; distanceLabel: string }
   > = {
     '2.8': {
       angle: 114,
       conePath: 'M 30 95 L 250 15 L 250 175 Z',
       markerX: 95,
-      targetLabel: 'Идентификация: 6 м (Широкий обзор)',
+      progress: 30,
+      distanceLabel: '6 м — Общий периметр и двор без слепых зон',
     },
     '4.0': {
       angle: 84,
       conePath: 'M 30 95 L 250 42 L 250 148 Z',
       markerX: 155,
-      targetLabel: 'Идентификация: 12 м (Фасад / Ворота)',
+      progress: 60,
+      distanceLabel: '12 м — Фасады, коридоры, въездные ворота',
     },
     '6.0': {
       angle: 54,
       conePath: 'M 30 95 L 250 66 L 250 124 Z',
       markerX: 220,
-      targetLabel: 'Идентификация: 22 м (Госномер авто)',
+      progress: 100,
+      distanceLabel: '22 м — Прицельное чтение госномеров авто и лиц',
     },
   };
 
-  const currentFov = fovSpecs[focal];
+  const currentFov = fovSpecs[lens];
+
+  const renderTopology = (brandLabel: string, nvrLabel: string, protocol: string) => (
+    <Card withBorder padding="xl" radius="lg" bg="dark.9" c="white" h="100%">
+      <Group justify="space-between" mb="md">
+        <Badge color="teal" variant="light">
+          СХЕМА ВКЛЮЧЕНИЯ
+        </Badge>
+        <Text fz="xs" ff="monospace" c="gray.4">
+          {protocol}
+        </Text>
+      </Group>
+
+      <Title order={4} c="white" mb="xs">
+        Единая архитектура записи и облака
+      </Title>
+      <Text fz="sm" c="gray.4" mb="lg">
+        Все камеры питаются по одному кабелю PoE 48V, пишутся на сервер {nvrLabel} с диском WD Purple и открываются в приложении Hik-Connect.
+      </Text>
+
+      <SimpleGrid cols={2} spacing="sm">
+        <Paper p="sm" radius="md" bg="dark.7" style={{ border: '1px solid var(--mantine-color-dark-5)' }}>
+          <Group gap="xs" mb={4}>
+            <Camera size={16} color="var(--mantine-color-teal-4)" />
+            <Text fz="xs" fw={700} c="white">
+              01. Камеры
+            </Text>
+          </Group>
+          <Text fz="xs" c="gray.3">
+            {brandLabel}
+          </Text>
+        </Paper>
+
+        <Paper p="sm" radius="md" bg="dark.7" style={{ border: '1px solid var(--mantine-color-dark-5)' }}>
+          <Group gap="xs" mb={4}>
+            <Network size={16} color="var(--mantine-color-teal-4)" />
+            <Text fz="xs" fw={700} c="white">
+              02. PoE 48V
+            </Text>
+          </Group>
+          <Text fz="xs" c="gray.3">
+            IEEE 802.3af Cat6
+          </Text>
+        </Paper>
+
+        <Paper p="sm" radius="md" bg="dark.7" style={{ border: '1px solid var(--mantine-color-teal-7)' }}>
+          <Group gap="xs" mb={4}>
+            <Server size={16} color="var(--mantine-color-teal-4)" />
+            <Text fz="xs" fw={700} c="teal.3">
+              03. Сервер NVR
+            </Text>
+          </Group>
+          <Text fz="xs" c="white" fw={600}>
+            {nvrLabel}
+          </Text>
+        </Paper>
+
+        <Paper p="sm" radius="md" bg="dark.7" style={{ border: '1px solid var(--mantine-color-dark-5)' }}>
+          <Group gap="xs" mb={4}>
+            <Smartphone size={16} color="var(--mantine-color-teal-4)" />
+            <Text fz="xs" fw={700} c="white">
+              04. Смартфон
+            </Text>
+          </Group>
+          <Text fz="xs" c="gray.3">
+            Hik-Connect 24/7
+          </Text>
+        </Paper>
+      </SimpleGrid>
+    </Card>
+  );
 
   return (
-    <section
+    <Box
+      component="section"
       id="hardware"
-      className="snap-screen-section bg-white border-b border-zinc-200"
+      style={{ borderBottom: '1px solid var(--mantine-color-gray-3)' }}
     >
-      <div className="flex-1 min-h-0 w-full grid grid-cols-1 grid-rows-[1fr_1fr] lg:grid-rows-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200 overflow-hidden">
-        {/* ============================================================ */}
-        {/* LEFT / TOP ZONE (5 cols on lg): Brand Switcher + Topology    */}
-        {/* ============================================================ */}
-        <div className="lg:col-span-5 flex flex-col justify-between p-3.5 sm:p-6 lg:p-10 xl:p-12 min-h-0 overflow-hidden bg-white">
-          {/* Top Header + Interactive Brand Tabs */}
-          <div className="shrink-0">
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-zinc-400">
-                  {hw.eyebrow}
-                </span>
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </div>
-              <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-wider text-zinc-500">
-                NVR: HIKVISION / HIWATCH ONLY
-              </span>
-            </div>
+      <Container size="xl" py={{ base: 50, md: 90 }}>
+        <Stack gap="xs" mb="xl">
+          <Group gap="xs">
+            <Badge variant="light" color="dark" radius="sm">
+              {hw.eyebrow}
+            </Badge>
+            <Badge variant="outline" color="teal" radius="sm">
+              HIKVISION · HIWATCH · DAHUA IP
+            </Badge>
+          </Group>
+          <Title order={2} fz={{ base: 28, sm: 38 }} fw={800}>
+            {hw.title}
+          </Title>
+          <Text c="dimmed" size="lg" maw={720}>
+            {hw.subtitle}
+          </Text>
+        </Stack>
 
-            <h2 className="mt-1 sm:mt-2 text-lg sm:text-2xl lg:text-3xl font-semibold tracking-tight text-zinc-950 truncate">
-              {hw.title}
-            </h2>
+        {/* Brand Ecosystem Tabs */}
+        <Tabs defaultValue="hikvision" variant="pills" color="dark" radius="md">
+          <Tabs.List mb="xl">
+            <Tabs.Tab value="hikvision" fw={600}>
+              01. Hikvision (Флагман)
+            </Tabs.Tab>
+            <Tabs.Tab value="hiwatch" fw={600}>
+              02. HiWatch (Оптимум)
+            </Tabs.Tab>
+            <Tabs.Tab value="dahua" fw={600}>
+              03. Камеры Dahua IP
+            </Tabs.Tab>
+          </Tabs.List>
 
-            {/* Compact Brand Selector Tabs */}
-            <div className="mt-2.5 sm:mt-4 grid grid-cols-3 gap-1.5 bg-zinc-100 p-1 rounded-xl border border-zinc-200">
-              {(
-                [
-                  { key: 'hikvision', label: '01. HIKVISION' },
-                  { key: 'hiwatch', label: '02. HIWATCH' },
-                  { key: 'dahua', label: '03. DAHUA IP' },
-                ] as { key: BrandKey; label: string }[]
-              ).map((tab) => {
-                const active = activeBrand === tab.key;
-                return (
-                  <button
-                    key={tab.key}
-                    type="button"
-                    onClick={() => setActiveBrand(tab.key)}
-                    className={`cursor-pointer rounded-lg py-1.5 sm:py-2 px-2 font-mono text-[10px] sm:text-xs font-bold tracking-tight transition ${
-                      active
-                        ? 'bg-zinc-950 text-white shadow-xs'
-                        : 'text-zinc-600 hover:text-zinc-950'
-                    }`}
+          {/* Tab 1: Hikvision */}
+          <Tabs.Panel value="hikvision">
+            <Grid gutter="lg">
+              <Grid.Col span={{ base: 12, md: 7 }}>
+                <Card withBorder padding="xl" radius="lg" h="100%">
+                  <Group justify="space-between" mb="md">
+                    <Badge color="dark" size="lg">
+                      {hw.hikvision.badge}
+                    </Badge>
+                    <Text fz="xs" ff="monospace" c="dimmed">
+                      [NVR + IP CAMERAS]
+                    </Text>
+                  </Group>
+                  <Title order={3} fz="h2" mb="sm">
+                    {hw.hikvision.name}
+                  </Title>
+                  <Text c="dimmed" mb="lg">
+                    {hw.hikvision.description}
+                  </Text>
+                  <List
+                    spacing="sm"
+                    icon={
+                      <ThemeIcon color="dark" size={20} radius="xl">
+                        <Check size={12} />
+                      </ThemeIcon>
+                    }
                   >
-                    {tab.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+                    {hw.hikvision.features.map((f) => (
+                      <List.Item key={f}>
+                        <Text fw={500}>{f}</Text>
+                      </List.Item>
+                    ))}
+                  </List>
+                </Card>
+              </Grid.Col>
+              <Grid.Col span={{ base: 12, md: 5 }}>
+                {renderTopology('Hikvision 4K ColorVu', 'Hikvision NVR', 'HIK PRIVATE P2P')}
+              </Grid.Col>
+            </Grid>
+          </Tabs.Panel>
 
-          {/* Middle: Active Brand Spec Card (flex-1 min-h-0) */}
-          <div className="my-auto py-2 min-h-0 flex flex-col justify-center">
-            <div className="rounded-xl border border-zinc-200 bg-zinc-50/70 p-3 sm:p-5">
-              <div className="flex items-center justify-between gap-2">
-                <span
-                  className={`font-mono text-[9px] sm:text-[11px] font-semibold uppercase tracking-wider ${
-                    brandSpecs.isDahua ? 'text-amber-600' : 'text-emerald-600'
-                  }`}
-                >
-                  {brandSpecs.code}
-                </span>
-                <span className="rounded-full bg-zinc-950 px-2.5 py-0.5 font-mono text-[9px] sm:text-[10px] font-semibold text-white uppercase">
-                  {brandSpecs.badge}
-                </span>
-              </div>
-
-              <h3 className="mt-1 sm:mt-2 text-base sm:text-2xl font-semibold tracking-tight text-zinc-950">
-                {brandSpecs.name}
-              </h3>
-
-              <p className="mt-1 text-xs sm:text-sm text-zinc-600 line-clamp-2 leading-relaxed">
-                {brandSpecs.description}
-              </p>
-
-              <ul className="mt-2.5 sm:mt-4 grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
-                {brandSpecs.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-start gap-1.5 text-[11px] sm:text-xs text-zinc-800"
+          {/* Tab 2: HiWatch */}
+          <Tabs.Panel value="hiwatch">
+            <Grid gutter="lg">
+              <Grid.Col span={{ base: 12, md: 7 }}>
+                <Card withBorder padding="xl" radius="lg" h="100%">
+                  <Group justify="space-between" mb="md">
+                    <Badge color="teal" size="lg">
+                      {hw.hiwatch.badge}
+                    </Badge>
+                    <Text fz="xs" ff="monospace" c="dimmed">
+                      [OFFICIAL HIKVISION ECOSYSTEM]
+                    </Text>
+                  </Group>
+                  <Title order={3} fz="h2" mb="sm">
+                    {hw.hiwatch.name}
+                  </Title>
+                  <Text c="dimmed" mb="lg">
+                    {hw.hiwatch.description}
+                  </Text>
+                  <List
+                    spacing="sm"
+                    icon={
+                      <ThemeIcon color="dark" size={20} radius="xl">
+                        <Check size={12} />
+                      </ThemeIcon>
+                    }
                   >
-                    <span className="mt-0.5 flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-zinc-200 text-zinc-950">
-                      <Check size={9} strokeWidth={3} />
-                    </span>
-                    <span className="line-clamp-1 sm:line-clamp-2">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+                    {hw.hiwatch.features.map((f) => (
+                      <List.Item key={f}>
+                        <Text fw={500}>{f}</Text>
+                      </List.Item>
+                    ))}
+                  </List>
+                </Card>
+              </Grid.Col>
+              <Grid.Col span={{ base: 12, md: 5 }}>
+                {renderTopology('HiWatch Pro IP', 'HiWatch / Hikvision NVR', 'HIK-CONNECT NATIVE')}
+              </Grid.Col>
+            </Grid>
+          </Tabs.Panel>
 
-              {/* Explicit Architectural Rule Note */}
-              <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-zinc-200/80 flex items-start gap-2">
-                <Info
-                  size={13}
-                  className={`mt-0.5 shrink-0 ${
-                    brandSpecs.isDahua ? 'text-amber-600' : 'text-emerald-600'
-                  }`}
-                />
-                <p className="text-[10px] sm:text-xs text-zinc-600 leading-snug">
-                  <strong className="text-zinc-950 font-semibold">Архитектура NVR:</strong>{' '}
-                  Серверы записи строго <span className="font-semibold text-zinc-950">Hikvision / HiWatch</span>. Камеры Dahua интегрируются только как IP-оптика по ONVIF/RTSP.
-                </p>
-              </div>
-            </div>
-          </div>
+          {/* Tab 3: Dahua IP Cameras strictly */}
+          <Tabs.Panel value="dahua">
+            <Grid gutter="lg">
+              <Grid.Col span={{ base: 12, md: 7 }}>
+                <Card withBorder padding="xl" radius="lg" h="100%">
+                  <Group justify="space-between" mb="md">
+                    <Badge color="dark" variant="outline" size="lg">
+                      {hw.dahua.badge}
+                    </Badge>
+                    <Text fz="xs" ff="monospace" c="dimmed">
+                      [OPTICAL IP ENDPOINTS ONLY]
+                    </Text>
+                  </Group>
+                  <Title order={3} fz="h2" mb="sm">
+                    {hw.dahua.name}
+                  </Title>
+                  <Text c="dimmed" mb="lg">
+                    {hw.dahua.description}
+                  </Text>
+                  <List
+                    spacing="sm"
+                    mb="lg"
+                    icon={
+                      <ThemeIcon color="dark" size={20} radius="xl">
+                        <Check size={12} />
+                      </ThemeIcon>
+                    }
+                  >
+                    {hw.dahua.features.map((f) => (
+                      <List.Item key={f}>
+                        <Text fw={500}>{f}</Text>
+                      </List.Item>
+                    ))}
+                  </List>
 
-          {/* Bottom: Live 4-Node Signal Topology Pipeline */}
-          <div className="shrink-0 rounded-xl border border-zinc-200 bg-zinc-950 p-2.5 sm:p-3.5 text-white">
-            <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono text-zinc-400 pb-1.5 mb-2 border-b border-zinc-800">
-              <span className="flex items-center gap-1.5 text-white font-semibold">
-                <Layers size={12} className="text-emerald-400" />
-                TOPOLOGY // {activeBrand.toUpperCase()}
-              </span>
-              <span className="truncate">{brandSpecs.protocol}</span>
-            </div>
+                  <Alert
+                    variant="light"
+                    color="dark"
+                    title="Архитектурное правило NVR"
+                    icon={<Info size={18} />}
+                  >
+                    {hw.dahua.note} Видеорегистраторы (NVR) в наших системах — 100% Hikvision / HiWatch, а Dahua используется строго для IP-камер.
+                  </Alert>
+                </Card>
+              </Grid.Col>
+              <Grid.Col span={{ base: 12, md: 5 }}>
+                {renderTopology('Dahua IP-камеры', 'Hikvision / HiWatch NVR', 'ONVIF PROFILE S / RTSP')}
+              </Grid.Col>
+            </Grid>
+          </Tabs.Panel>
+        </Tabs>
 
-            <div className="grid grid-cols-4 gap-1.5 text-center font-mono">
-              <div
-                className={`rounded-lg border p-1.5 ${
-                  brandSpecs.isDahua
-                    ? 'border-amber-500/50 bg-amber-950/20'
-                    : 'border-zinc-800 bg-zinc-900/70'
-                }`}
-              >
-                <Camera size={13} className="mx-auto text-emerald-400 mb-0.5" />
-                <span className="text-[9px] sm:text-[10px] font-bold block truncate">
-                  {brandSpecs.camNode}
-                </span>
-              </div>
-
-              <div className="rounded-lg border border-zinc-800 bg-zinc-900/70 p-1.5">
-                <Network size={13} className="mx-auto text-emerald-400 mb-0.5" />
-                <span className="text-[9px] sm:text-[10px] font-bold block truncate">
-                  PoE 48V Switch
-                </span>
-              </div>
-
-              <div className="rounded-lg border border-emerald-500/60 bg-emerald-950/20 p-1.5">
-                <Server size={13} className="mx-auto text-emerald-400 mb-0.5" />
-                <span className="text-[9px] sm:text-[10px] font-bold text-emerald-300 block truncate">
-                  {brandSpecs.nvrNode}
-                </span>
-              </div>
-
-              <div className="rounded-lg border border-zinc-800 bg-zinc-900/70 p-1.5">
-                <Smartphone size={13} className="mx-auto text-emerald-400 mb-0.5" />
-                <span className="text-[9px] sm:text-[10px] font-bold block truncate">
-                  Hik-Connect
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================================ */}
-        {/* RIGHT / BOTTOM ZONE (7 cols on lg): Interactive Optical Lab  */}
-        {/* ============================================================ */}
-        <div className="lg:col-span-7 flex flex-col justify-between p-3.5 sm:p-6 lg:p-10 xl:p-12 min-h-0 overflow-hidden bg-zinc-950 text-white relative select-none">
-          {/* Subtle architectural dot matrix */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"
-          />
-
-          {/* Top Bar: Optical Lab Header + 2.8 / 4.0 / 6.0 mm Switcher */}
-          <div className="relative z-10 shrink-0 flex flex-wrap items-center justify-between gap-2 pb-2.5 sm:pb-4 border-b border-zinc-800">
-            <div>
-              <span className="font-mono text-[9px] sm:text-xs uppercase tracking-widest text-emerald-400 block">
+        {/* Interactive Lens Simulator Card */}
+        <Card withBorder radius="lg" p={{ base: 'md', sm: 'xl' }} mt="xl" bg="gray.0">
+          <Group justify="space-between" align="flex-end" mb="lg" wrap="wrap" gap="md">
+            <Box>
+              <Text fz="xs" ff="monospace" tt="uppercase" c="dimmed" fw={700}>
                 {lab.eyebrow}
-              </span>
-              <h3 className="text-sm sm:text-xl lg:text-2xl font-semibold tracking-tight text-white">
+              </Text>
+              <Title order={3} mt={4}>
                 {lab.title}
-              </h3>
-            </div>
+              </Title>
+              <Text fz="sm" c="dimmed" mt={4}>
+                {lab.subtitle}
+              </Text>
+            </Box>
 
-            {/* Focal Length Switcher (2.8 мм / 4.0 мм / 6.0 мм) */}
-            <div className="flex items-center gap-1 bg-zinc-900 border border-zinc-800 p-1 rounded-xl">
-              {(['2.8', '4.0', '6.0'] as FocalKey[]).map((f) => {
-                const active = focal === f;
-                return (
-                  <button
-                    key={f}
-                    type="button"
-                    onClick={() => setFocal(f)}
-                    className={`cursor-pointer px-2.5 sm:px-4 py-1 sm:py-1.5 rounded-lg font-mono text-[10px] sm:text-xs font-bold transition ${
-                      active
-                        ? 'bg-emerald-500 text-zinc-950 shadow-xs'
-                        : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    {f} мм
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+            <SegmentedControl
+              value={lens}
+              onChange={(val) => setLens(val as FocalKey)}
+              data={[
+                { label: '2.8 мм (114° Обзор)', value: '2.8' },
+                { label: '4.0 мм (84° Средний)', value: '4.0' },
+                { label: '6.0 мм (54° Дальний)', value: '6.0' },
+              ]}
+            />
+          </Group>
 
-          {/* Center: Full-height Live SVG Optical Beam (114° vs 84° vs 54°) */}
-          <div className="relative z-10 flex-1 min-h-0 w-full flex items-center justify-center overflow-hidden my-1">
-            {/* Top-right Live Angle HUD Badge */}
-            <div className="pointer-events-none absolute top-2 right-2 z-20 rounded-md border border-zinc-800 bg-zinc-900/90 px-2.5 py-1 font-mono text-[10px] sm:text-xs text-emerald-400 font-bold">
-              FOV: {lens.angle} // {lens.focal}
-            </div>
+          <Grid gutter="lg" align="center">
+            <Grid.Col span={{ base: 12, md: 7 }}>
+              <Paper bg="dark.9" p="md" radius="md">
+                <svg
+                  width="100%"
+                  height="210"
+                  viewBox="0 0 280 190"
+                  preserveAspectRatio="xMidYMid meet"
+                  fill="none"
+                >
+                  <line x1="95" y1="15" x2="95" y2="175" stroke="#27272A" strokeDasharray="3 3" />
+                  <text x="88" y="186" fill="#71717A" fontSize="7" fontFamily="monospace">
+                    6м
+                  </text>
 
-            <svg
-              className="w-full h-full max-h-full"
-              viewBox="0 0 280 190"
-              preserveAspectRatio="xMidYMid meet"
-              fill="none"
-            >
-              {/* Distance Range Scale Markers: 6m, 12m, 22m */}
-              <line x1="95" y1="15" x2="95" y2="175" stroke="#27272A" strokeDasharray="3 3" />
-              <text x="88" y="186" fill="#71717A" fontSize="7" fontFamily="monospace">
-                6м
-              </text>
+                  <line x1="155" y1="15" x2="155" y2="175" stroke="#27272A" strokeDasharray="3 3" />
+                  <text x="147" y="186" fill="#71717A" fontSize="7" fontFamily="monospace">
+                    12м
+                  </text>
 
-              <line x1="155" y1="15" x2="155" y2="175" stroke="#27272A" strokeDasharray="3 3" />
-              <text x="147" y="186" fill="#71717A" fontSize="7" fontFamily="monospace">
-                12м
-              </text>
+                  <line x1="220" y1="15" x2="220" y2="175" stroke="#27272A" strokeDasharray="3 3" />
+                  <text x="212" y="186" fill="#71717A" fontSize="7" fontFamily="monospace">
+                    22м
+                  </text>
 
-              <line x1="220" y1="15" x2="220" y2="175" stroke="#27272A" strokeDasharray="3 3" />
-              <text x="212" y="186" fill="#71717A" fontSize="7" fontFamily="monospace">
-                22м
-              </text>
+                  <rect
+                    x="12"
+                    y="84"
+                    width="18"
+                    height="22"
+                    rx="3"
+                    fill="#27272A"
+                    stroke="#71717A"
+                    strokeWidth="1.2"
+                  />
+                  <circle cx="30" cy="95" r="4.5" fill="#10B981" />
 
-              {/* Center Optical Axis */}
-              <line
-                x1="32"
-                y1="95"
-                x2="255"
-                y2="95"
-                stroke="#3F3F46"
-                strokeWidth="0.8"
-                strokeDasharray="2 2"
-              />
+                  <path
+                    d={currentFov.conePath}
+                    fill="rgba(16, 185, 129, 0.2)"
+                    stroke="#10B981"
+                    strokeWidth="1.6"
+                  />
 
-              {/* Camera Chassis Node */}
-              <rect
-                x="12"
-                y="84"
-                width="18"
-                height="22"
-                rx="3"
-                fill="#27272A"
-                stroke="#71717A"
-                strokeWidth="1.2"
-              />
-              <circle cx="30" cy="95" r="4.5" fill="#10B981" />
+                  <line
+                    x1={currentFov.markerX}
+                    y1="28"
+                    x2={currentFov.markerX}
+                    y2="162"
+                    stroke="#34D399"
+                    strokeWidth="2"
+                  />
+                  <circle
+                    cx={currentFov.markerX}
+                    cy="95"
+                    r="5.5"
+                    fill="#10B981"
+                    stroke="#FFFFFF"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+              </Paper>
+            </Grid.Col>
 
-              {/* Dynamic Optical Beam Cone */}
-              <path
-                d={currentFov.conePath}
-                fill="rgba(16, 185, 129, 0.16)"
-                stroke="#10B981"
-                strokeWidth="1.6"
-                className="transition-all duration-300"
-              />
+            <Grid.Col span={{ base: 12, md: 5 }}>
+              <Card withBorder radius="md" p="lg" bg="white">
+                <Group justify="space-between" mb="xs">
+                  <Badge color="teal" variant="light">
+                    {currentLens.tag}
+                  </Badge>
+                  <Text ff="monospace" fw={700}>
+                    {currentLens.focal} · {currentLens.angle}
+                  </Text>
+                </Group>
 
-              {/* Target Identification Distance Plane */}
-              <line
-                x1={currentFov.markerX}
-                y1="28"
-                x2={currentFov.markerX}
-                y2="162"
-                stroke="#34D399"
-                strokeWidth="2"
-                className="transition-all duration-300"
-              />
+                <Title order={4} mb="xs">
+                  {currentLens.title}
+                </Title>
+                <Text fz="sm" c="dimmed" mb="md">
+                  {currentLens.desc}
+                </Text>
 
-              <circle
-                cx={currentFov.markerX}
-                cy="95"
-                r="5.5"
-                fill="#10B981"
-                stroke="#FFFFFF"
-                strokeWidth="1.5"
-                className="transition-all duration-300"
-              />
-
-              <rect
-                x={Math.min(currentFov.markerX - 45, 150)}
-                y="14"
-                width="115"
-                height="12"
-                rx="2"
-                fill="#10B981"
-                className="transition-all duration-300"
-              />
-              <text
-                x={Math.min(currentFov.markerX - 41, 154)}
-                y="22.5"
-                fill="#09090B"
-                fontSize="6"
-                fontFamily="monospace"
-                fontWeight="bold"
-                className="transition-all duration-300"
-              >
-                {currentFov.targetLabel}
-              </text>
-            </svg>
-          </div>
-
-          {/* Bottom Bar: Selected Lens Spec Summary */}
-          <div className="relative z-10 shrink-0 rounded-xl border border-zinc-800 bg-zinc-900/90 p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-6">
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-emerald-400 font-bold">
-                  [{lens.tag}]
-                </span>
-                <span className="text-xs sm:text-base font-semibold text-white truncate">
-                  {lens.title}
-                </span>
-              </div>
-              <p className="mt-0.5 text-[11px] sm:text-xs text-zinc-400 line-clamp-2 leading-relaxed">
-                {lens.desc}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-4 sm:gap-6 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 sm:border-l border-zinc-800 sm:pl-5">
-              <div>
-                <span className="font-mono text-[9px] text-zinc-500 uppercase block">
-                  Угол обзора
-                </span>
-                <span className="font-mono text-sm sm:text-lg font-bold text-white">
-                  {lens.angle}
-                </span>
-              </div>
-              <div>
-                <span className="font-mono text-[9px] text-zinc-500 uppercase block">
-                  Дистанция лиц
-                </span>
-                <span className="font-mono text-sm sm:text-lg font-bold text-emerald-400">
-                  {lens.distance}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                <Box>
+                  <Group justify="space-between" mb={6}>
+                    <Text fz="xs" fw={600}>
+                      Дальность идентификации лиц / номеров:
+                    </Text>
+                    <Text fz="xs" fw={700} c="teal.7">
+                      {currentLens.distance}
+                    </Text>
+                  </Group>
+                  <Progress value={currentFov.progress} color="teal" size="lg" radius="xl" />
+                  <Text fz="xs" c="dimmed" mt={6}>
+                    {currentFov.distanceLabel}
+                  </Text>
+                </Box>
+              </Card>
+            </Grid.Col>
+          </Grid>
+        </Card>
+      </Container>
+    </Box>
   );
 }

@@ -1,10 +1,29 @@
-import { type ChangeEvent, type FormEvent, useId, useState } from 'react';
-import { CheckCircle2, Clock, MapPin, Phone, Send, Tag } from 'lucide-react';
+import { type FormEvent, useState } from 'react';
+import {
+  Alert,
+  Badge,
+  Box,
+  Button,
+  Chip,
+  Container,
+  Grid,
+  Group,
+  List,
+  Paper,
+  Select,
+  SimpleGrid,
+  Stack,
+  Text,
+  Textarea,
+  TextInput,
+  ThemeIcon,
+  Title,
+} from '@mantine/core';
+import { Check, CheckCircle2, Phone, Send } from 'lucide-react';
 import { buildWhatsAppUrl, PHONES, WHATSAPP_URL } from '../config/contacts';
 import { OBJECT_TYPE_KEYS, objectTypeForMessage, type ObjectTypeKey } from '../i18n/translations';
 import { useLanguage } from '../i18n/LanguageContext';
 import { WhatsAppIcon } from './icons/BrandIcons';
-import Footer from './Footer';
 
 /* ------------------------------------------------------------------ */
 /* Phone helpers                                                       */
@@ -71,51 +90,31 @@ const openWhatsApp = (url: string) => {
   }
 };
 
-type Errors = Partial<Record<'name' | 'phone', true>>;
+type Errors = Partial<Record<'name' | 'phone', string>>;
 
 const initialState: FormState = { name: '', phone: '', objectType: 'house', comment: '' };
+
+const QUICK_CHIPS = [
+  '4 камеры',
+  '8 камер',
+  'ColorVu (ночной цвет)',
+  'Монтаж под ключ',
+  'Настройка / ремонт',
+];
 
 export default function CallbackForm() {
   const { t } = useLanguage();
   const f = t.form;
-  const c = t.contacts;
-  const uid = useId();
-  const ids = {
-    name: `${uid}-name`,
-    phone: `${uid}-phone`,
-    objectType: `${uid}-object`,
-    comment: `${uid}-comment`,
-    nameErr: `${uid}-name-err`,
-    phoneErr: `${uid}-phone-err`,
-  };
 
   const [form, setForm] = useState<FormState>(initialState);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
 
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((item) => item !== tag) : [...prev, tag]
-    );
-  };
-
-  const update =
-    <K extends keyof FormState>(key: K) =>
-    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-      const raw = e.target.value;
-      const value = (key === 'phone' ? formatPhone(raw) : raw) as FormState[K];
-      setForm((prev) => ({ ...prev, [key]: value }));
-      setSent(false);
-      if (key === 'name' || key === 'phone') {
-        setErrors((prev) => ({ ...prev, [key]: undefined }));
-      }
-    };
-
   const validate = (): boolean => {
     const next: Errors = {};
-    if (!form.name.trim()) next.name = true;
-    if (!isPhoneValid(form.phone)) next.phone = true;
+    if (!form.name.trim()) next.name = f.errors.name;
+    if (!isPhoneValid(form.phone)) next.phone = f.errors.phone;
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -129,299 +128,234 @@ export default function CallbackForm() {
     setSent(true);
   };
 
+  const selectData = OBJECT_TYPE_KEYS.map((key) => ({
+    value: key,
+    label: f.objectTypes[key],
+  }));
+
   return (
-    <section
-      id="contacts"
-      className="snap-screen-section bg-zinc-950 text-white justify-between"
-    >
-      {/* Main Full-Bleed Dark Workstation Grid */}
-      <div className="flex-1 min-h-0 w-full grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-800 overflow-hidden relative">
-        {/* Subtle architectural dot matrix */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-blueprint-dots-dark opacity-30"
-        />
+    <Box component="section" id="contacts">
+      <Container size="xl" py={{ base: 50, md: 80 }}>
+        <Paper bg="dark.9" c="white" p={{ base: 'xl', md: 50 }} radius="xl">
+          <Grid gutter={{ base: 32, lg: 48 }} align="center">
+            {/* ============================================================ */}
+            {/* LEFT COLUMN: Intro, Bullets, Direct Phones                   */}
+            {/* ============================================================ */}
+            <Grid.Col span={{ base: 12, lg: 5 }}>
+              <Stack gap="md">
+                <Group gap="xs">
+                  <Badge color="teal" variant="dot" size="lg">
+                    ONLINE · ОТВЕТ ЗА 5 МИНУТ
+                  </Badge>
+                </Group>
 
-        {/* ============================================================ */}
-        {/* LEFT COLUMN (5 cols on lg): Headline + Instant Phone Blocks  */}
-        {/* ============================================================ */}
-        <div className="relative z-10 lg:col-span-5 p-3.5 sm:p-6 lg:p-10 xl:p-14 flex flex-col justify-between shrink-0 lg:min-h-0 overflow-hidden">
-          <div>
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-zinc-400">
-                  {f.eyebrow}
-                </span>
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="font-mono text-[10px] sm:text-xs text-emerald-400 font-semibold">
-                  ONLINE · 5 МИН
-                </span>
-              </div>
-              <span className="lg:hidden font-mono text-[10px] text-zinc-400 flex items-center gap-1">
-                <MapPin size={11} className="text-emerald-400" />
-                {c.areaValue}
-              </span>
-            </div>
+                <Title order={2} fz={{ base: 28, sm: 38 }} c="white" lh={1.12}>
+                  {f.title}
+                </Title>
 
-            <h2 className="mt-1 sm:mt-3 text-xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-tight leading-[1.08] text-white">
-              {f.title}
-            </h2>
+                <Text c="gray.4" fz="md">
+                  {f.subtitle}
+                </Text>
 
-            <p className="hidden sm:block mt-2 lg:mt-4 text-xs sm:text-sm lg:text-base text-zinc-400 leading-relaxed max-w-md">
-              {f.subtitle}
-            </p>
-
-            {/* Engineering Bullets (visible on lg) */}
-            <ul className="hidden lg:block mt-6 space-y-2.5">
-              {f.bullets.map((b) => (
-                <li key={b} className="flex items-center gap-2.5 text-xs xl:text-sm text-zinc-300">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-emerald-400">
-                    <CheckCircle2 size={13} />
-                  </span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Instant Clickable Phone Blocks + Working Hours + Almaty Coverage */}
-          <div className="mt-2.5 sm:mt-4 lg:mt-0 space-y-2 sm:space-y-3 lg:pt-6 lg:border-t lg:border-zinc-800">
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-2">
-              {/* Main Phone + WhatsApp Block */}
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-2 sm:p-3.5 flex items-center justify-between gap-2">
-                <a href={PHONES.main.tel} className="min-w-0 flex-1 group">
-                  <span className="font-mono text-[9px] sm:text-[10px] text-emerald-400 uppercase block truncate">
-                    ● {c.mainPhone}
-                  </span>
-                  <span className="font-mono text-xs sm:text-base lg:text-lg font-bold text-white group-hover:text-emerald-300 transition truncate block">
-                    +7 (706) 606-63-23
-                  </span>
-                </a>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="WhatsApp"
-                  className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500 text-zinc-950 hover:bg-emerald-400 transition"
+                <List
+                  spacing="sm"
+                  my="xs"
+                  icon={
+                    <ThemeIcon color="teal" variant="light" size={22} radius="xl">
+                      <Check size={13} />
+                    </ThemeIcon>
+                  }
                 >
-                  <WhatsAppIcon size={16} />
-                </a>
-              </div>
+                  {f.bullets.map((b) => (
+                    <List.Item key={b}>
+                      <Text c="gray.2" fz="sm" fw={500}>
+                        {b}
+                      </Text>
+                    </List.Item>
+                  ))}
+                </List>
 
-              {/* Secondary Phone Block */}
-              <a
-                href="tel:+77776066323"
-                className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-2 sm:p-3.5 flex items-center justify-between gap-2 hover:border-zinc-600 transition"
-              >
-                <div className="min-w-0">
-                  <span className="font-mono text-[9px] sm:text-[10px] text-zinc-400 uppercase block truncate">
-                    {c.extraPhone}
-                  </span>
-                  <span className="font-mono text-xs sm:text-base lg:text-lg font-bold text-zinc-200 truncate block">
-                    +7 (777) 606-63-23
-                  </span>
-                </div>
-                <span className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-800 text-zinc-300">
-                  <Phone size={15} />
-                </span>
-              </a>
-            </div>
-
-            {/* Working Hours & Almaty Coverage Strip */}
-            <div className="hidden lg:flex items-center justify-between text-xs font-mono text-zinc-400 pt-1">
-              <span className="inline-flex items-center gap-1.5">
-                <Clock size={13} className="text-emerald-400" />
-                БЕЗ ВЫХОДНЫХ · 08:00–22:00
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-zinc-300">
-                <MapPin size={13} className="text-emerald-400" />
-                {c.areaValue}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================================ */}
-        {/* RIGHT COLUMN (7 cols on lg): Quick-Tags + Callback Form      */}
-        {/* ============================================================ */}
-        <div className="relative z-10 lg:col-span-7 p-3.5 sm:p-6 lg:p-10 xl:p-14 flex flex-col justify-center flex-1 min-h-0 overflow-hidden">
-          <form
-            noValidate
-            onSubmit={onSubmit}
-            className="w-full max-w-2xl mx-auto rounded-2xl border border-zinc-800 bg-zinc-900/75 p-3.5 sm:p-6 lg:p-8 backdrop-blur-md flex flex-col justify-between gap-3 sm:gap-5"
-          >
-            {/* Interactive Quick-Tag Chips */}
-            <div>
-              <div className="flex items-center gap-1.5 font-mono text-[10px] sm:text-[11px] text-zinc-400 mb-1.5 sm:mb-2">
-                <Tag size={12} className="text-emerald-400 shrink-0" />
-                <span className="truncate">{f.quickTagsTitle}</span>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5">
-                {f.quickTags.map((tag) => {
-                  const selected = selectedTags.includes(tag);
-                  return (
-                    <button
-                      key={tag}
-                      type="button"
-                      onClick={() => toggleTag(tag)}
-                      className={`cursor-pointer px-2.5 py-1 rounded-full font-mono text-[10px] sm:text-xs transition active:scale-95 border ${
-                        selected
-                          ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 font-semibold'
-                          : 'bg-zinc-950/80 border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-white'
-                      }`}
+                <Stack gap="xs" pt="md" style={{ borderTop: '1px solid var(--mantine-color-dark-6)' }}>
+                  <Text fz="xs" ff="monospace" tt="uppercase" c="gray.5">
+                    Прямые телефоны инженеров (Алматы)
+                  </Text>
+                  <Group gap="sm" wrap="wrap">
+                    <Button
+                      component="a"
+                      href={PHONES.main.tel}
+                      variant="outline"
+                      color="gray.3"
+                      leftSection={<Phone size={15} />}
                     >
-                      {selected ? `✓ ${tag}` : `+ ${tag}`}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+                      +7 (706) 606-63-23
+                    </Button>
+                    <Button
+                      component="a"
+                      href="tel:+77776066323"
+                      variant="outline"
+                      color="gray.5"
+                      leftSection={<Phone size={15} />}
+                    >
+                      +7 (777) 606-63-23
+                    </Button>
+                  </Group>
+                  <Group mt={4}>
+                    <Button
+                      component="a"
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="subtle"
+                      color="teal"
+                      size="xs"
+                      leftSection={<WhatsAppIcon size={15} />}
+                    >
+                      Написать напрямую в WhatsApp
+                    </Button>
+                  </Group>
+                </Stack>
+              </Stack>
+            </Grid.Col>
 
-            {/* Form Inputs Grid (16px text-base to prevent iOS zoom) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              {/* Name field */}
-              <div>
-                <label
-                  htmlFor={ids.name}
-                  className="block font-mono text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400"
-                >
-                  {f.nameLabel} <span className="text-red-400">*</span>
-                </label>
-                <input
-                  id={ids.name}
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  maxLength={60}
-                  value={form.name}
-                  onChange={update('name')}
-                  placeholder={f.namePlaceholder}
-                  aria-invalid={errors.name ? true : undefined}
-                  aria-describedby={errors.name ? ids.nameErr : undefined}
-                  className="monolith-input text-base"
-                />
-                {errors.name && (
-                  <p id={ids.nameErr} role="alert" className="mt-1 font-mono text-[10px] text-red-400">
-                    {f.errors.name}
-                  </p>
-                )}
-              </div>
-
-              {/* Phone field */}
-              <div>
-                <label
-                  htmlFor={ids.phone}
-                  className="block font-mono text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400"
-                >
-                  {f.phoneLabel} <span className="text-red-400">*</span>
-                </label>
-                <input
-                  id={ids.phone}
-                  name="phone"
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel"
-                  required
-                  value={form.phone}
-                  onChange={update('phone')}
-                  onFocus={() => !form.phone && setForm((p) => ({ ...p, phone: '+7' }))}
-                  onBlur={() => form.phone === '+7' && setForm((p) => ({ ...p, phone: '' }))}
-                  placeholder={f.phonePlaceholder}
-                  aria-invalid={errors.phone ? true : undefined}
-                  aria-describedby={errors.phone ? ids.phoneErr : undefined}
-                  className="monolith-input font-mono text-base"
-                />
-                {errors.phone && (
-                  <p id={ids.phoneErr} role="alert" className="mt-1 font-mono text-[10px] text-red-400">
-                    {f.errors.phone}
-                  </p>
-                )}
-              </div>
-
-              {/* Object Type Select */}
-              <div>
-                <label
-                  htmlFor={ids.objectType}
-                  className="block font-mono text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400"
-                >
-                  {f.objectTypeLabel}
-                </label>
-                <div className="relative">
-                  <select
-                    id={ids.objectType}
-                    name="objectType"
-                    value={form.objectType}
-                    onChange={update('objectType')}
-                    className="monolith-input appearance-none pr-8 cursor-pointer text-base text-white [&>option]:bg-zinc-900 [&>option]:text-white"
-                  >
-                    {OBJECT_TYPE_KEYS.map((key) => (
-                      <option key={key} value={key}>
-                        {f.objectTypes[key]}
-                      </option>
-                    ))}
-                  </select>
-                  <svg
-                    aria-hidden="true"
-                    className="pointer-events-none absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 text-zinc-500"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Comment Input (single-line or compact input on mobile, 16px text-base) */}
-              <div>
-                <label
-                  htmlFor={ids.comment}
-                  className="block font-mono text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400"
-                >
-                  {f.commentLabel} <span className="text-zinc-600">({f.optional})</span>
-                </label>
-                <input
-                  id={ids.comment}
-                  name="comment"
-                  type="text"
-                  maxLength={500}
-                  value={form.comment}
-                  onChange={update('comment')}
-                  placeholder={f.commentPlaceholder}
-                  className="monolith-input text-base"
-                />
-              </div>
-            </div>
-
-            {/* Submit Pill + Status */}
-            <div>
-              <button
-                type="submit"
-                className="btn-pill-white w-full py-2.5 sm:py-3.5 text-sm sm:text-base font-semibold cursor-pointer"
+            {/* ============================================================ */}
+            {/* RIGHT COLUMN: Quick-Select Chips + Mantine Form              */}
+            {/* ============================================================ */}
+            <Grid.Col span={{ base: 12, lg: 7 }}>
+              <Paper
+                component="form"
+                noValidate
+                onSubmit={onSubmit}
+                p={{ base: 'md', sm: 'xl' }}
+                radius="lg"
+                bg="dark.8"
+                c="white"
+                style={{ border: '1px solid var(--mantine-color-dark-5)' }}
               >
-                <Send size={15} />
-                <span>{f.submit}</span>
-              </button>
+                <Stack gap="md">
+                  <Box>
+                    <Text fz="xs" fw={700} tt="uppercase" c="gray.4" mb="xs">
+                      {f.quickTagsTitle}
+                    </Text>
+                    <Chip.Group multiple value={selectedTags} onChange={setSelectedTags}>
+                      <Group gap="xs" mb="lg">
+                        {QUICK_CHIPS.map((chipLabel) => (
+                          <Chip
+                            key={chipLabel}
+                            value={chipLabel}
+                            variant="outline"
+                            color="teal"
+                            size="xs"
+                            styles={{
+                              label: {
+                                color: 'var(--mantine-color-gray-1)',
+                                borderColor: 'var(--mantine-color-dark-4)',
+                              },
+                            }}
+                          >
+                            {chipLabel}
+                          </Chip>
+                        ))}
+                      </Group>
+                    </Chip.Group>
+                  </Box>
 
-              {sent ? (
-                <p className="mt-2 text-center font-mono text-[11px] text-emerald-400">
-                  {f.success}
-                </p>
-              ) : (
-                <p className="hidden sm:block mt-2 text-center font-mono text-[10px] text-zinc-500">
-                  {f.note}
-                </p>
-              )}
-            </div>
-          </form>
-        </div>
-      </div>
+                  <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+                    <TextInput
+                      size="md"
+                      required
+                      label={f.nameLabel}
+                      placeholder={f.namePlaceholder}
+                      value={form.name}
+                      error={errors.name}
+                      styles={{ label: { color: 'var(--mantine-color-gray-2)', marginBottom: 4 } }}
+                      onChange={(e) => {
+                        const val = e.currentTarget.value;
+                        setForm((prev) => ({ ...prev, name: val }));
+                        setSent(false);
+                        setErrors((prev) => ({ ...prev, name: undefined }));
+                      }}
+                    />
 
-      {/* Integrated Bottom Bar (Footer.tsx — h-14 shrink-0) */}
-      <Footer />
-    </section>
+                    <TextInput
+                      size="md"
+                      required
+                      type="tel"
+                      label={f.phoneLabel}
+                      placeholder={f.phonePlaceholder}
+                      value={form.phone}
+                      error={errors.phone}
+                      styles={{ label: { color: 'var(--mantine-color-gray-2)', marginBottom: 4 } }}
+                      onFocus={() => !form.phone && setForm((p) => ({ ...p, phone: '+7' }))}
+                      onBlur={() => form.phone === '+7' && setForm((p) => ({ ...p, phone: '' }))}
+                      onChange={(e) => {
+                        const formatted = formatPhone(e.currentTarget.value);
+                        setForm((prev) => ({ ...prev, phone: formatted }));
+                        setSent(false);
+                        setErrors((prev) => ({ ...prev, phone: undefined }));
+                      }}
+                    />
+                  </SimpleGrid>
+
+                  <Select
+                    size="md"
+                    label={f.objectTypeLabel}
+                    data={selectData}
+                    value={form.objectType}
+                    allowDeselect={false}
+                    styles={{ label: { color: 'var(--mantine-color-gray-2)', marginBottom: 4 } }}
+                    onChange={(val) => {
+                      if (val) {
+                        setForm((prev) => ({ ...prev, objectType: val as ObjectTypeKey }));
+                      }
+                    }}
+                  />
+
+                  <Textarea
+                    size="md"
+                    minRows={3}
+                    autosize
+                    label={`${f.commentLabel} (${f.optional})`}
+                    placeholder={f.commentPlaceholder}
+                    value={form.comment}
+                    styles={{ label: { color: 'var(--mantine-color-gray-2)', marginBottom: 4 } }}
+                    onChange={(e) => {
+                      const val = e.currentTarget.value;
+                      setForm((prev) => ({ ...prev, comment: val }));
+                    }}
+                  />
+
+                  <Button
+                    type="submit"
+                    size="lg"
+                    fullWidth
+                    color="gray.0"
+                    c="dark.9"
+                    fw={700}
+                    leftSection={<Send size={18} />}
+                  >
+                    Отправить заявку в WhatsApp
+                  </Button>
+
+                  <Text fz="xs" c="gray.5" ta="center">
+                    {f.note}
+                  </Text>
+
+                  {sent && (
+                    <Alert
+                      color="teal"
+                      variant="light"
+                      icon={<CheckCircle2 size={16} />}
+                      title="Заявка сформирована"
+                    >
+                      {f.success}
+                    </Alert>
+                  )}
+                </Stack>
+              </Paper>
+            </Grid.Col>
+          </Grid>
+        </Paper>
+      </Container>
+    </Box>
   );
 }
