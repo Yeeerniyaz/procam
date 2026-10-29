@@ -1,28 +1,9 @@
-import { type FormEvent, useState } from 'react';
-import {
-  Alert,
-  Badge,
-  Box,
-  Button,
-  Chip,
-  Container,
-  Grid,
-  Group,
-  List,
-  Paper,
-  Select,
-  SimpleGrid,
-  Stack,
-  Text,
-  Textarea,
-  TextInput,
-  ThemeIcon,
-  Title,
-} from '@mantine/core';
-import { Check, CheckCircle2, Phone, Send } from 'lucide-react';
+import { type ChangeEvent, type FormEvent, useId, useState } from 'react';
+import { CheckCircle2, Phone, Send, Tag } from 'lucide-react';
 import { buildWhatsAppUrl, PHONES, WHATSAPP_URL } from '../config/contacts';
 import { OBJECT_TYPE_KEYS, objectTypeForMessage, type ObjectTypeKey } from '../i18n/translations';
 import { useLanguage } from '../i18n/LanguageContext';
+import Footer from './Footer';
 import { WhatsAppIcon } from './icons/BrandIcons';
 
 /* ------------------------------------------------------------------ */
@@ -64,7 +45,7 @@ interface FormState {
 
 const buildMessage = (
   { name, phone, objectType, comment }: FormState,
-  tags: string[]
+  tags: string[],
 ): string => {
   const parts = [
     'Здравствуйте, ProCam! Заявка с сайта на расчёт системы видеонаблюдения:',
@@ -73,7 +54,7 @@ const buildMessage = (
     `🏢 Объект: ${objectTypeForMessage(objectType)}`,
   ];
   if (tags.length > 0) {
-    parts.push(`🏷️ Параметры: ${tags.join(', ')}`);
+    parts.push(`🏷️ Выбранные теги: ${tags.join(', ')}`);
   }
   if (comment.trim()) {
     parts.push(`💬 Комментарий: ${comment.trim()}`);
@@ -90,31 +71,51 @@ const openWhatsApp = (url: string) => {
   }
 };
 
-type Errors = Partial<Record<'name' | 'phone', string>>;
+type Errors = Partial<Record<'name' | 'phone', true>>;
 
 const initialState: FormState = { name: '', phone: '', objectType: 'house', comment: '' };
-
-const QUICK_CHIPS = [
-  '4 камеры',
-  '8 камер',
-  'ColorVu (ночной цвет)',
-  'Монтаж под ключ',
-  'Настройка / ремонт',
-];
 
 export default function CallbackForm() {
   const { t } = useLanguage();
   const f = t.form;
+  const c = t.contacts;
+  const uid = useId();
+  const ids = {
+    name: `${uid}-name`,
+    phone: `${uid}-phone`,
+    objectType: `${uid}-object`,
+    comment: `${uid}-comment`,
+    nameErr: `${uid}-name-err`,
+    phoneErr: `${uid}-phone-err`,
+  };
 
   const [form, setForm] = useState<FormState>(initialState);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
 
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((item) => item !== tag) : [...prev, tag],
+    );
+  };
+
+  const update =
+    <K extends keyof FormState>(key: K) =>
+    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+      const raw = e.target.value;
+      const value = (key === 'phone' ? formatPhone(raw) : raw) as FormState[K];
+      setForm((prev) => ({ ...prev, [key]: value }));
+      setSent(false);
+      if (key === 'name' || key === 'phone') {
+        setErrors((prev) => ({ ...prev, [key]: undefined }));
+      }
+    };
+
   const validate = (): boolean => {
     const next: Errors = {};
-    if (!form.name.trim()) next.name = f.errors.name;
-    if (!isPhoneValid(form.phone)) next.phone = f.errors.phone;
+    if (!form.name.trim()) next.name = true;
+    if (!isPhoneValid(form.phone)) next.phone = true;
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -128,234 +129,258 @@ export default function CallbackForm() {
     setSent(true);
   };
 
-  const selectData = OBJECT_TYPE_KEYS.map((key) => ({
-    value: key,
-    label: f.objectTypes[key],
-  }));
-
   return (
-    <Box component="section" id="contacts">
-      <Container size="xl" py={{ base: 50, md: 80 }}>
-        <Paper bg="dark.9" c="white" p={{ base: 'xl', md: 50 }} radius="xl">
-          <Grid gutter={{ base: 32, lg: 48 }} align="center">
-            {/* ============================================================ */}
-            {/* LEFT COLUMN: Intro, Bullets, Direct Phones                   */}
-            {/* ============================================================ */}
-            <Grid.Col span={{ base: 12, lg: 5 }}>
-              <Stack gap="md">
-                <Group gap="xs">
-                  <Badge color="teal" variant="dot" size="lg">
-                    ONLINE · ОТВЕТ ЗА 5 МИНУТ
-                  </Badge>
-                </Group>
+    <section
+      id="contacts"
+      className="min-h-screen flex flex-col justify-between pt-16 lg:pt-24 bg-architectural-grid"
+    >
+      <div className="container-open w-full my-auto">
+        {/* Dark Monolith Card */}
+        <div className="bg-zinc-950 text-white rounded-2xl sm:rounded-[2rem] p-6 sm:p-12 lg:p-16 border border-zinc-800 shadow-2xl relative overflow-hidden">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-blueprint-dots-dark opacity-35"
+          />
 
-                <Title order={2} fz={{ base: 28, sm: 38 }} c="white" lh={1.12}>
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            {/* Left Column: Headline, Clickable Phone Cards, Instant Response Indicator */}
+            <div className="lg:col-span-5 flex flex-col justify-between h-full">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900 px-3.5 py-1.5 mb-5">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <span className="font-mono text-[10px] sm:text-xs text-emerald-400 uppercase tracking-wider">
+                    {f.eyebrow} // ONLINE 24/7
+                  </span>
+                </div>
+
+                <h2 className="text-2xl sm:text-4xl lg:text-[42px] font-semibold tracking-tight leading-[1.1] text-white">
                   {f.title}
-                </Title>
+                </h2>
 
-                <Text c="gray.4" fz="md">
+                <p className="mt-4 text-sm sm:text-base text-zinc-400 leading-relaxed">
                   {f.subtitle}
-                </Text>
+                </p>
 
-                <List
-                  spacing="sm"
-                  my="xs"
-                  icon={
-                    <ThemeIcon color="teal" variant="light" size={22} radius="xl">
-                      <Check size={13} />
-                    </ThemeIcon>
-                  }
-                >
+                <ul className="mt-6 space-y-2.5">
                   {f.bullets.map((b) => (
-                    <List.Item key={b}>
-                      <Text c="gray.2" fz="sm" fw={500}>
-                        {b}
-                      </Text>
-                    </List.Item>
+                    <li key={b} className="flex items-center gap-2.5 text-xs sm:text-sm text-zinc-300">
+                      <CheckCircle2 size={15} className="text-emerald-400 shrink-0" />
+                      <span>{b}</span>
+                    </li>
                   ))}
-                </List>
+                </ul>
+              </div>
 
-                <Stack gap="xs" pt="md" style={{ borderTop: '1px solid var(--mantine-color-dark-6)' }}>
-                  <Text fz="xs" ff="monospace" tt="uppercase" c="gray.5">
-                    Прямые телефоны инженеров (Алматы)
-                  </Text>
-                  <Group gap="sm" wrap="wrap">
-                    <Button
-                      component="a"
-                      href={PHONES.main.tel}
-                      variant="outline"
-                      color="gray.3"
-                      leftSection={<Phone size={15} />}
-                    >
+              {/* Clickable Phone Cards */}
+              <div className="mt-8 pt-6 border-t border-zinc-800/90 space-y-3">
+                <a
+                  href={PHONES.main.tel}
+                  className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/90 hover:border-emerald-500/60 p-4 transition group"
+                >
+                  <div className="min-w-0">
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-emerald-400 block">
+                      {c.mainPhone}
+                    </span>
+                    <span className="mt-0.5 font-mono text-base sm:text-lg font-bold text-white block whitespace-nowrap">
                       +7 (706) 606-63-23
-                    </Button>
-                    <Button
-                      component="a"
-                      href="tel:+77776066323"
-                      variant="outline"
-                      color="gray.5"
-                      leftSection={<Phone size={15} />}
-                    >
-                      +7 (777) 606-63-23
-                    </Button>
-                  </Group>
-                  <Group mt={4}>
-                    <Button
-                      component="a"
-                      href={WHATSAPP_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variant="subtle"
-                      color="teal"
-                      size="xs"
-                      leftSection={<WhatsAppIcon size={15} />}
-                    >
-                      Написать напрямую в WhatsApp
-                    </Button>
-                  </Group>
-                </Stack>
-              </Stack>
-            </Grid.Col>
+                    </span>
+                  </div>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-zinc-950 transition">
+                    <Phone size={16} />
+                  </span>
+                </a>
 
-            {/* ============================================================ */}
-            {/* RIGHT COLUMN: Quick-Select Chips + Mantine Form              */}
-            {/* ============================================================ */}
-            <Grid.Col span={{ base: 12, lg: 7 }}>
-              <Paper
-                component="form"
+                <a
+                  href={PHONES.extra.tel}
+                  className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 hover:border-zinc-600 p-4 transition group"
+                >
+                  <div className="min-w-0">
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400 block">
+                      {c.extraPhone}
+                    </span>
+                    <span className="mt-0.5 font-mono text-base sm:text-lg font-bold text-zinc-200 block whitespace-nowrap">
+                      +7 (777) 606-63-23
+                    </span>
+                  </div>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-800 text-zinc-300 group-hover:bg-white group-hover:text-zinc-950 transition">
+                    <Phone size={16} />
+                  </span>
+                </a>
+
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 pt-1 font-mono text-xs text-emerald-400 hover:text-emerald-300 transition"
+                >
+                  <WhatsAppIcon size={15} className="shrink-0" />
+                  <span>WHATSAPP DIRECT // +7 (706) 606-63-23</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Column: Smart Form + Quick-Select Chips */}
+            <div className="lg:col-span-7">
+              <form
                 noValidate
                 onSubmit={onSubmit}
-                p={{ base: 'md', sm: 'xl' }}
-                radius="lg"
-                bg="dark.8"
-                c="white"
-                style={{ border: '1px solid var(--mantine-color-dark-5)' }}
+                className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-5 sm:p-8"
               >
-                <Stack gap="md">
-                  <Box>
-                    <Text fz="xs" fw={700} tt="uppercase" c="gray.4" mb="xs">
-                      {f.quickTagsTitle}
-                    </Text>
-                    <Chip.Group multiple value={selectedTags} onChange={setSelectedTags}>
-                      <Group gap="xs" mb="lg">
-                        {QUICK_CHIPS.map((chipLabel) => (
-                          <Chip
-                            key={chipLabel}
-                            value={chipLabel}
-                            variant="outline"
-                            color="teal"
-                            size="xs"
-                            styles={{
-                              label: {
-                                color: 'var(--mantine-color-gray-1)',
-                                borderColor: 'var(--mantine-color-dark-4)',
-                              },
-                            }}
-                          >
-                            {chipLabel}
-                          </Chip>
-                        ))}
-                      </Group>
-                    </Chip.Group>
-                  </Box>
+                {/* Interactive Quick-Tag Pills */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-1.5 font-mono text-xs text-zinc-300 mb-3">
+                    <Tag size={13} className="text-emerald-400 shrink-0" />
+                    <span>{f.quickTagsTitle}</span>
+                  </div>
 
-                  <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-                    <TextInput
-                      size="md"
+                  <div className="flex flex-wrap gap-2">
+                    {f.quickTags.map((tag) => {
+                      const active = selectedTags.includes(tag);
+                      return (
+                        <button
+                          key={tag}
+                          type="button"
+                          onClick={() => toggleTag(tag)}
+                          className={`cursor-pointer rounded-full border px-3.5 py-1.5 font-mono text-xs transition whitespace-nowrap ${
+                            active
+                              ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 font-semibold'
+                              : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
+                          }`}
+                        >
+                          {active ? `✓ ${tag}` : `+ ${tag}`}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Form Inputs (text-base 16px on mobile to prevent iOS zoom) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      htmlFor={ids.name}
+                      className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-1.5"
+                    >
+                      {f.nameLabel} *
+                    </label>
+                    <input
+                      id={ids.name}
+                      name="name"
+                      type="text"
+                      autoComplete="name"
                       required
-                      label={f.nameLabel}
-                      placeholder={f.namePlaceholder}
+                      maxLength={60}
                       value={form.name}
-                      error={errors.name}
-                      styles={{ label: { color: 'var(--mantine-color-gray-2)', marginBottom: 4 } }}
-                      onChange={(e) => {
-                        const val = e.currentTarget.value;
-                        setForm((prev) => ({ ...prev, name: val }));
-                        setSent(false);
-                        setErrors((prev) => ({ ...prev, name: undefined }));
-                      }}
+                      onChange={update('name')}
+                      placeholder={f.namePlaceholder}
+                      aria-invalid={errors.name ? true : undefined}
+                      aria-describedby={errors.name ? ids.nameErr : undefined}
+                      className="monolith-input text-base"
                     />
+                    {errors.name && (
+                      <p id={ids.nameErr} role="alert" className="mt-1 font-mono text-xs text-red-400">
+                        {f.errors.name}
+                      </p>
+                    )}
+                  </div>
 
-                    <TextInput
-                      size="md"
-                      required
+                  <div>
+                    <label
+                      htmlFor={ids.phone}
+                      className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-1.5"
+                    >
+                      {f.phoneLabel} *
+                    </label>
+                    <input
+                      id={ids.phone}
+                      name="phone"
                       type="tel"
-                      label={f.phoneLabel}
-                      placeholder={f.phonePlaceholder}
+                      inputMode="tel"
+                      autoComplete="tel"
+                      required
                       value={form.phone}
-                      error={errors.phone}
-                      styles={{ label: { color: 'var(--mantine-color-gray-2)', marginBottom: 4 } }}
+                      onChange={update('phone')}
                       onFocus={() => !form.phone && setForm((p) => ({ ...p, phone: '+7' }))}
                       onBlur={() => form.phone === '+7' && setForm((p) => ({ ...p, phone: '' }))}
-                      onChange={(e) => {
-                        const formatted = formatPhone(e.currentTarget.value);
-                        setForm((prev) => ({ ...prev, phone: formatted }));
-                        setSent(false);
-                        setErrors((prev) => ({ ...prev, phone: undefined }));
-                      }}
+                      placeholder={f.phonePlaceholder}
+                      aria-invalid={errors.phone ? true : undefined}
+                      aria-describedby={errors.phone ? ids.phoneErr : undefined}
+                      className="monolith-input font-mono text-base"
                     />
-                  </SimpleGrid>
+                    {errors.phone && (
+                      <p id={ids.phoneErr} role="alert" className="mt-1 font-mono text-xs text-red-400">
+                        {f.errors.phone}
+                      </p>
+                    )}
+                  </div>
 
-                  <Select
-                    size="md"
-                    label={f.objectTypeLabel}
-                    data={selectData}
-                    value={form.objectType}
-                    allowDeselect={false}
-                    styles={{ label: { color: 'var(--mantine-color-gray-2)', marginBottom: 4 } }}
-                    onChange={(val) => {
-                      if (val) {
-                        setForm((prev) => ({ ...prev, objectType: val as ObjectTypeKey }));
-                      }
-                    }}
-                  />
-
-                  <Textarea
-                    size="md"
-                    minRows={3}
-                    autosize
-                    label={`${f.commentLabel} (${f.optional})`}
-                    placeholder={f.commentPlaceholder}
-                    value={form.comment}
-                    styles={{ label: { color: 'var(--mantine-color-gray-2)', marginBottom: 4 } }}
-                    onChange={(e) => {
-                      const val = e.currentTarget.value;
-                      setForm((prev) => ({ ...prev, comment: val }));
-                    }}
-                  />
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    fullWidth
-                    color="gray.0"
-                    c="dark.9"
-                    fw={700}
-                    leftSection={<Send size={18} />}
-                  >
-                    Отправить заявку в WhatsApp
-                  </Button>
-
-                  <Text fz="xs" c="gray.5" ta="center">
-                    {f.note}
-                  </Text>
-
-                  {sent && (
-                    <Alert
-                      color="teal"
-                      variant="light"
-                      icon={<CheckCircle2 size={16} />}
-                      title="Заявка сформирована"
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor={ids.objectType}
+                      className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-1.5"
                     >
-                      {f.success}
-                    </Alert>
-                  )}
-                </Stack>
-              </Paper>
-            </Grid.Col>
-          </Grid>
-        </Paper>
-      </Container>
-    </Box>
+                      {f.objectTypeLabel}
+                    </label>
+                    <select
+                      id={ids.objectType}
+                      name="objectType"
+                      value={form.objectType}
+                      onChange={update('objectType')}
+                      className="monolith-input text-base cursor-pointer [&>option]:bg-zinc-900 [&>option]:text-white"
+                    >
+                      {OBJECT_TYPE_KEYS.map((key) => (
+                        <option key={key} value={key}>
+                          {f.objectTypes[key]}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor={ids.comment}
+                      className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-1.5"
+                    >
+                      {f.commentLabel} <span className="text-zinc-600">({f.optional})</span>
+                    </label>
+                    <textarea
+                      id={ids.comment}
+                      name="comment"
+                      rows={3}
+                      maxLength={500}
+                      value={form.comment}
+                      onChange={update('comment')}
+                      placeholder={f.commentPlaceholder}
+                      className="monolith-input resize-none text-base"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn-pill-white mt-6 w-full text-base font-semibold cursor-pointer"
+                >
+                  <Send size={16} />
+                  <span>{f.submit}</span>
+                </button>
+
+                <p className="mt-3 text-center font-mono text-[11px] text-zinc-500">
+                  {f.note}
+                </p>
+
+                {sent && (
+                  <div className="mt-4 rounded-xl border border-emerald-500/40 bg-emerald-950/30 p-3 text-center font-mono text-xs text-emerald-300">
+                    {f.success}
+                  </div>
+                )}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Integrated Footer at bottom of Screen 05 */}
+      <Footer />
+    </section>
   );
 }

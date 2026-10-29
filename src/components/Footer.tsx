@@ -1,4 +1,3 @@
-import { Anchor, Box, Container, Divider, Group, Stack, Text } from '@mantine/core';
 import { MapPin, Phone } from 'lucide-react';
 import { PHONES } from '../config/contacts';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -11,65 +10,51 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <Box
-      component="footer"
-      bg="white"
-      style={{ borderTop: '1px solid var(--mantine-color-gray-3)' }}
-    >
-      <Container size="xl" py="xl">
-        <Group justify="space-between" align="center" wrap="wrap" gap="lg">
-          <Stack gap={4}>
+    <footer className="mt-16 border-t border-zinc-200 bg-white">
+      <div className="container-open py-8 sm:py-10">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-8 border-b border-zinc-200">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <Logo tagline={t.nav.brandTagline} />
-            <Group gap={6} mt={4}>
-              <MapPin size={14} color="var(--mantine-color-teal-6)" />
-              <Text fz="xs" c="dimmed">
-                {c.area}: {c.areaValue}
-              </Text>
-            </Group>
-          </Stack>
+            <div className="hidden sm:block h-5 w-px bg-zinc-200" />
+            <div className="flex items-center gap-2 font-mono text-xs text-zinc-500">
+              <MapPin size={14} className="text-emerald-500 shrink-0" />
+              <span>
+                {c.area}: <strong className="font-semibold text-zinc-900">{c.areaValue}</strong>
+              </span>
+            </div>
+          </div>
 
-          <Group gap="lg" wrap="wrap">
-            <Anchor
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <a
               href={PHONES.main.tel}
-              underline="never"
-              fw={700}
-              fz="sm"
-              c="dark.9"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 font-mono text-xs sm:text-sm font-medium text-zinc-950 hover:border-zinc-950 transition whitespace-nowrap shrink-0"
             >
-              <Group gap={6}>
-                <Phone size={15} color="var(--mantine-color-teal-6)" />
-                <span>+7 (706) 606-63-23</span>
-              </Group>
-            </Anchor>
+              <Phone size={14} className="text-emerald-500 shrink-0" />
+              <span>+7 (706) 606-63-23</span>
+            </a>
 
-            <Anchor
-              href="tel:+77776066323"
-              underline="never"
-              fw={600}
-              fz="sm"
-              c="dimmed"
+            <a
+              href={PHONES.extra.tel}
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 font-mono text-xs sm:text-sm font-medium text-zinc-700 hover:border-zinc-950 transition whitespace-nowrap shrink-0"
             >
-              <Group gap={6}>
-                <Phone size={15} />
-                <span>+7 (777) 606-63-23</span>
-              </Group>
-            </Anchor>
-          </Group>
+              <Phone size={14} className="text-zinc-400 shrink-0" />
+              <span>+7 (777) 606-63-23</span>
+            </a>
 
-          <SocialLinks />
-        </Group>
+            <SocialLinks />
+          </div>
+        </div>
 
-        <Divider my="lg" />
-
-        <Group justify="space-between" wrap="wrap" gap="xs">
-          <Text fz="xs" c="dimmed">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-500">
+          <p className="text-center sm:text-left">
             © {year} ProCam. {t.footer.tagline}
-          </Text>
-          <Text fz="xs" ff="monospace" c="dimmed">
-            ALMATY // HIKVISION · HIWATCH · DAHUA IP
-          </Text>
-        </Group>
-      </Container>
-    </Box>
+          </p>
+          <div className="flex items-center gap-2 text-[11px] text-zinc-400 whitespace-nowrap">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <span>ALMATY // HIKVISION · HIWATCH · DAHUA IP</span>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }
