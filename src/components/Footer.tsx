@@ -15,10 +15,11 @@ export default function Footer() {
       component="footer"
       mt="lg"
       pt="md"
+      pb={{ base: 64, lg: 'md' }}
       style={{ borderTop: '1px solid #E4E4E7' }}
     >
       <Container size="xl">
-        <Group justify="space-between" align="center" wrap="wrap" gap="md">
+        <Group justify="space-between" align="center" wrap="wrap" gap="sm">
           <Group gap="md" wrap="wrap">
             <Logo tagline={t.nav.brandTagline} />
             <Group gap={6} visibleFrom="sm">

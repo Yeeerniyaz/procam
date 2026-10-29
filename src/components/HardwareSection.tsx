@@ -29,7 +29,7 @@ export default function HardwareSection() {
       style={{ borderBottom: '1px solid #E4E4E7' }}
     >
       <Container size="xl" w="100%">
-        <Stack gap="xs" mb={{ base: 'xl', lg: 36 }}>
+        <Stack gap={6} mb={{ base: 'lg', lg: 36 }}>
           <Group gap="xs">
             <Badge
               variant="light"
@@ -41,16 +41,16 @@ export default function HardwareSection() {
             </Badge>
           </Group>
 
-          <Title order={2} fz={{ base: 26, sm: 36, lg: 44 }} fw={800} c="dark.9">
+          <Title order={2} fz={{ base: 24, sm: 36, lg: 44 }} lh={1.15} fw={800} c="dark.9">
             {hw.title}
           </Title>
 
-          <Text c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={720}>
+          <Text c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={720} lh={1.55}>
             {hw.subtitle}
           </Text>
         </Stack>
 
-        <Grid gutter="xl" align="stretch">
+        <Grid gutter={{ base: 'md', sm: 'xl' }} align="stretch">
           {hw.cards.map((card, idx) => {
             const isPrimary = idx === 0;
             return (
@@ -63,7 +63,7 @@ export default function HardwareSection() {
                   <Card
                     withBorder
                     radius="xl"
-                    p={{ base: 'lg', sm: 32 }}
+                    p={{ base: 'md', sm: 28 }}
                     h="100%"
                     bg={isPrimary ? '#FAFAFA' : 'white'}
                     style={{
@@ -74,9 +74,9 @@ export default function HardwareSection() {
                     }}
                   >
                     <Box>
-                      <Group justify="space-between" align="center" mb="md">
+                      <Group justify="space-between" align="center" wrap="nowrap" mb="sm">
                         <Text
-                          fz={32}
+                          fz={{ base: 26, sm: 32 }}
                           fw={900}
                           lh={1}
                           c="dark.9"
@@ -87,7 +87,7 @@ export default function HardwareSection() {
                         <Badge
                           color={isPrimary ? 'dark.9' : idx === 1 ? 'teal' : 'gray'}
                           variant={isPrimary ? 'filled' : 'light'}
-                          size="md"
+                          size="sm"
                           radius="xl"
                         >
                           {card.badge}
@@ -95,36 +95,37 @@ export default function HardwareSection() {
                       </Group>
 
                       <Text
-                        fz="xs"
+                        fz={11}
                         fw={700}
                         tt="uppercase"
                         c="teal.7"
-                        mb={4}
-                        style={{ fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}
+                        mb={2}
+                        style={{ fontFamily: 'var(--font-mono)', letterSpacing: '0.03em' }}
                       >
                         {card.tag}
                       </Text>
 
-                      <Title order={3} fz={{ base: 22, sm: 26 }} fw={800} c="dark.9" mb="sm">
-                        {card.num}. {card.name}
+                      <Title order={3} fz={{ base: 20, sm: 24 }} fw={800} c="dark.9" mb="sm">
+                        {card.name}
                       </Title>
 
-                      <Text c="dimmed" fz="sm" lh={1.6} mb="lg">
+                      <Text visibleFrom="sm" c="dimmed" fz="sm" lh={1.55} mb="md">
                         {card.description}
                       </Text>
 
                       <List
-                        spacing="xs"
+                        spacing={8}
                         size="sm"
+                        center
                         icon={
-                          <ThemeIcon color="dark.9" size={20} radius="xl">
-                            <Check size={12} strokeWidth={3} />
+                          <ThemeIcon color="dark.9" size={18} radius="xl">
+                            <Check size={11} strokeWidth={3} />
                           </ThemeIcon>
                         }
                       >
                         {card.features.map((feature) => (
                           <List.Item key={feature}>
-                            <Text fz="sm" fw={500} c="dark.8">
+                            <Text fz="sm" fw={500} c="dark.8" lh={1.45}>
                               {feature}
                             </Text>
                           </List.Item>
@@ -132,11 +133,11 @@ export default function HardwareSection() {
                       </List>
                     </Box>
 
-                    <Box mt="lg">
-                      <Divider mb="sm" color="#E4E4E7" />
-                      <Group justify="space-between">
+                    <Box mt="md">
+                      <Divider mb="xs" color="#E4E4E7" />
+                      <Group justify="space-between" wrap="nowrap" align="center">
                         <Text
-                          fz="xs"
+                          fz={11}
                           c="dimmed"
                           fw={700}
                           style={{ fontFamily: 'var(--font-mono)' }}
@@ -146,7 +147,11 @@ export default function HardwareSection() {
                         <Box
                           w={8}
                           h={8}
-                          style={{ borderRadius: '50%', backgroundColor: '#10B981' }}
+                          style={{
+                            borderRadius: '50%',
+                            backgroundColor: '#10B981',
+                            flexShrink: 0,
+                          }}
                         />
                       </Group>
                     </Box>

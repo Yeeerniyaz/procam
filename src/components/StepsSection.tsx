@@ -30,8 +30,8 @@ export default function StepsSection() {
       style={{ borderBottom: '1px solid #E4E4E7' }}
     >
       <Container size="xl" w="100%">
-        <Group justify="space-between" align="flex-end" mb={{ base: 'xl', lg: 40 }} wrap="wrap" gap="md">
-          <Stack gap="xs">
+        <Group justify="space-between" align="flex-end" mb={{ base: 'lg', lg: 36 }} wrap="wrap" gap="sm">
+          <Stack gap={6}>
             <Group gap="xs">
               <Badge
                 variant="light"
@@ -43,16 +43,17 @@ export default function StepsSection() {
               </Badge>
             </Group>
 
-            <Title order={2} fz={{ base: 26, sm: 36, lg: 44 }} fw={800} c="dark.9">
+            <Title order={2} fz={{ base: 24, sm: 36, lg: 44 }} lh={1.15} fw={800} c="dark.9">
               {s.title}
             </Title>
 
-            <Text c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={680}>
+            <Text c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={680} lh={1.55}>
               {s.subtitle}
             </Text>
           </Stack>
 
           <Button
+            visibleFrom="sm"
             color="dark.9"
             radius="xl"
             size="md"
@@ -64,7 +65,7 @@ export default function StepsSection() {
           </Button>
         </Group>
 
-        <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing="lg">
+        <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing={{ base: 'md', sm: 'lg' }}>
           {s.stages.map((stage, idx) => {
             const Icon = STEP_ICONS[idx] || CheckCircle2;
             return (
@@ -76,7 +77,7 @@ export default function StepsSection() {
                 <Card
                   withBorder
                   radius="xl"
-                  p={{ base: 'lg', sm: 'xl' }}
+                  p={{ base: 'md', sm: 'xl' }}
                   h="100%"
                   bg={idx === 3 ? '#FAFAFA' : 'white'}
                   style={{
@@ -87,11 +88,11 @@ export default function StepsSection() {
                   }}
                 >
                   <Box>
-                    <Group justify="space-between" align="center" mb="lg">
+                    <Group justify="space-between" align="center" wrap="nowrap" mb="sm">
                       <Badge
                         color="dark.9"
                         variant={idx === 3 ? 'filled' : 'light'}
-                        size="lg"
+                        size="md"
                         radius="xl"
                         styles={{ label: { fontFamily: 'var(--font-mono)' } }}
                       >
@@ -99,32 +100,34 @@ export default function StepsSection() {
                       </Badge>
 
                       <ThemeIcon
-                        size={42}
+                        size={38}
                         radius="lg"
                         color={idx === 3 ? 'dark.9' : 'gray.1'}
                         c={idx === 3 ? 'teal.4' : 'dark.9'}
                       >
-                        <Icon size={20} />
+                        <Icon size={18} />
                       </ThemeIcon>
                     </Group>
 
-                    <Title order={3} fz="lg" fw={800} c="dark.9" mb="xs">
+                    <Title order={3} fz={{ base: 18, sm: 20 }} fw={800} c="dark.9" mb={6}>
                       {stage.title}
                     </Title>
 
-                    <Text fz="sm" fw={600} c="dark.8" lh={1.55} mb="sm">
+                    <Text visibleFrom="sm" fz="sm" fw={600} c="dark.8" lh={1.5} mb="xs">
                       {stage.desc}
                     </Text>
 
-                    <Text fz="xs" c="dimmed" lh={1.55}>
+                    <Text fz="sm" c="dimmed" lh={1.5}>
                       {stage.detail}
                     </Text>
                   </Box>
 
                   <Group
                     justify="space-between"
-                    mt="lg"
-                    pt="sm"
+                    align="center"
+                    wrap="nowrap"
+                    mt="md"
+                    pt="xs"
                     style={{ borderTop: '1px solid #F4F4F5' }}
                   >
                     <Text
@@ -135,7 +138,7 @@ export default function StepsSection() {
                     >
                       0{idx + 1} / 04
                     </Text>
-                    <CheckCircle2 size={15} color="#10B981" />
+                    <CheckCircle2 size={15} color="#10B981" style={{ flexShrink: 0 }} />
                   </Group>
                 </Card>
               </motion.div>

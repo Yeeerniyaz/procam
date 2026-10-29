@@ -28,7 +28,7 @@ export default function AdvantagesSection() {
       style={{ borderBottom: '1px solid #E4E4E7' }}
     >
       <Container size="xl" w="100%">
-        <Stack gap="xs" mb={{ base: 'xl', lg: 36 }}>
+        <Stack gap={6} mb={{ base: 'lg', lg: 36 }}>
           <Group gap="xs">
             <Badge
               variant="light"
@@ -40,16 +40,16 @@ export default function AdvantagesSection() {
             </Badge>
           </Group>
 
-          <Title order={2} fz={{ base: 26, sm: 36, lg: 44 }} fw={800} c="dark.9">
+          <Title order={2} fz={{ base: 24, sm: 36, lg: 44 }} lh={1.15} fw={800} c="dark.9">
             {a.title}
           </Title>
 
-          <Text c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={680}>
+          <Text c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={680} lh={1.55}>
             {a.subtitle}
           </Text>
         </Stack>
 
-        <SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl">
+        <SimpleGrid cols={{ base: 1, md: 2 }} spacing={{ base: 'md', sm: 'xl' }}>
           {a.items.map((item, idx) => {
             const Icon = ICONS[idx] || Cable;
             return (
@@ -61,7 +61,7 @@ export default function AdvantagesSection() {
                 <Card
                   withBorder
                   radius="xl"
-                  p={{ base: 'lg', sm: 32 }}
+                  p={{ base: 'md', sm: 28 }}
                   h="100%"
                   bg="white"
                   style={{
@@ -72,12 +72,12 @@ export default function AdvantagesSection() {
                   }}
                 >
                   <Box>
-                    <Group justify="space-between" align="flex-start" mb="md">
+                    <Group justify="space-between" align="center" wrap="nowrap" mb="sm">
                       <Text
-                        fz={{ base: 36, sm: 44 }}
+                        fz={{ base: 28, sm: 40 }}
                         fw={900}
                         lh={1}
-                        c="gray.3"
+                        c="gray.4"
                         style={{ fontFamily: 'var(--font-mono)', letterSpacing: '-0.04em' }}
                       >
                         {item.num}
@@ -92,31 +92,35 @@ export default function AdvantagesSection() {
                           ease: 'easeInOut',
                         }}
                       >
-                        <ThemeIcon size={46} radius="lg" color="dark.9" variant="filled">
-                          <Icon size={22} color="#10B981" />
+                        <ThemeIcon size={42} radius="lg" color="dark.9" variant="filled">
+                          <Icon size={20} color="#10B981" />
                         </ThemeIcon>
                       </motion.div>
                     </Group>
 
-                    <Title order={3} fz={{ base: 20, sm: 24 }} fw={800} c="dark.9" mb="xs">
-                      {item.code}
+                    <Title order={3} fz={{ base: 18, sm: 22 }} fw={800} c="dark.9" mb={6} lh={1.25}>
+                      {item.title}
                     </Title>
 
-                    <Text c="dimmed" fz="sm" lh={1.65}>
+                    <Text c="dimmed" fz="sm" lh={1.55}>
                       {item.desc}
                     </Text>
                   </Box>
 
                   <Group
                     justify="space-between"
-                    mt="lg"
-                    pt="sm"
+                     align="center"
+                    wrap="nowrap"
+                    gap="xs"
+                    mt="md"
+                    pt="xs"
                     style={{ borderTop: '1px solid #F4F4F5' }}
                   >
                     <Text
-                      fz="xs"
+                      fz={11}
                       fw={600}
                       c="teal.7"
+                      lh={1.35}
                       style={{ fontFamily: 'var(--font-mono)' }}
                     >
                       {item.spec}
@@ -124,7 +128,11 @@ export default function AdvantagesSection() {
                     <Box
                       w={7}
                       h={7}
-                      style={{ borderRadius: '50%', backgroundColor: '#10B981' }}
+                      style={{
+                        borderRadius: '50%',
+                        backgroundColor: '#10B981',
+                        flexShrink: 0,
+                      }}
                     />
                   </Group>
                 </Card>

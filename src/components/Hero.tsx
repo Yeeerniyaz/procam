@@ -22,7 +22,7 @@ function CyberOwlOpticalCore() {
     <Paper
       bg="dark.9"
       radius="xl"
-      p={{ base: 32, sm: 56 }}
+      p={{ base: 24, sm: 44, lg: 56 }}
       withBorder
       style={{
         borderColor: '#27272A',
@@ -31,7 +31,7 @@ function CyberOwlOpticalCore() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: '0 24px 60px rgba(9, 9, 11, 0.14)',
+        boxShadow: '0 20px 50px rgba(9, 9, 11, 0.12)',
       }}
     >
       <svg
@@ -40,7 +40,11 @@ function CyberOwlOpticalCore() {
         viewBox="0 0 280 280"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+        style={{
+          width: 'clamp(176px, 48vw, 280px)',
+          height: 'auto',
+          display: 'block',
+        }}
         aria-hidden="true"
       >
         <defs>
@@ -184,7 +188,7 @@ export default function Hero() {
       style={{ borderBottom: '1px solid #E4E4E7' }}
     >
       <Container size="xl" w="100%">
-        <Grid gutter={{ base: 32, lg: 56 }} align="center">
+        <Grid gutter={{ base: 24, sm: 32, lg: 56 }} align="center">
           {/* ============================================================ */}
           {/* LEFT COLUMN (7 cols on lg)                                   */}
           {/* ============================================================ */}
@@ -192,9 +196,9 @@ export default function Hero() {
             <Badge
               variant="dot"
               color="teal"
-              size="lg"
+              size="md"
               radius="xl"
-              mb="md"
+              mb="sm"
               bg="white"
               styles={{
                 root: { border: '1px solid #E4E4E7' },
@@ -206,41 +210,39 @@ export default function Hero() {
 
             <Title
               order={1}
-              fz={{ base: 34, sm: 48, lg: 60 }}
-              lh={1.06}
+              lh={1.08}
               fw={800}
-              mb="md"
+              mb="sm"
               c="dark.9"
+              style={{
+                fontSize: 'clamp(1.65rem, 7.2vw, 3.75rem)',
+                letterSpacing: '-0.025em',
+                overflowWrap: 'break-word',
+              }}
             >
-              {h.title.split(/(IP[\u2011-][^\s]+)/).map((part, i) =>
-                part.startsWith('IP') ? (
-                  <Text component="span" key={i} inherit style={{ whiteSpace: 'nowrap' }}>
-                    {part}
-                  </Text>
-                ) : (
-                  part
-                ),
-              )}
+              {h.title}
             </Title>
 
-            <Text c="dimmed" fz={{ base: 'md', sm: 'xl' }} maw={540} mb="xl" lh={1.55}>
+            <Text c="dimmed" fz={{ base: 'sm', sm: 'xl' }} maw={540} mb={{ base: 'md', sm: 'xl' }} lh={1.55}>
               {h.subtitle}
             </Text>
 
-            <Stack hiddenFrom="sm" gap="sm" mb="xl">
+            <Stack hiddenFrom="sm" gap="xs" mb="lg">
               <Button
-                size="lg"
+                size="md"
+                h={46}
                 radius="xl"
                 color="dark.9"
                 fullWidth
                 component="a"
                 href="#contacts"
-                rightSection={<ArrowRight size={18} />}
+                rightSection={<ArrowRight size={17} />}
               >
                 {h.primaryCta}
               </Button>
               <Button
-                size="lg"
+                size="md"
+                h={46}
                 radius="xl"
                 variant="default"
                 fullWidth
@@ -248,7 +250,7 @@ export default function Hero() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                leftSection={<WhatsAppIcon size={18} />}
+                leftSection={<WhatsAppIcon size={17} />}
               >
                 {h.secondaryCta}
               </Button>
@@ -282,16 +284,16 @@ export default function Hero() {
             {/* Minimal 4-Item Bottom Metrics Row */}
             <SimpleGrid
               cols={{ base: 2, sm: 4 }}
-              spacing="lg"
-              pt="lg"
+              spacing={{ base: 'sm', sm: 'lg' }}
+              pt={{ base: 'md', sm: 'lg' }}
               style={{ borderTop: '1px solid #E4E4E7' }}
             >
               {h.highlights.map((item) => (
                 <Box key={item.value}>
-                  <Text fw={900} fz={{ base: 22, sm: 26 }} c="dark.9" lh={1.1}>
+                  <Text fw={900} fz={{ base: 20, sm: 26 }} c="dark.9" lh={1.1}>
                     {item.value}
                   </Text>
-                  <Text fz="sm" c="dimmed" mt={4}>
+                  <Text fz={{ base: 'xs', sm: 'sm' }} c="dimmed" mt={2}>
                     {item.label}
                   </Text>
                 </Box>

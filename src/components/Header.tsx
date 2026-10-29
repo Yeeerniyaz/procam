@@ -43,8 +43,8 @@ export default function Header() {
         borderBottom: '1px solid #E4E4E7',
       }}
     >
-      <Container size="xl" h="100%">
-        <Group justify="space-between" h="100%" wrap="nowrap" gap="md">
+      <Container size="xl" h="100%" px={{ base: 'md', sm: 'xl' }}>
+        <Group justify="space-between" h="100%" wrap="nowrap" gap="xs">
           <Logo tagline={t.nav.brandTagline} />
 
           {/* Desktop Navigation */}

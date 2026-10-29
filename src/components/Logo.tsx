@@ -77,6 +77,7 @@ export default function Logo({ tagline, dark = false }: { tagline?: string; dark
             </Text>
           </Text>
           <Text
+            visibleFrom="xs"
             fz={9.5}
             tt="uppercase"
             fw={600}

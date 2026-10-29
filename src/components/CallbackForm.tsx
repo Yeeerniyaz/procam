@@ -4,7 +4,6 @@ import {
   Badge,
   Box,
   Button,
-  Chip,
   Container,
   Grid,
   Group,
@@ -18,6 +17,7 @@ import {
   TextInput,
   ThemeIcon,
   Title,
+  UnstyledButton,
 } from '@mantine/core';
 import { Check, CheckCircle2, Phone, Send } from 'lucide-react';
 import { buildWhatsAppUrl, PHONES, WHATSAPP_URL } from '../config/contacts';
@@ -104,6 +104,12 @@ export default function CallbackForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
 
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((item) => item !== tag) : [...prev, tag],
+    );
+  };
+
   const validate = (): boolean => {
     const next: Errors = {};
     if (!form.name.trim()) next.name = f.errors.name;
@@ -133,15 +139,15 @@ export default function CallbackForm() {
       className="vms-screen-section bg-architectural-grid"
       style={{ justifyContent: 'space-between' }}
     >
-      <Container size="xl" w="100%" my="auto">
+      <Container size="xl" w="100%" my={{ base: 0, lg: 'auto' }}>
         <Paper
           bg="dark.9"
           c="white"
           radius="xl"
-          p={{ base: 'lg', sm: 36, lg: 44 }}
+          p={{ base: 'md', sm: 32, lg: 40 }}
           style={{ border: '1px solid #27272A' }}
         >
-          <Grid gutter={{ base: 28, lg: 44 }} align="center">
+          <Grid gutter={{ base: 20, sm: 28, lg: 40 }} align="center">
             {/* ============================================================ */}
             {/* LEFT COLUMN: Intro, Bullets, Clickable Phones                */}
             {/* ============================================================ */}
@@ -153,23 +159,28 @@ export default function CallbackForm() {
                     variant="dot"
                     size="md"
                     radius="xl"
-                    styles={{ label: { fontFamily: 'var(--font-mono)' } }}
+                    bg="dark.8"
+                    styles={{
+                      root: { border: '1px solid #3F3F46' },
+                      label: { color: '#E4E4E7', fontFamily: 'var(--font-mono)' },
+                    }}
                   >
                     {f.eyebrow}
                   </Badge>
                 </Group>
 
-                <Title order={2} fz={{ base: 24, sm: 32, lg: 38 }} c="white" lh={1.12}>
+                <Title order={2} fz={{ base: 22, sm: 30, lg: 36 }} c="white" lh={1.15}>
                   {f.title}
                 </Title>
 
-                <Text c="gray.4" fz="sm" lh={1.6}>
+                <Text c="gray.4" fz="sm" lh={1.55}>
                   {f.subtitle}
                 </Text>
 
                 <List
-                  spacing="xs"
-                  my={4}
+                  spacing={8}
+                  my={2}
+                  center
                   icon={
                     <ThemeIcon color="teal" variant="light" size={20} radius="xl">
                       <Check size={12} />
@@ -178,7 +189,7 @@ export default function CallbackForm() {
                 >
                   {f.bullets.map((b) => (
                     <List.Item key={b}>
-                      <Text c="gray.2" fz="sm" fw={500}>
+                      <Text c="gray.2" fz="sm" fw={500} lh={1.4}>
                         {b}
                       </Text>
                     </List.Item>
@@ -186,16 +197,18 @@ export default function CallbackForm() {
                 </List>
 
                 <Stack gap="xs" pt="sm" style={{ borderTop: '1px solid #27272A' }}>
-                  <Group gap="sm" wrap="wrap">
+                  <SimpleGrid cols={{ base: 1, xs: 2 }} spacing="xs">
                     <Button
                       component="a"
                       href={PHONES.main.tel}
                       variant="outline"
                       color="gray.2"
                       radius="xl"
-                      size="md"
+                      size="sm"
+                      h={42}
+                      fullWidth
                       leftSection={<Phone size={15} color="#10B981" />}
-                      styles={{ label: { fontFamily: 'var(--font-mono)' } }}
+                      styles={{ label: { fontFamily: 'var(--font-mono)', fontSize: 13 } }}
                     >
                       {PHONES.main.display}
                     </Button>
@@ -204,76 +217,81 @@ export default function CallbackForm() {
                       component="a"
                       href={PHONES.extra.tel}
                       variant="outline"
-                      color="gray.5"
+                      color="gray.4"
                       radius="xl"
-                      size="md"
-                      leftSection={<Phone size={15} />}
-                      styles={{ label: { fontFamily: 'var(--font-mono)' } }}
+                      size="sm"
+                      h={42}
+                      fullWidth
+                      leftSection={<Phone size={15} color="#A1A1AA" />}
+                      styles={{ label: { fontFamily: 'var(--font-mono)', fontSize: 13 } }}
                     >
                       {PHONES.extra.display}
                     </Button>
-                  </Group>
+                  </SimpleGrid>
 
-                  <Group>
-                    <Button
-                      component="a"
-                      href={WHATSAPP_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variant="subtle"
-                      color="teal"
-                      size="xs"
-                      radius="xl"
-                      leftSection={<WhatsAppIcon size={15} />}
-                    >
-                      {t.contacts.write}
-                    </Button>
-                  </Group>
+                  <Button
+                    component="a"
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="light"
+                    color="teal"
+                    size="sm"
+                    h={40}
+                    radius="xl"
+                    fullWidth
+                    leftSection={<WhatsAppIcon size={16} />}
+                  >
+                    {t.contacts.write}
+                  </Button>
                 </Stack>
               </Stack>
             </Grid.Col>
 
             {/* ============================================================ */}
-            {/* RIGHT COLUMN: Clean Form + 4 Clean Quick Tags                */}
+            {/* RIGHT COLUMN: Clean Form + 4 High-Contrast Quick Tags        */}
             {/* ============================================================ */}
             <Grid.Col span={{ base: 12, lg: 7 }}>
               <Paper
                 component="form"
                 noValidate
                 onSubmit={onSubmit}
-                p={{ base: 'md', sm: 'xl' }}
+                p={{ base: 0, sm: 'xl' }}
                 radius="lg"
-                bg="dark.8"
+                bg={{ base: 'transparent', sm: 'dark.8' }}
                 c="white"
-                style={{ border: '1px solid #27272A' }}
+                style={{ border: 'none' }}
               >
                 <Stack gap="sm">
                   <Box>
-                    <Text fz="xs" fw={600} c="gray.4" mb={6}>
+                    <Text fz="xs" fw={600} c="gray.3" mb={8}>
                       {f.quickTagsTitle}
                     </Text>
-                    <Chip.Group multiple value={selectedTags} onChange={setSelectedTags}>
-                      <Group gap={6}>
-                        {f.quickTags.map((tag) => (
-                          <Chip
+                    <Group gap={6}>
+                      {f.quickTags.map((tag) => {
+                        const active = selectedTags.includes(tag);
+                        return (
+                          <UnstyledButton
                             key={tag}
-                            value={tag}
-                            variant="outline"
-                            color="teal"
-                            size="xs"
-                            radius="xl"
-                            styles={{
-                              label: {
-                                color: '#E4E4E7',
-                                borderColor: '#3F3F46',
-                              },
+                            type="button"
+                            onClick={() => toggleTag(tag)}
+                            style={{
+                              padding: '6px 12px',
+                              borderRadius: 999,
+                              fontSize: 12,
+                              fontWeight: 600,
+                              lineHeight: 1.2,
+                              border: `1px solid ${active ? '#10B981' : '#3F3F46'}`,
+                              backgroundColor: active ? 'rgba(16, 185, 129, 0.18)' : '#18181B',
+                              color: active ? '#34D399' : '#E4E4E7',
+                              transition: 'all 0.15s ease',
                             }}
                           >
-                            {tag}
-                          </Chip>
-                        ))}
-                      </Group>
-                    </Chip.Group>
+                            {active ? `✓ ${tag}` : tag}
+                          </UnstyledButton>
+                        );
+                      })}
+                    </Group>
                   </Box>
 
                   <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="sm">
@@ -356,19 +374,24 @@ export default function CallbackForm() {
 
                   <Button
                     type="submit"
-                    size="lg"
+                    size="md"
+                    h={48}
                     radius="xl"
                     fullWidth
-                    color="gray.0"
-                    c="dark.9"
-                    fw={800}
+                    color="teal.6"
+                    c="white"
+                    fw={700}
                     mt={4}
-                    leftSection={<Send size={18} />}
+                    leftSection={<Send size={16} />}
+                    styles={{
+                      root: { paddingInline: 14 },
+                      label: { fontSize: 14, whiteSpace: 'nowrap' },
+                    }}
                   >
                     {f.submit}
                   </Button>
 
-                  <Text fz="xs" c="gray.5" ta="center">
+                  <Text fz="xs" c="gray.5" ta="center" lh={1.4}>
                     {f.note}
                   </Text>
 
