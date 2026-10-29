@@ -55,14 +55,14 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
         borderBottom: '1px solid #E4E4E7',
       }}
     >
-      <Container size="xl" h="100%" px={{ base: 'md', sm: 'xl' }}>
-        <Group justify="space-between" h="100%" wrap="nowrap" gap="xs">
-          <Box onClick={() => onNavigatePage?.('home')} style={{ cursor: 'pointer' }}>
-            <Logo tagline={t.nav.brandTagline} />
+      <Container fluid h="100%" px={{ base: 'md', sm: 'xl', lg: 24, xl: 40 }} style={{ maxWidth: 1440 }}>
+        <Group justify="space-between" h="100%" wrap="nowrap" gap="md">
+          <Box onClick={() => onNavigatePage?.('home')} style={{ cursor: 'pointer', flexShrink: 0 }}>
+            <Logo tagline={t.nav.brandTagline} showTagline={false} />
           </Box>
 
           {/* Desktop Navigation */}
-          <Group gap="xl" visibleFrom="lg" wrap="nowrap">
+          <Group visibleFrom="lg" wrap="nowrap" style={{ flexShrink: 1, gap: 'clamp(14px, 1.8vw, 28px)' }}>
             {links.map((l) => (
               <Anchor
                 key={l.href}
@@ -70,9 +70,13 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
                 onClick={handleSectionClick}
                 underline="never"
                 fw={600}
-                fz="sm"
+                fz={{ lg: 13.5, xl: 14.5 }}
                 c="dark.8"
-                style={{ whiteSpace: 'nowrap', flexShrink: 0 }}
+                style={{
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
+                  transition: 'color 0.15s ease',
+                }}
               >
                 {l.label}
               </Anchor>
@@ -84,7 +88,7 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
               onClick={() => onNavigatePage?.(activePage === 'radar' ? 'home' : 'radar')}
               underline="never"
               fw={700}
-              fz="sm"
+              fz={{ lg: 13.5, xl: 14.5 }}
               c={activePage === 'radar' ? 'teal.7' : 'dark.9'}
               style={{
                 whiteSpace: 'nowrap',
@@ -93,9 +97,27 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
                 border: 'none',
                 cursor: 'pointer',
                 padding: 0,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
               }}
             >
-              {t.nav.radar}
+              <span>{lang === 'kz' ? 'Radar (БҚ)' : 'Radar (ПО)'}</span>
+              <Box
+                component="span"
+                style={{
+                  fontSize: 10,
+                  fontWeight: 700,
+                  fontFamily: 'var(--font-mono)',
+                  color: '#10B981',
+                  backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                  padding: '2px 6px',
+                  borderRadius: 6,
+                  lineHeight: 1.2,
+                }}
+              >
+                v4.0
+              </Box>
             </Anchor>
           </Group>
 
@@ -115,10 +137,14 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
                 variant="default"
                 radius="xl"
                 size="sm"
+                px={{ lg: 12, xl: 16 }}
                 component="a"
                 href={PHONES.main.tel}
                 leftSection={<Phone size={14} color="#10B981" />}
-                styles={{ label: { fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' } }}
+                styles={{
+                  root: { flexShrink: 0 },
+                  label: { fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', fontSize: 13 },
+                }}
               >
                 {PHONES.main.display}
               </Button>
@@ -127,10 +153,14 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
                 color="dark.9"
                 radius="xl"
                 size="sm"
+                px={{ lg: 14, xl: 18 }}
                 component="a"
                 href="#contacts"
                 onClick={handleSectionClick}
-                styles={{ label: { whiteSpace: 'nowrap' } }}
+                styles={{
+                  root: { flexShrink: 0 },
+                  label: { whiteSpace: 'nowrap', fontSize: 13, fontWeight: 700 },
+                }}
               >
                 {t.nav.cta}
               </Button>
