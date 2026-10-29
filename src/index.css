@@ -1,41 +1,29 @@
 @import 'tailwindcss';
 
-@theme {
+:root {
   --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-
-  --color-zinc-950: #09090b;
-  --color-live: #10b981;
-  --color-rec: #ef4444;
 }
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 4rem;
-    overflow-x: hidden;
-    max-width: 100vw;
-    background-color: #FAFAFA;
-    color: #09090B;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    -webkit-tap-highlight-color: transparent;
-    color-scheme: light;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  body {
-    overflow-x: hidden;
-    max-width: 100vw;
-    background-color: #FAFAFA;
-    color: #09090B;
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FAFAFA;
+  color: #09090B;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  ::selection {
-    background-color: #09090b;
-    color: #ffffff;
-  }
+::selection {
+  background-color: #09090B;
+  color: #FFFFFF;
 }
 
 .bg-architectural-grid {
@@ -44,27 +32,50 @@
   background-size: 24px 24px;
 }
 
-.bg-blueprint-dots-dark {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-  background-size: 24px 24px;
+/* Desktop (>= 1024px): Full-Screen Snap Sections */
+@media (min-width: 1024px) {
+  html, body {
+    overflow: hidden;
+    height: 100dvh;
+  }
+  .vms-snap-container {
+    height: 100dvh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  .vms-screen-section {
+    min-height: 100dvh;
+    height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding-top: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
 }
 
-@utility container-open {
-  @apply mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-16;
-}
-
-@utility btn-pill-black {
-  @apply inline-flex cursor-pointer items-center justify-center gap-2.5 rounded-full bg-zinc-950 px-7 py-3.5 text-sm sm:text-base font-medium text-white transition-all duration-200 hover:bg-zinc-800 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 whitespace-nowrap shrink-0;
-}
-
-@utility btn-pill-outline {
-  @apply inline-flex cursor-pointer items-center justify-center gap-2.5 rounded-full border border-zinc-300 bg-white px-7 py-3.5 text-sm sm:text-base font-medium text-zinc-950 transition-all duration-200 hover:border-zinc-950 hover:bg-zinc-50 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 whitespace-nowrap shrink-0;
-}
-
-@utility btn-pill-white {
-  @apply inline-flex cursor-pointer items-center justify-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-sm sm:text-base font-semibold text-zinc-950 transition-all duration-200 hover:bg-zinc-200 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 whitespace-nowrap shrink-0;
-}
-
-@utility monolith-input {
-  @apply block w-full rounded-xl border border-zinc-800 bg-zinc-950/90 px-4 py-3.5 text-base text-white placeholder-zinc-500 transition-colors duration-200 focus:border-emerald-400 focus:outline-none;
+/* Mobile & Tablet (< 1024px): Natural, Breathable Smooth Vertical Scroll! */
+@media (max-width: 1023px) {
+  html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    scroll-behavior: smooth;
+    scroll-padding-top: 64px;
+  }
+  .vms-snap-container {
+    height: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .vms-screen-section {
+    min-height: auto;
+    height: auto;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    overflow: visible;
+  }
 }
