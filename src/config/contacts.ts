@@ -42,6 +42,7 @@ export const SECTION_IDS = {
   equipment: 'hardware',
   advantages: 'advantages',
   steps: 'steps',
+  radar: 'radar',
   callback: 'contacts',
   contacts: 'contacts',
 } as const;

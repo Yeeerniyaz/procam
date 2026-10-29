@@ -17,7 +17,12 @@ import { type Lang } from '../i18n/translations';
 import { useLanguage } from '../i18n/LanguageContext';
 import Logo from './Logo';
 
-export default function Header() {
+interface HeaderProps {
+  activePage?: 'home' | 'radar';
+  onNavigatePage?: (page: 'home' | 'radar') => void;
+}
+
+export default function Header({ activePage = 'home', onNavigatePage }: HeaderProps) {
   const { lang, setLang, t } = useLanguage();
   const [opened, { toggle, close }] = useDisclosure(false);
 
@@ -27,6 +32,13 @@ export default function Header() {
     { href: '#steps', label: t.nav.steps },
     { href: '#contacts', label: t.nav.contacts },
   ];
+
+  const handleSectionClick = () => {
+    if (activePage !== 'home' && onNavigatePage) {
+      onNavigatePage('home');
+    }
+    close();
+  };
 
   return (
     <Box
@@ -45,7 +57,9 @@ export default function Header() {
     >
       <Container size="xl" h="100%" px={{ base: 'md', sm: 'xl' }}>
         <Group justify="space-between" h="100%" wrap="nowrap" gap="xs">
-          <Logo tagline={t.nav.brandTagline} />
+          <Box onClick={() => onNavigatePage?.('home')} style={{ cursor: 'pointer' }}>
+            <Logo tagline={t.nav.brandTagline} />
+          </Box>
 
           {/* Desktop Navigation */}
           <Group gap="xl" visibleFrom="lg" wrap="nowrap">
@@ -53,6 +67,7 @@ export default function Header() {
               <Anchor
                 key={l.href}
                 href={l.href}
+                onClick={handleSectionClick}
                 underline="never"
                 fw={600}
                 fz="sm"
@@ -62,6 +77,26 @@ export default function Header() {
                 {l.label}
               </Anchor>
             ))}
+
+            <Anchor
+              component="button"
+              type="button"
+              onClick={() => onNavigatePage?.(activePage === 'radar' ? 'home' : 'radar')}
+              underline="never"
+              fw={700}
+              fz="sm"
+              c={activePage === 'radar' ? 'teal.7' : 'dark.9'}
+              style={{
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+              }}
+            >
+              {t.nav.radar}
+            </Anchor>
           </Group>
 
           {/* Right Actions + Language Switcher + Mobile Burger */}
@@ -94,6 +129,7 @@ export default function Header() {
                 size="sm"
                 component="a"
                 href="#contacts"
+                onClick={handleSectionClick}
                 styles={{ label: { whiteSpace: 'nowrap' } }}
               >
                 {t.nav.cta}
@@ -126,7 +162,7 @@ export default function Header() {
             <Anchor
               key={l.href}
               href={l.href}
-              onClick={close}
+              onClick={handleSectionClick}
               underline="never"
               fw={700}
               fz="lg"
@@ -137,6 +173,31 @@ export default function Header() {
               {l.label}
             </Anchor>
           ))}
+
+          <Anchor
+            component="button"
+            type="button"
+            onClick={() => {
+              onNavigatePage?.(activePage === 'radar' ? 'home' : 'radar');
+              close();
+            }}
+            underline="never"
+            fw={700}
+            fz="lg"
+            c={activePage === 'radar' ? 'teal.7' : 'dark.9'}
+            py="xs"
+            style={{
+              borderBottom: '1px solid #F4F4F5',
+              textAlign: 'left',
+              background: 'none',
+              borderTop: 'none',
+              borderLeft: 'none',
+              borderRight: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            {t.nav.radar}
+          </Anchor>
 
           <Divider my="xs" />
 
@@ -173,7 +234,7 @@ export default function Header() {
             color="dark.9"
             component="a"
             href="#contacts"
-            onClick={close}
+            onClick={handleSectionClick}
           >
             {t.nav.cta}
           </Button>
