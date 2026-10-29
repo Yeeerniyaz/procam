@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, Phone, X } from 'lucide-react';
+import { PHONES } from '../config/contacts';
 import { LANGS } from '../i18n/translations';
 import { useLanguage } from '../i18n/LanguageContext';
 import Logo from './Logo';
@@ -84,10 +85,10 @@ export default function Header() {
           <LanguageSwitcher />
 
           <a
-            href="tel:+77066066323"
+            href={PHONES.main.tel}
             className="whitespace-nowrap shrink-0 font-mono text-xs xl:text-sm px-4 py-2 rounded-full border border-zinc-200 hover:border-zinc-950 transition text-zinc-900"
           >
-            +7 (706) 606-63-23
+            {PHONES.main.display}
           </a>
 
           <a
@@ -144,19 +145,19 @@ export default function Header() {
 
               <div className="flex flex-col gap-2.5 pt-2">
                 <a
-                  href="tel:+77066066323"
+                  href={PHONES.main.tel}
                   className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-full border border-zinc-200 bg-zinc-50 font-mono text-sm font-medium text-zinc-950 hover:border-zinc-950 transition whitespace-nowrap"
                 >
                   <Phone size={15} className="text-emerald-500 shrink-0" />
-                  <span>+7 (706) 606-63-23</span>
+                  <span>{PHONES.main.display}</span>
                 </a>
 
                 <a
-                  href="tel:+77766066323"
+                  href={PHONES.extra.tel}
                   className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-full border border-zinc-200 bg-white font-mono text-sm font-medium text-zinc-700 hover:border-zinc-950 transition whitespace-nowrap"
                 >
                   <Phone size={15} className="text-zinc-400 shrink-0" />
-                  <span>+7 (777) 606-63-23</span>
+                  <span>{PHONES.extra.display}</span>
                 </a>
 
                 <a

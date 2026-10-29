@@ -182,7 +182,7 @@ export default function CallbackForm() {
                       {c.mainPhone}
                     </span>
                     <span className="mt-0.5 font-mono text-base sm:text-lg font-bold text-white block whitespace-nowrap">
-                      +7 (706) 606-63-23
+                      {PHONES.main.display}
                     </span>
                   </div>
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-zinc-950 transition">
@@ -199,7 +199,7 @@ export default function CallbackForm() {
                       {c.extraPhone}
                     </span>
                     <span className="mt-0.5 font-mono text-base sm:text-lg font-bold text-zinc-200 block whitespace-nowrap">
-                      +7 (777) 606-63-23
+                      {PHONES.extra.display}
                     </span>
                   </div>
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-800 text-zinc-300 group-hover:bg-white group-hover:text-zinc-950 transition">

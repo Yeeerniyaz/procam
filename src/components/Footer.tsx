@@ -30,7 +30,7 @@ export default function Footer() {
               className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 font-mono text-xs sm:text-sm font-medium text-zinc-950 hover:border-zinc-950 transition whitespace-nowrap shrink-0"
             >
               <Phone size={14} className="text-emerald-500 shrink-0" />
-              <span>+7 (706) 606-63-23</span>
+              <span>{PHONES.main.display}</span>
             </a>
 
             <a
@@ -38,7 +38,7 @@ export default function Footer() {
               className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 font-mono text-xs sm:text-sm font-medium text-zinc-700 hover:border-zinc-950 transition whitespace-nowrap shrink-0"
             >
               <Phone size={14} className="text-zinc-400 shrink-0" />
-              <span>+7 (777) 606-63-23</span>
+              <span>{PHONES.extra.display}</span>
             </a>
 
             <SocialLinks />
