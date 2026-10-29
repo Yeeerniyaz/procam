@@ -38,10 +38,10 @@ export const buildWhatsAppUrl = (message: string): string =>
 
 /** Section anchors used for smooth in-page navigation. */
 export const SECTION_IDS = {
-  hero: 'top',
-  equipment: 'equipment',
+  hero: 'hero',
+  equipment: 'hardware',
   advantages: 'advantages',
   steps: 'steps',
-  callback: 'callback',
+  callback: 'contacts',
   contacts: 'contacts',
 } as const;

@@ -1,8 +1,21 @@
 import { useState } from 'react';
-import { ArrowRight, ChevronRight, FileCheck, Layers, ShieldCheck, Terminal, Wrench } from 'lucide-react';
+import {
+  ArrowRight,
+  CheckCircle2,
+  ChevronRight,
+  FileCheck,
+  Layers,
+  ShieldCheck,
+  Terminal,
+  Wrench,
+} from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
-export default function StepsSection() {
+interface StepsSectionProps {
+  onNavigate?: (id: string) => void;
+}
+
+export default function StepsSection({ onNavigate }: StepsSectionProps) {
   const { t } = useLanguage();
   const s = t.steps;
 
@@ -11,150 +24,256 @@ export default function StepsSection() {
 
   const icons = [Layers, Wrench, Terminal, FileCheck];
 
+  const blueprintSpecs = [
+    [
+      { code: 'OPTICS', val: '2.8 / 4.0 / 6.0 мм', note: 'Расчёт углов без слепых зон' },
+      { code: 'LASER', val: 'Bosch GLM 50C', note: 'Точный замер трасс до 100м' },
+      { code: 'ESTIMATE', val: 'Смета за 15 мин', note: 'Фиксированная цена в договоре' },
+    ],
+    [
+      { code: 'CABLE', val: 'UTP Cat6 100% Cu', note: 'Чистая медь (без биметалла)' },
+      { code: 'PINOUT', val: 'TIA/EIA T568B', note: 'Тест линии Fluke 1000 Mbps' },
+      { code: 'SHIELD', val: 'Гермобоксы IP66', note: 'Защита контактов от влаги и мороза' },
+    ],
+    [
+      { code: 'EXPOSURE', val: 'True WDR 120dB', note: 'Защита от встречной засветки' },
+      { code: 'AI ENGINE', val: 'AcuSense 2.0', note: 'Фильтр ложных тревог (листва/дождь)' },
+      { code: 'ARCHIVE', val: 'WD Purple H.265+', note: 'Запись 24/7 + детекция движения' },
+    ],
+    [
+      { code: 'MOBILE', val: 'Hik-Connect P2P', note: 'iOS и Android для всей семьи' },
+      { code: 'SECURITY', val: 'AES-128 TLS', note: 'Передача мастер-ключей владельцу' },
+      { code: 'WARRANTY', val: 'Официальный Акт', note: 'Гарантия на монтаж и оборудование' },
+    ],
+  ][activeStep] || [];
+
+  const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate('contacts');
+    } else {
+      document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
-    <section id="steps" className="min-h-screen flex flex-col justify-center py-16 lg:py-24 border-b border-zinc-200 bg-white">
-      <div className="container-open w-full">
-        {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 pb-8 sm:pb-12 border-b border-zinc-200">
-          <div>
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
-                {s.eyebrow}
-              </span>
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              <span className="font-mono text-xs text-zinc-500 uppercase">
-                4-PHASE EXECUTION
+    <section
+      id="steps"
+      className="snap-screen-section bg-white border-b border-zinc-200"
+    >
+      <div className="flex-1 min-h-0 w-full grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200 overflow-hidden">
+        {/* ============================================================ */}
+        {/* LEFT COLUMN (4 cols on lg, horizontal step bar on mobile)    */}
+        {/* ============================================================ */}
+        <div className="lg:col-span-4 flex flex-col justify-between p-3.5 sm:p-6 lg:p-8 xl:p-10 bg-zinc-50/70 shrink-0 lg:min-h-0 overflow-hidden">
+          {/* Header */}
+          <div className="shrink-0">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-zinc-400">
+                  {s.eyebrow}
+                </span>
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              </div>
+              <span className="font-mono text-[10px] text-zinc-500 uppercase">
+                ФАЗА 0{activeStep + 1} / 04
               </span>
             </div>
-            <h2 className="mt-4 text-2xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-zinc-950">
+
+            <h2 className="mt-1 sm:mt-2 text-lg sm:text-2xl lg:text-3xl font-semibold tracking-tight text-zinc-950">
               {s.title}
             </h2>
+            <p className="hidden lg:block mt-2 text-xs xl:text-sm text-zinc-600 leading-relaxed">
+              {s.subtitle}
+            </p>
           </div>
-          <p className="max-w-xl text-base sm:text-lg text-zinc-600 font-normal leading-relaxed">
-            {s.subtitle}
-          </p>
-        </div>
 
-        {/* Global Progress Bar (25% -> 50% -> 75% -> 100%) */}
-        <div className="mt-8 sm:mt-10 mb-8 sm:mb-12">
-          <div className="flex items-center justify-between text-xs font-mono text-zinc-500 mb-2">
-            <span>ПРОГРЕСС МОНТАЖА:</span>
-            <span className="font-bold text-zinc-950">{current.progress}% ВЫПОЛНЕНО</span>
-          </div>
-          <div className="h-2 w-full bg-zinc-100 rounded-full overflow-hidden border border-zinc-200">
-            <div
-              className="h-full bg-zinc-950 transition-all duration-500 ease-out rounded-full"
-              style={{ width: `${current.progress}%` }}
-            />
-          </div>
-        </div>
+          {/* 4 Interactive Stage Buttons (4-col horizontal bar on mobile, vertical list on lg) */}
+          <div className="mt-2.5 lg:my-auto grid grid-cols-4 lg:grid-cols-1 gap-1.5 sm:gap-2.5">
+            {s.stages.map((stage, idx) => {
+              const Icon = icons[idx] || Wrench;
+              const isActive = idx === activeStep;
+              const isCompleted = idx < activeStep;
 
-        {/* Interactive Stepper Layout: 4 Stage Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {s.stages.map((stage, idx) => {
-            const Icon = icons[idx] || Wrench;
-            const isActive = idx === activeStep;
-            const isCompleted = idx < activeStep;
-
-            return (
-              <div
-                key={stage.num}
-                onClick={() => setActiveStep(idx)}
-                className={`cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between ${
-                  isActive
-                    ? 'border-zinc-950 bg-zinc-50 ring-2 ring-zinc-950 shadow-md'
-                    : 'border-zinc-200 bg-white hover:border-zinc-400 hover:bg-zinc-50/50'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className={`flex h-11 w-11 items-center justify-center rounded-xl font-mono text-sm font-bold transition ${
-                      isActive
-                        ? 'bg-zinc-950 text-white'
-                        : isCompleted
-                        ? 'bg-emerald-100 text-emerald-800'
-                        : 'bg-zinc-100 text-zinc-700'
-                    }`}>
-                      <Icon size={18} />
+              return (
+                <button
+                  key={stage.num}
+                  type="button"
+                  onClick={() => setActiveStep(idx)}
+                  className={`cursor-pointer rounded-xl border p-2 sm:p-3.5 text-left transition-all duration-150 flex flex-col lg:flex-row lg:items-center justify-between gap-1.5 lg:gap-3 ${
+                    isActive
+                      ? 'border-zinc-950 bg-zinc-950 text-white shadow-sm'
+                      : 'border-zinc-200 bg-white text-zinc-800 hover:border-zinc-400'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div
+                      className={`hidden sm:flex h-8 w-8 shrink-0 items-center justify-center rounded-lg font-mono text-xs font-bold ${
+                        isActive
+                          ? 'bg-emerald-500 text-zinc-950'
+                          : isCompleted
+                          ? 'bg-emerald-100 text-emerald-800'
+                          : 'bg-zinc-100 text-zinc-600'
+                      }`}
+                    >
+                      <Icon size={15} />
                     </div>
-
-                    <span className="font-mono text-2xl font-bold tracking-tighter text-zinc-300">
-                      {stage.num}
-                    </span>
+                    <div className="min-w-0">
+                      <span
+                        className={`font-mono text-[9px] sm:text-[10px] font-bold uppercase block ${
+                          isActive ? 'text-emerald-400' : 'text-zinc-400'
+                        }`}
+                      >
+                        {stage.num} // STAGE
+                      </span>
+                      <span className="text-[11px] sm:text-sm font-semibold truncate block">
+                        {stage.title}
+                      </span>
+                    </div>
                   </div>
 
-                  <h3 className="mt-5 text-base sm:text-lg font-semibold text-zinc-950">
-                    {stage.title}
-                  </h3>
-                  <p className="mt-2 text-xs text-zinc-600 leading-relaxed line-clamp-3">
-                    {stage.desc}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-3 border-t border-zinc-200/80 flex items-center justify-between font-mono text-[11px]">
-                  <span className={isActive ? 'text-zinc-950 font-bold' : 'text-zinc-400'}>
-                    ФАЗА 0{idx + 1}/04
-                  </span>
-                  {isActive && <ChevronRight size={14} className="text-zinc-950" />}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Detailed Stage Technical Deep-Dive Card */}
-        <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-950 text-white p-6 sm:p-10 shadow-lg">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-zinc-800 pb-6 mb-6">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="rounded bg-emerald-500/20 px-2 py-0.5 font-mono text-xs font-bold text-emerald-400">
-                  ТЕХНИЧЕСКИЙ РЕГЛАМЕНТ // ФАЗА {current.num}
-                </span>
-                <span className="font-mono text-xs text-zinc-400">ГОСТ / СНиП РК</span>
-              </div>
-              <h4 className="text-xl sm:text-2xl font-semibold text-white">
-                {current.title}
-              </h4>
-              <p className="mt-2 text-sm text-zinc-300 max-w-2xl leading-relaxed">
-                {current.desc}
-              </p>
-            </div>
-
-            {/* Next stage button */}
-            <button
-              type="button"
-              onClick={() => setActiveStep((prev) => (prev + 1) % s.stages.length)}
-              className="cursor-pointer self-start lg:self-auto inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-mono text-xs font-semibold text-zinc-950 transition hover:bg-zinc-200 active:scale-95"
-            >
-              <span>СЛЕДУЮЩАЯ ФАЗА</span>
-              <ArrowRight size={14} />
-            </button>
+                  <ChevronRight
+                    size={15}
+                    className={`hidden lg:block shrink-0 transition-transform ${
+                      isActive ? 'text-emerald-400 translate-x-0.5' : 'text-zinc-300'
+                    }`}
+                  />
+                </button>
+              );
+            })}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4">
-              <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider block mb-1">
-                ИНСТРУМЕНТ И ОБОРУДОВАНИЕ
+          {/* Desktop Footer Note */}
+          <div className="hidden lg:flex items-center justify-between pt-4 border-t border-zinc-200 font-mono text-[11px] text-zinc-500 shrink-0">
+            <span>СНиП РК // TIA-568B</span>
+            <span className="text-emerald-600 font-bold">● ГАРАНТИЯ ПО ДОГОВОРУ</span>
+          </div>
+        </div>
+
+        {/* ============================================================ */}
+        {/* RIGHT COLUMN (8 cols on lg, main viewport on mobile)         */}
+        {/* Full-height Interactive Engineering Blueprint Terminal       */}
+        {/* ============================================================ */}
+        <div className="lg:col-span-8 flex-1 min-h-0 bg-zinc-950 text-white p-4 sm:p-8 lg:p-10 xl:p-14 flex flex-col justify-between relative overflow-hidden">
+          {/* Subtle architectural blueprint grid */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px]"
+          />
+
+          {/* Top Bar: Animated Progress Bar (25% -> 100%) */}
+          <div className="relative z-10 shrink-0">
+            <div className="flex items-center justify-between text-[10px] sm:text-xs font-mono mb-2">
+              <span className="text-emerald-400 font-bold uppercase tracking-wider">
+                ТЕХНИЧЕСКИЙ РЕГЛАМЕНТ // ФАЗА {current.num}
               </span>
-              <div className="flex items-center gap-2 mt-1">
-                <Wrench size={16} className="text-emerald-400 shrink-0" />
-                <span className="font-mono text-xs sm:text-sm text-zinc-200">
-                  {current.tools}
-                </span>
-              </div>
+              <span className="text-white font-bold">
+                ГОТОВНОСТЬ СИСТЕМЫ: {current.progress}%
+              </span>
             </div>
 
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4">
-              <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider block mb-1">
-                СТАНДАРТ КАЧЕСТВА И ПРОВЕРКА
-              </span>
-              <div className="flex items-center gap-2 mt-1">
-                <ShieldCheck size={16} className="text-emerald-400 shrink-0" />
-                <span className="font-mono text-xs sm:text-sm text-zinc-200">
-                  {current.standards}
-                </span>
+            <div className="h-2 w-full bg-zinc-800 rounded-full overflow-hidden border border-zinc-700">
+              <div
+                className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-500 ease-out rounded-full"
+                style={{ width: `${current.progress}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Middle: Active Step Engineering Blueprint & Specs */}
+          <div className="relative z-10 my-auto py-2 min-h-0 flex flex-col justify-center">
+            <div className="inline-flex items-center gap-2 font-mono text-[10px] sm:text-xs text-zinc-400 mb-1">
+              <span>[STEP_{current.num}_SPECIFICATION]</span>
+              <span>·</span>
+              <span className="text-emerald-400">IP66 / T568B / WDR 120dB</span>
+            </div>
+
+            <h3 className="text-xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-white">
+              {current.num}. {current.title}
+            </h3>
+
+            <p className="mt-1.5 sm:mt-3 text-xs sm:text-base text-zinc-300 max-w-3xl leading-relaxed line-clamp-3">
+              {current.desc}
+            </p>
+
+            {/* 3 Engineering Telemetry Cards for Active Step */}
+            <div className="mt-3 sm:mt-6 grid grid-cols-3 gap-2 sm:gap-4">
+              {blueprintSpecs.map((item) => (
+                <div
+                  key={item.code}
+                  className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-2.5 sm:p-4"
+                >
+                  <span className="font-mono text-[9px] sm:text-[10px] text-emerald-400 uppercase tracking-wider block">
+                    [{item.code}]
+                  </span>
+                  <span className="mt-0.5 sm:mt-1 font-mono text-xs sm:text-base font-bold text-white block truncate">
+                    {item.val}
+                  </span>
+                  <span className="mt-0.5 text-[10px] sm:text-xs text-zinc-400 line-clamp-1 sm:line-clamp-2">
+                    {item.note}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Tool Specs & Quality Standard Strip */}
+            <div className="mt-2.5 sm:mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-2.5 sm:p-3.5 flex items-center gap-2.5">
+                <Wrench size={15} className="text-emerald-400 shrink-0" />
+                <div className="min-w-0">
+                  <span className="font-mono text-[9px] text-zinc-500 uppercase block">
+                    ИНСТРУМЕНТАРИЙ ИНЖЕНЕРА
+                  </span>
+                  <span className="font-mono text-[11px] sm:text-xs text-zinc-200 truncate block">
+                    {current.tools}
+                  </span>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-2.5 sm:p-3.5 flex items-center gap-2.5">
+                <ShieldCheck size={15} className="text-emerald-400 shrink-0" />
+                <div className="min-w-0">
+                  <span className="font-mono text-[9px] text-zinc-500 uppercase block">
+                    СТАНДАРТ ПРИЁМКИ
+                  </span>
+                  <span className="font-mono text-[11px] sm:text-xs text-zinc-200 truncate block">
+                    {current.standards}
+                  </span>
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* Bottom Bar: Step Switcher + Direct CTA Button */}
+          <div className="relative z-10 shrink-0 pt-2.5 sm:pt-4 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveStep((prev) => (prev - 1 + s.stages.length) % s.stages.length)
+                }
+                className="cursor-pointer rounded-full border border-zinc-700 bg-zinc-900 px-3.5 py-2 font-mono text-[10px] sm:text-xs font-semibold text-zinc-300 transition hover:border-white hover:text-white"
+              >
+                ← ПРЕД.
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveStep((prev) => (prev + 1) % s.stages.length)}
+                className="cursor-pointer inline-flex items-center gap-1.5 rounded-full border border-zinc-700 bg-zinc-900 px-4 py-2 font-mono text-[10px] sm:text-xs font-semibold text-white transition hover:border-emerald-400 hover:text-emerald-400"
+              >
+                <span>СЛЕД. ФАЗА</span>
+                <ArrowRight size={13} />
+              </button>
+            </div>
+
+            <a
+              href="#contacts"
+              onClick={handleCtaClick}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-4 sm:px-6 py-2 sm:py-2.5 font-mono text-[11px] sm:text-xs font-bold text-zinc-950 transition hover:bg-zinc-200 active:scale-95 shadow-xs"
+            >
+              <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+              <span>РАССЧИТАТЬ МОНТАЖ</span>
+            </a>
           </div>
         </div>
       </div>
