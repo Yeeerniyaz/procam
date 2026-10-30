@@ -33,11 +33,16 @@ body {
 
 .bg-architectural-grid {
   background-color: #FAFAFA;
-  background-image: radial-gradient(#D4D4D8 1px, transparent 1px);
-  background-size: 24px 24px;
 }
 
-/* Mobile-First Default (< 1024px): Clean, Breathable Vertical Scroll */
+@media (min-width: 768px) {
+  .bg-architectural-grid {
+    background-image: radial-gradient(#D4D4D8 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+/* Mobile-First Default (< 1024px): Clean, Breathable Open-Space Scroll */
 .vms-snap-container {
   width: 100%;
   max-width: 100vw;
@@ -46,8 +51,8 @@ body {
 
 .vms-screen-section {
   width: 100%;
-  padding-top: 28px;
-  padding-bottom: 36px;
+  padding-top: 56px;
+  padding-bottom: 64px;
 }
 
 /* Desktop (>= 1024px): Full-Screen Snap Sections */

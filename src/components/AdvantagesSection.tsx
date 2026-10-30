@@ -27,8 +27,8 @@ export default function AdvantagesSection() {
       className="vms-screen-section bg-architectural-grid"
       style={{ borderBottom: '1px solid #E4E4E7' }}
     >
-      <Container size="xl" w="100%">
-        <Stack gap={6} mb={{ base: 'lg', lg: 36 }}>
+      <Container size="xl" w="100%" px={{ base: 20, sm: 'md' }}>
+        <Stack gap={8} mb={{ base: 28, lg: 36 }}>
           <Group gap="xs">
             <Badge
               variant="light"
@@ -40,16 +40,16 @@ export default function AdvantagesSection() {
             </Badge>
           </Group>
 
-          <Title order={2} fz={{ base: 24, sm: 36, lg: 44 }} lh={1.15} fw={800} c="dark.9">
+          <Title order={2} fz={{ base: 26, sm: 36, lg: 44 }} lh={1.15} fw={800} c="dark.9">
             {a.title}
           </Title>
 
-          <Text c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={680} lh={1.55}>
+          <Text visibleFrom="sm" c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={680} lh={1.55}>
             {a.subtitle}
           </Text>
         </Stack>
 
-        <SimpleGrid cols={{ base: 1, md: 2 }} spacing={{ base: 'md', sm: 'xl' }}>
+        <SimpleGrid cols={{ base: 1, md: 2 }} spacing={{ base: 18, sm: 'xl' }}>
           {a.items.map((item, idx) => {
             const Icon = ICONS[idx] || Cable;
             return (
@@ -61,7 +61,7 @@ export default function AdvantagesSection() {
                 <Card
                   withBorder
                   radius="xl"
-                  p={{ base: 'md', sm: 28 }}
+                  p={{ base: 22, sm: 28 }}
                   h="100%"
                   bg="white"
                   style={{
@@ -74,7 +74,7 @@ export default function AdvantagesSection() {
                   <Box>
                     <Group justify="space-between" align="center" wrap="nowrap" mb="sm">
                       <Text
-                        fz={{ base: 28, sm: 40 }}
+                        fz={{ base: 24, sm: 40 }}
                         fw={900}
                         lh={1}
                         c="gray.4"
@@ -98,18 +98,19 @@ export default function AdvantagesSection() {
                       </motion.div>
                     </Group>
 
-                    <Title order={3} fz={{ base: 18, sm: 22 }} fw={800} c="dark.9" mb={6} lh={1.25}>
+                    <Title order={3} fz={{ base: 18, sm: 22 }} fw={800} c="dark.9" mb={8} lh={1.25}>
                       {item.title}
                     </Title>
 
-                    <Text c="dimmed" fz="sm" lh={1.55}>
+                    <Text c="dimmed" fz="sm" lh={1.6}>
                       {item.desc}
                     </Text>
                   </Box>
 
                   <Group
+                    visibleFrom="sm"
                     justify="space-between"
-                     align="center"
+                    align="center"
                     wrap="nowrap"
                     gap="xs"
                     mt="md"

@@ -139,12 +139,12 @@ export default function CallbackForm() {
       className="vms-screen-section bg-architectural-grid"
       style={{ justifyContent: 'space-between' }}
     >
-      <Container size="xl" w="100%" my={{ base: 0, lg: 'auto' }}>
+      <Container size="xl" w="100%" my={{ base: 0, lg: 'auto' }} px={{ base: 20, sm: 'md' }}>
         <Paper
           bg="dark.9"
           c="white"
           radius="xl"
-          p={{ base: 'md', sm: 32, lg: 40 }}
+          p={{ base: 24, sm: 32, lg: 40 }}
           style={{ border: '1px solid #27272A' }}
         >
           <Grid gutter={{ base: 20, sm: 28, lg: 40 }} align="center">
@@ -169,7 +169,7 @@ export default function CallbackForm() {
                   </Badge>
                 </Group>
 
-                <Title order={2} fz={{ base: 22, sm: 30, lg: 36 }} c="white" lh={1.15}>
+                <Title order={2} fz={{ base: 24, sm: 30, lg: 36 }} c="white" lh={1.15}>
                   {f.title}
                 </Title>
 
@@ -178,6 +178,7 @@ export default function CallbackForm() {
                 </Text>
 
                 <List
+                  visibleFrom="sm"
                   spacing={8}
                   my={2}
                   center
@@ -196,7 +197,7 @@ export default function CallbackForm() {
                   ))}
                 </List>
 
-                <Stack gap="xs" pt="sm" style={{ borderTop: '1px solid #27272A' }}>
+                <Stack visibleFrom="sm" gap="xs" pt="sm" style={{ borderTop: '1px solid #27272A' }}>
                   <SimpleGrid cols={{ base: 1, xs: 2 }} spacing="xs">
                     <Button
                       component="a"
@@ -355,6 +356,7 @@ export default function CallbackForm() {
                   />
 
                   <Textarea
+                    visibleFrom="sm"
                     size="md"
                     minRows={2}
                     maxRows={3}

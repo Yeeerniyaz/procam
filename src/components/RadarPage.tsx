@@ -86,8 +86,8 @@ export default function RadarPage({ onBackHome }: RadarPageProps) {
         className="vms-screen-section bg-architectural-grid"
         style={{ borderBottom: '1px solid #E4E4E7' }}
       >
-        <Container size="xl" w="100%">
-          <Grid gutter={{ base: 24, sm: 32, lg: 44 }} align="center">
+        <Container size="xl" w="100%" px={{ base: 20, sm: 'md' }}>
+          <Grid gutter={{ base: 28, sm: 32, lg: 44 }} align="center">
             {/* LEFT COLUMN: Title, Live Git Downloads, Linux Install Command */}
             <Grid.Col span={{ base: 12, lg: 5 }}>
               <Group gap="xs" mb="sm">
@@ -191,6 +191,7 @@ export default function RadarPage({ onBackHome }: RadarPageProps) {
 
               {/* Linux 1-Command Installer Box */}
               <Card
+                visibleFrom="sm"
                 withBorder
                 radius="lg"
                 p="sm"
@@ -322,8 +323,8 @@ export default function RadarPage({ onBackHome }: RadarPageProps) {
         bg="white"
         style={{ justifyContent: 'space-between' }}
       >
-        <Container size="xl" w="100%" my={{ base: 0, lg: 'auto' }}>
-          <Stack gap={6} mb={{ base: 'lg', lg: 32 }}>
+        <Container size="xl" w="100%" my={{ base: 0, lg: 'auto' }} px={{ base: 20, sm: 'md' }}>
+          <Stack gap={8} mb={{ base: 28, lg: 32 }}>
             <Group gap="xs">
               <Badge
                 variant="light"
@@ -335,12 +336,12 @@ export default function RadarPage({ onBackHome }: RadarPageProps) {
               </Badge>
             </Group>
 
-            <Title order={2} fz={{ base: 24, sm: 34, lg: 40 }} lh={1.15} fw={800} c="dark.9">
+            <Title order={2} fz={{ base: 26, sm: 34, lg: 40 }} lh={1.15} fw={800} c="dark.9">
               Инженерные возможности и установка ProCam Radar
             </Title>
           </Stack>
 
-          <SimpleGrid cols={{ base: 1, md: 2 }} spacing={{ base: 'md', sm: 'lg' }}>
+          <SimpleGrid cols={{ base: 1, md: 2 }} spacing={{ base: 18, sm: 'lg' }}>
             {t.radar.features.map((item, idx) => {
               const Icon = FEATURE_ICONS[idx] || Cable;
               return (
@@ -352,7 +353,7 @@ export default function RadarPage({ onBackHome }: RadarPageProps) {
                   <Card
                     withBorder
                     radius="xl"
-                    p={{ base: 'md', sm: 24 }}
+                    p={{ base: 22, sm: 24 }}
                     h="100%"
                     bg="white"
                     style={{
@@ -365,7 +366,7 @@ export default function RadarPage({ onBackHome }: RadarPageProps) {
                     <Box>
                       <Group justify="space-between" align="center" wrap="nowrap" mb="xs">
                         <Text
-                          fz={{ base: 26, sm: 34 }}
+                          fz={{ base: 24, sm: 34 }}
                           fw={900}
                           lh={1}
                           c="gray.4"
@@ -379,16 +380,17 @@ export default function RadarPage({ onBackHome }: RadarPageProps) {
                         </ThemeIcon>
                       </Group>
 
-                      <Title order={3} fz={{ base: 17, sm: 20 }} fw={800} c="dark.9" mb={6} lh={1.25}>
+                      <Title order={3} fz={{ base: 18, sm: 20 }} fw={800} c="dark.9" mb={6} lh={1.25}>
                         {item.title}
                       </Title>
 
-                      <Text c="dimmed" fz="sm" lh={1.5}>
+                      <Text c="dimmed" fz="sm" lh={1.55}>
                         {item.desc}
                       </Text>
                     </Box>
 
                     <Group
+                      visibleFrom="sm"
                       justify="space-between"
                       align="center"
                       wrap="nowrap"

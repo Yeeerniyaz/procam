@@ -187,8 +187,8 @@ export default function Hero() {
       className="vms-screen-section bg-architectural-grid"
       style={{ borderBottom: '1px solid #E4E4E7' }}
     >
-      <Container size="xl" w="100%">
-        <Grid gutter={{ base: 24, sm: 32, lg: 56 }} align="center">
+      <Container size="xl" w="100%" px={{ base: 20, sm: 'md' }}>
+        <Grid gutter={{ base: 32, sm: 32, lg: 56 }} align="center">
           {/* ============================================================ */}
           {/* LEFT COLUMN (7 cols on lg)                                   */}
           {/* ============================================================ */}
@@ -198,7 +198,7 @@ export default function Hero() {
               color="teal"
               size="md"
               radius="xl"
-              mb="sm"
+              mb={{ base: 'md', sm: 'sm' }}
               bg="white"
               styles={{
                 root: { border: '1px solid #E4E4E7' },
@@ -210,12 +210,12 @@ export default function Hero() {
 
             <Title
               order={1}
-              lh={1.08}
+              lh={1.1}
               fw={800}
-              mb="sm"
+              mb={{ base: 'md', sm: 'sm' }}
               c="dark.9"
               style={{
-                fontSize: 'clamp(1.65rem, 7.2vw, 3.75rem)',
+                fontSize: 'clamp(1.85rem, 7.2vw, 3.75rem)',
                 letterSpacing: '-0.025em',
                 overflowWrap: 'break-word',
               }}
@@ -223,14 +223,14 @@ export default function Hero() {
               {h.title}
             </Title>
 
-            <Text c="dimmed" fz={{ base: 'sm', sm: 'xl' }} maw={540} mb={{ base: 'md', sm: 'xl' }} lh={1.55}>
+            <Text c="dimmed" fz={{ base: 'md', sm: 'xl' }} maw={540} mb="xl" lh={1.6}>
               {h.subtitle}
             </Text>
 
-            <Stack hiddenFrom="sm" gap="xs" mb="lg">
+            <Stack hiddenFrom="sm" gap="sm" mb={32}>
               <Button
                 size="md"
-                h={46}
+                h={50}
                 radius="xl"
                 color="dark.9"
                 fullWidth
@@ -242,7 +242,7 @@ export default function Hero() {
               </Button>
               <Button
                 size="md"
-                h={46}
+                h={50}
                 radius="xl"
                 variant="default"
                 fullWidth
@@ -284,16 +284,16 @@ export default function Hero() {
             {/* Minimal 4-Item Bottom Metrics Row */}
             <SimpleGrid
               cols={{ base: 2, sm: 4 }}
-              spacing={{ base: 'sm', sm: 'lg' }}
-              pt={{ base: 'md', sm: 'lg' }}
+              spacing={{ base: 'lg', sm: 'lg' }}
+              pt={{ base: 'xl', sm: 'lg' }}
               style={{ borderTop: '1px solid #E4E4E7' }}
             >
               {h.highlights.map((item) => (
                 <Box key={item.value}>
-                  <Text fw={900} fz={{ base: 20, sm: 26 }} c="dark.9" lh={1.1}>
+                  <Text fw={900} fz={{ base: 22, sm: 26 }} c="dark.9" lh={1.1}>
                     {item.value}
                   </Text>
-                  <Text fz={{ base: 'xs', sm: 'sm' }} c="dimmed" mt={2}>
+                  <Text fz={{ base: 'xs', sm: 'sm' }} c="dimmed" mt={4}>
                     {item.label}
                   </Text>
                 </Box>
@@ -304,7 +304,7 @@ export default function Hero() {
           {/* ============================================================ */}
           {/* RIGHT COLUMN (5 cols on lg): Pure Animated Cyber-Owl Art     */}
           {/* ============================================================ */}
-          <Grid.Col span={{ base: 12, lg: 5 }}>
+          <Grid.Col span={{ base: 12, lg: 5 }} visibleFrom="lg">
             <CyberOwlOpticalCore />
           </Grid.Col>
         </Grid>

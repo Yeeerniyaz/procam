@@ -5,7 +5,6 @@ import Hero from './components/Hero';
 import HardwareSection from './components/HardwareSection';
 import AdvantagesSection from './components/AdvantagesSection';
 import StepsSection from './components/StepsSection';
-import RadarSection from './components/RadarSection';
 import RadarPage from './components/RadarPage';
 import CallbackForm from './components/CallbackForm';
 import WhatsAppFab from './components/WhatsAppFab';
@@ -59,7 +58,6 @@ export default function App() {
           <HardwareSection />
           <AdvantagesSection />
           <StepsSection />
-          <RadarSection onOpenRadarPage={() => navigatePage('radar')} />
           <CallbackForm />
         </Box>
       )}

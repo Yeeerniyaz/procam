@@ -29,9 +29,9 @@ export default function StepsSection() {
       bg="white"
       style={{ borderBottom: '1px solid #E4E4E7' }}
     >
-      <Container size="xl" w="100%">
-        <Group justify="space-between" align="flex-end" mb={{ base: 'lg', lg: 36 }} wrap="wrap" gap="sm">
-          <Stack gap={6}>
+      <Container size="xl" w="100%" px={{ base: 20, sm: 'md' }}>
+        <Group justify="space-between" align="flex-end" mb={{ base: 28, lg: 36 }} wrap="wrap" gap="sm">
+          <Stack gap={8}>
             <Group gap="xs">
               <Badge
                 variant="light"
@@ -43,11 +43,11 @@ export default function StepsSection() {
               </Badge>
             </Group>
 
-            <Title order={2} fz={{ base: 24, sm: 36, lg: 44 }} lh={1.15} fw={800} c="dark.9">
+            <Title order={2} fz={{ base: 26, sm: 36, lg: 44 }} lh={1.15} fw={800} c="dark.9">
               {s.title}
             </Title>
 
-            <Text c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={680} lh={1.55}>
+            <Text visibleFrom="sm" c="dimmed" fz={{ base: 'sm', sm: 'md', lg: 'lg' }} maw={680} lh={1.55}>
               {s.subtitle}
             </Text>
           </Stack>
@@ -65,7 +65,7 @@ export default function StepsSection() {
           </Button>
         </Group>
 
-        <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing={{ base: 'md', sm: 'lg' }}>
+        <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing={{ base: 16, sm: 'lg' }}>
           {s.stages.map((stage, idx) => {
             const Icon = STEP_ICONS[idx] || CheckCircle2;
             return (
@@ -77,7 +77,7 @@ export default function StepsSection() {
                 <Card
                   withBorder
                   radius="xl"
-                  p={{ base: 'md', sm: 'xl' }}
+                  p={{ base: 22, sm: 'xl' }}
                   h="100%"
                   bg={idx === 3 ? '#FAFAFA' : 'white'}
                   style={{
@@ -113,16 +113,17 @@ export default function StepsSection() {
                       {stage.title}
                     </Title>
 
-                    <Text visibleFrom="sm" fz="sm" fw={600} c="dark.8" lh={1.5} mb="xs">
+                    <Text fz="sm" fw={{ base: 400, sm: 600 }} c={{ base: 'dimmed', sm: 'dark.8' }} lh={1.55} mb={{ base: 0, sm: 'xs' }}>
                       {stage.desc}
                     </Text>
 
-                    <Text fz="sm" c="dimmed" lh={1.5}>
+                    <Text visibleFrom="sm" fz="sm" c="dimmed" lh={1.5}>
                       {stage.detail}
                     </Text>
                   </Box>
 
                   <Group
+                    visibleFrom="sm"
                     justify="space-between"
                     align="center"
                     wrap="nowrap"
