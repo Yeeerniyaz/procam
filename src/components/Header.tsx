@@ -17,9 +17,11 @@ import { type Lang } from '../i18n/translations';
 import { useLanguage } from '../i18n/LanguageContext';
 import Logo from './Logo';
 
+export type HeaderPage = 'home' | 'programs' | 'radar' | 'vms';
+
 interface HeaderProps {
-  activePage?: 'home' | 'radar';
-  onNavigatePage?: (page: 'home' | 'radar') => void;
+  activePage?: HeaderPage;
+  onNavigatePage?: (page: HeaderPage) => void;
 }
 
 export default function Header({ activePage = 'home', onNavigatePage }: HeaderProps) {
@@ -85,11 +87,11 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
             <Anchor
               component="button"
               type="button"
-              onClick={() => onNavigatePage?.(activePage === 'radar' ? 'home' : 'radar')}
+              onClick={() => onNavigatePage?.(activePage !== 'home' ? 'home' : 'programs')}
               underline="never"
-              fw={700}
+              fw={600}
               fz={{ lg: 13.5, xl: 14.5 }}
-              c={activePage === 'radar' ? 'teal.7' : 'dark.9'}
+              c={activePage !== 'home' ? 'teal.7' : 'dark.8'}
               style={{
                 whiteSpace: 'nowrap',
                 flexShrink: 0,
@@ -97,27 +99,10 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
                 border: 'none',
                 cursor: 'pointer',
                 padding: 0,
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
+                transition: 'color 0.15s ease',
               }}
             >
-              <span>{lang === 'kz' ? 'Radar (БҚ)' : 'Radar (ПО)'}</span>
-              <Box
-                component="span"
-                style={{
-                  fontSize: 10,
-                  fontWeight: 700,
-                  fontFamily: 'var(--font-mono)',
-                  color: '#10B981',
-                  backgroundColor: 'rgba(16, 185, 129, 0.12)',
-                  padding: '2px 6px',
-                  borderRadius: 6,
-                  lineHeight: 1.2,
-                }}
-              >
-                v4.0
-              </Box>
+              {lang === 'kz' ? 'Бағдарламалар' : 'Программы'}
             </Anchor>
           </Group>
 
@@ -208,13 +193,13 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
             component="button"
             type="button"
             onClick={() => {
-              onNavigatePage?.(activePage === 'radar' ? 'home' : 'radar');
+              onNavigatePage?.('programs');
               close();
             }}
             underline="never"
             fw={700}
             fz="lg"
-            c={activePage === 'radar' ? 'teal.7' : 'dark.9'}
+            c={activePage !== 'home' ? 'teal.7' : 'dark.9'}
             py="xs"
             style={{
               borderBottom: '1px solid #F4F4F5',
@@ -226,7 +211,7 @@ export default function Header({ activePage = 'home', onNavigatePage }: HeaderPr
               cursor: 'pointer',
             }}
           >
-            {t.nav.radar}
+            {lang === 'kz' ? 'Бағдарламалар' : 'Программы'}
           </Anchor>
 
           <Divider my="xs" />

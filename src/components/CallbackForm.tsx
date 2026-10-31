@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from 'react';
 import {
   Alert,
+  Anchor,
   Badge,
   Box,
   Button,
@@ -20,7 +21,7 @@ import {
   UnstyledButton,
 } from '@mantine/core';
 import { Check, CheckCircle2, Phone, Send } from 'lucide-react';
-import { buildWhatsAppUrl, PHONES, WHATSAPP_URL } from '../config/contacts';
+import { buildWhatsAppUrl, EMAIL, PHONES, WEBSITE, WEBSITE_DISPLAY, WHATSAPP_URL } from '../config/contacts';
 import { OBJECT_TYPE_KEYS, objectTypeForMessage, type ObjectTypeKey } from '../i18n/translations';
 import { useLanguage } from '../i18n/LanguageContext';
 import Footer from './Footer';
@@ -95,7 +96,11 @@ type Errors = Partial<Record<'name' | 'phone', string>>;
 
 const initialState: FormState = { name: '', phone: '', objectType: 'house', comment: '' };
 
-export default function CallbackForm() {
+interface CallbackFormProps {
+  onNavigateRadar?: () => void;
+}
+
+export default function CallbackForm({ onNavigateRadar }: CallbackFormProps = {}) {
   const { t } = useLanguage();
   const f = t.form;
 
@@ -245,6 +250,29 @@ export default function CallbackForm() {
                   >
                     {t.contacts.write}
                   </Button>
+
+                  <Group justify="space-between" pt={2} px={4}>
+                    <Anchor
+                      href={`mailto:${EMAIL}`}
+                      fz="xs"
+                      c="gray.4"
+                      underline="hover"
+                      style={{ fontFamily: 'var(--font-mono)' }}
+                    >
+                      {EMAIL}
+                    </Anchor>
+                    <Anchor
+                      href={WEBSITE}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      fz="xs"
+                      fw={600}
+                      c="teal.4"
+                      underline="hover"
+                    >
+                      {WEBSITE_DISPLAY} ↗
+                    </Anchor>
+                  </Group>
                 </Stack>
               </Stack>
             </Grid.Col>
@@ -414,7 +442,7 @@ export default function CallbackForm() {
         </Paper>
       </Container>
 
-      <Footer />
+      <Footer onNavigateRadar={onNavigateRadar} />
     </Box>
   );
 }

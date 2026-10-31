@@ -1,0 +1,34 @@
+{
+  "name": "ProCam VMS",
+  "version": "4.1.0",
+  "tag": "v4.1.0",
+  "released_at": "2026-11-01",
+  "windows": {
+    "filename": "ProCamViewer_Windows_x64.exe",
+    "size": "9.0 MB",
+    "arch": "Windows 10 / 11 (x64)",
+    "url": "/downloads/ProCamViewer_Windows_x64.exe",
+    "fallback_url": "/downloads/ProCamViewer_Windows_x64.exe"
+  },
+  "linux": {
+    "filename": "ProCamViewer_Linux_x64",
+    "size": "8.7 MB",
+    "arch": "Linux Desktop (x64)",
+    "url": "/downloads/ProCamViewer_Linux_x64",
+    "fallback_url": "/downloads/ProCamViewer_Linux_x64",
+    "install_cmd": "curl -fsSL https://procam.yeee.kz/downloads/install-vms.sh | sudo bash"
+  },
+  "manual": {
+    "filename": "PROCAM_VIEWER_MANUAL_RU.pdf",
+    "size": "51 KB",
+    "url": "/downloads/PROCAM_VIEWER_MANUAL_RU.pdf",
+    "fallback_url": "/downloads/PROCAM_VIEWER_MANUAL_RU.pdf"
+  },
+  "changelog": [
+    "Многоканальная видеостена реального времени (сетки 1×1, 2×2, 3×3, 4×4)",
+    "Мгновенный выбор Main Stream / Sub Stream по каждой ячейке",
+    "Прямой доступ к архиву NVR регистратора, синхронный таймлайн и календарь записей",
+    "Пакетный экспорт доказательной базы в MP4 через встроенный движок FFmpeg",
+    "Инженерная диагностика потоков, кодеков H.265+/H.264 и RTSP-параметров"
+  ]
+}
