@@ -29,7 +29,6 @@ import {
   Layers,
   Monitor,
   Network,
-  Radar as RadarIcon,
   Server,
   ShieldCheck,
   Terminal,
@@ -271,8 +270,8 @@ export default function ProgramsPage({ onBackHome, initialTab = 'vms' }: Program
                 {
                   value: 'vms',
                   label: (
-                    <Group gap={6} wrap="nowrap" px={4}>
-                      <Monitor size={16} color={activeTab === 'vms' ? '#10B981' : '#64748B'} />
+                    <Group gap={8} wrap="nowrap" px={4}>
+                      <Image src="/logos/procam-vms.svg" w={18} h={18} style={{ borderRadius: 4 }} />
                       <Text fw={700} fz={13.5}>
                         ProCam VMS
                       </Text>
@@ -285,8 +284,8 @@ export default function ProgramsPage({ onBackHome, initialTab = 'vms' }: Program
                 {
                   value: 'radar',
                   label: (
-                    <Group gap={6} wrap="nowrap" px={4}>
-                      <RadarIcon size={16} color={activeTab === 'radar' ? '#10B981' : '#64748B'} />
+                    <Group gap={8} wrap="nowrap" px={4}>
+                      <Image src="/logos/procam-radar.svg" w={18} h={18} style={{ borderRadius: 4 }} />
                       <Text fw={700} fz={13.5}>
                         ProCam Radar
                       </Text>
@@ -338,25 +337,30 @@ export default function ProgramsPage({ onBackHome, initialTab = 'vms' }: Program
                 <Grid gutter={{ base: 28, sm: 32, lg: 44 }} align="center">
                   {/* LEFT: Info & Downloads */}
                   <Grid.Col span={{ base: 12, lg: 5 }}>
-                    <Group gap="xs" mb="xs">
-                      <Badge
-                        variant="filled"
-                        color="dark"
-                        size="md"
-                        radius="md"
-                        styles={{ label: { fontFamily: 'var(--font-mono)' } }}
-                      >
-                        VMS CLIENT STATION & ARCHIVE
-                      </Badge>
-                      <Badge
-                        variant="light"
-                        color="teal"
-                        size="md"
-                        radius="md"
-                        styles={{ label: { fontWeight: 700 } }}
-                      >
-                        {vmsRel.tag} · {vmsRel.releasedAt}
-                      </Badge>
+                    <Group gap="sm" align="center" mb="xs">
+                      <Image src="/logos/procam-vms.svg" w={46} h={46} style={{ borderRadius: 12, flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                      <Box>
+                        <Group gap="xs">
+                          <Badge
+                            variant="filled"
+                            color="dark"
+                            size="md"
+                            radius="md"
+                            styles={{ label: { fontFamily: 'var(--font-mono)' } }}
+                          >
+                            VMS CLIENT STATION & ARCHIVE
+                          </Badge>
+                          <Badge
+                            variant="light"
+                            color="teal"
+                            size="md"
+                            radius="md"
+                            styles={{ label: { fontWeight: 700 } }}
+                          >
+                            {vmsRel.tag} · {vmsRel.releasedAt}
+                          </Badge>
+                        </Group>
+                      </Box>
                     </Group>
 
                     <Title
@@ -728,25 +732,30 @@ export default function ProgramsPage({ onBackHome, initialTab = 'vms' }: Program
                 <Grid gutter={{ base: 28, sm: 32, lg: 44 }} align="center">
                   {/* LEFT: Info & Downloads */}
                   <Grid.Col span={{ base: 12, lg: 5 }}>
-                    <Group gap="xs" mb="xs">
-                      <Badge
-                        variant="filled"
-                        color="dark"
-                        size="md"
-                        radius="md"
-                        styles={{ label: { fontFamily: 'var(--font-mono)' } }}
-                      >
-                        NETWORK IP SCANNER & DIAGNOSTICS
-                      </Badge>
-                      <Badge
-                        variant="light"
-                        color="teal"
-                        size="md"
-                        radius="md"
-                        styles={{ label: { fontWeight: 700 } }}
-                      >
-                        {radarRel.tag} · {radarRel.releasedAt}
-                      </Badge>
+                    <Group gap="sm" align="center" mb="xs">
+                      <Image src="/logos/procam-radar.svg" w={46} h={46} style={{ borderRadius: 12, flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                      <Box>
+                        <Group gap="xs">
+                          <Badge
+                            variant="filled"
+                            color="dark"
+                            size="md"
+                            radius="md"
+                            styles={{ label: { fontFamily: 'var(--font-mono)' } }}
+                          >
+                            NETWORK IP SCANNER & DIAGNOSTICS
+                          </Badge>
+                          <Badge
+                            variant="light"
+                            color="teal"
+                            size="md"
+                            radius="md"
+                            styles={{ label: { fontWeight: 700 } }}
+                          >
+                            {radarRel.tag} · {radarRel.releasedAt}
+                          </Badge>
+                        </Group>
+                      </Box>
                     </Group>
 
                     <Title
