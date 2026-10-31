@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ProCam — Брендбук и все варианты логотипа (SVG + PNG)</title>
+  <title>ProCam — Официальный брендбук и логотипы (78 вариантов SVG + PNG HD)</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: #FAFAFA;
       color: #09090B;
-      padding: 32px 16px 64px;
+      padding: 32px 16px 80px;
       line-height: 1.5;
     }
-    .container { max-width: 1280px; margin: 0 auto; }
+    .container { max-width: 1320px; margin: 0 auto; }
     .header {
       display: flex;
       flex-wrap: wrap;
@@ -24,39 +25,160 @@
       border-bottom: 1px solid #E4E4E7;
       margin-bottom: 32px;
     }
-    h1 { font-size: 28px; font-weight: 900; letter-spacing: -0.03em; }
-    .subtitle { color: #71717A; font-size: 15px; margin-top: 4px; }
+    h1 { font-size: 30px; font-weight: 900; letter-spacing: -0.03em; color: #09090B; }
+    .subtitle { color: #71717A; font-size: 15px; margin-top: 6px; max-width: 800px; }
     .back-link {
       display: inline-flex;
       align-items: center;
-      padding: 10px 18px;
+      padding: 10px 20px;
       border-radius: 999px;
       background: #09090B;
       color: #FFFFFF;
       text-decoration: none;
       font-weight: 700;
       font-size: 14px;
+      transition: all 0.2s ease;
     }
-    .cat-title {
-      font-size: 20px;
+    .back-link:hover {
+      background: #27272A;
+      transform: translateY(-1px);
+    }
+
+    /* 3 MASTER LOGOS HERO */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(9, 9, 11, 0.03) 100%);
+      border: 1.5px solid rgba(16, 185, 129, 0.3);
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 36px;
+    }
+    .hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hero-tag {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
       font-weight: 800;
-      margin: 36px 0 16px;
+      color: #10B981;
+      background: rgba(16, 185, 129, 0.14);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* TABS NAVIGATION */
+    .tabs-wrapper {
+      position: sticky;
+      top: 16px;
+      z-index: 50;
+      background: rgba(250, 250, 250, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 8px;
+      border-radius: 18px;
+      border: 1px solid #E4E4E7;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      flex: 1;
+      min-width: 180px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 800;
+      color: #71717A;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .tab-btn:hover {
+      color: #09090B;
+      background: #F4F4F5;
+    }
+    .tab-btn.active {
+      background: #09090B;
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+    .tab-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .tab-btn:not(.active) .tab-badge {
+      background: #E4E4E7;
+      color: #52525B;
+    }
+
+    /* PROJECT SECTION */
+    .project-header {
+      background: #FFFFFF;
+      border: 1px solid #E4E4E7;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .project-header-badge {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      font-weight: 800;
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .project-header-title {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .project-header-desc {
+      color: #71717A;
+      font-size: 14px;
+    }
+
+    .cat-title {
+      font-size: 19px;
+      font-weight: 800;
+      margin: 32px 0 16px;
       padding-bottom: 8px;
       border-bottom: 1px solid #E4E4E7;
+      color: #18181B;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
       gap: 20px;
     }
     .card {
       background: #FFFFFF;
       border: 1px solid #E4E4E7;
-      border-radius: 20px;
+      border-radius: 18px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+      border-color: #D4D4D8;
     }
     .preview {
       height: 180px;
@@ -65,6 +187,7 @@
       justify-content: center;
       padding: 24px;
       border-bottom: 1px solid #E4E4E7;
+      position: relative;
     }
     .preview-light {
       background-color: #F8FAFC;
@@ -82,35 +205,52 @@
       width: auto;
       height: auto;
       display: block;
+      transition: transform 0.2s ease;
+    }
+    .card:hover .preview img {
+      transform: scale(1.03);
     }
     .meta { padding: 16px 20px 20px; }
     .code {
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 11px;
-      color: #10B981;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 4px;
     }
-    .title { font-size: 15px; font-weight: 800; margin-bottom: 4px; color: #09090B; }
-    .desc { font-size: 13px; color: #71717A; margin-bottom: 14px; }
+    .title { font-size: 15px; font-weight: 800; margin-bottom: 4px; color: #09090B; line-height: 1.35; }
+    .desc { font-size: 13px; color: #71717A; margin-bottom: 14px; min-height: 38px; }
     .actions { display: flex; gap: 8px; }
     .btn {
       flex: 1;
       text-align: center;
-      padding: 8px 12px;
+      padding: 9px 12px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
       text-decoration: none;
+      transition: all 0.15s ease;
     }
     .btn-svg {
       background: #09090B;
       color: #FFFFFF;
     }
+    .btn-svg:hover {
+      background: #27272A;
+    }
     .btn-png {
       background: #F4F4F5;
       color: #09090B;
       border: 1px solid #E4E4E7;
+    }
+    .btn-png:hover {
+      background: #E4E4E7;
+    }
+
+    .project-pane {
+      display: none;
+    }
+    .project-pane.active {
+      display: block;
     }
   </style>
 </head>
@@ -118,18 +258,18 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1>ProCam — Официальный брендбук и логотипы проектов</h1>
-        <p class="subtitle">Индивидуальные фирменные знаки продуктов: ProCam CCTV, ProCam Radar и ProCam VMS, а также полный архив вариаций (SVG + PNG)</p>
+        <h1>ProCam — Официальный брендбук и логотипы экосистемы</h1>
+        <p class="subtitle">Индивидуальные фирменные знаки для трёх направлений: <strong>ProCam CCTV</strong>, <strong>ProCam Radar</strong> и <strong>ProCam VMS</strong>, а также полный набор по 26 вариаций каждого (78 логотипов в векторном SVG и растровом PNG HD).</p>
       </div>
       <a class="back-link" href="/">← На главную сайта</a>
     </div>
 
-    <!-- 3 DISTINCT PRODUCT LOGOS -->
-    <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(9, 9, 11, 0.03) 100%); border: 1.5px solid rgba(16, 185, 129, 0.3); border-radius: 24px; padding: 28px; margin-bottom: 36px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+    <!-- 3 DISTINCT HERO LOGOS -->
+    <div class="hero-banner">
+      <div class="hero-header">
         <div>
-          <span style="font-family: ui-monospace, monospace; font-size: 11px; font-weight: 800; color: #10B981; background: rgba(16, 185, 129, 0.14); padding: 3px 10px; border-radius: 6px;">// ЭКОСИСТЕМА PROCAM · ИНДИВИДУАЛЬНЫЕ ЛОГОТИПЫ ПРОЕКТОВ</span>
-          <h2 style="font-size: 24px; font-weight: 900; margin-top: 6px; letter-spacing: -0.02em;">Три продукта — три фирменных знака</h2>
+          <span class="hero-tag">// ЭКОСИСТЕМА PROCAM · ГЛАВНЫЕ ЭМБЛЕМЫ ПРОДУКТОВ</span>
+          <h2 style="font-size: 24px; font-weight: 900; margin-top: 6px; letter-spacing: -0.02em;">Три продукта — три уникальных фирменных знака</h2>
         </div>
         <span style="font-size: 13px; color: #71717A; font-weight: 500;">Векторные SVG и растровые PNG HD (512×512)</span>
       </div>
@@ -157,9 +297,9 @@
             <img src="./procam-radar.svg" alt="ProCam Radar Logo" style="height: 120px;" />
           </div>
           <div class="meta">
-            <div class="code" style="color: #34D399;">PROCAM-02 · RADAR v4.1</div>
+            <div class="code" style="color: #059669;">PROCAM-02 · RADAR v4.1</div>
             <div class="title" style="font-size: 17px;">ProCam Radar</div>
-            <div class="desc">Инженерный программный комплекс поиска IP-камер, мультисети /32 и подбора свободных IP.</div>
+            <div class="desc">Инженерный комплекс поиска IP-камер, мультисети /32 и подбора свободных IP (Радар).</div>
             <div class="actions">
               <a class="btn btn-svg" href="./procam-radar.svg" download="procam-radar.svg">Скачать SVG</a>
               <a class="btn btn-png" href="./procam-radar.png" download="procam-radar.png">Скачать PNG</a>
@@ -173,9 +313,9 @@
             <img src="./procam-vms.svg" alt="ProCam VMS Logo" style="height: 120px;" />
           </div>
           <div class="meta">
-            <div class="code" style="color: #60A5FA;">PROCAM-03 · VMS v4.1</div>
+            <div class="code" style="color: #2563EB;">PROCAM-03 · VMS v4.1</div>
             <div class="title" style="font-size: 17px;">ProCam VMS (Viewer)</div>
-            <div class="desc">Клиентская станция видеомониторинга, мультиэкранная видеостена, архив NVR и экспорт FFmpeg.</div>
+            <div class="desc">Клиентская станция видеомониторинга, мультиэкранная видеостена и архив NVR (Видеостена).</div>
             <div class="actions">
               <a class="btn btn-svg" href="./procam-vms.svg" download="procam-vms.svg">Скачать SVG</a>
               <a class="btn btn-png" href="./procam-vms.png" download="procam-vms.png">Скачать PNG</a>
@@ -184,371 +324,1225 @@
         </div>
       </div>
     </div>
-    <h2 class="cat-title">1. Без текста (Только иконка / знак)</h2><div class="grid">
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/01-icon-badge-dark.svg" alt="Иконка на тёмной плашке (Основной знак)" />
-        </div>
-        <div class="meta">
-          <div class="code">01-icon-badge-dark</div>
-          <div class="title">Иконка на тёмной плашке (Основной знак)</div>
-          <div class="desc">Для иконки сайта (Favicon), ярлыка приложения, водяного знака</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/01-icon-badge-dark.svg" download="01-icon-badge-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/01-icon-badge-dark.png" download="01-icon-badge-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/02-icon-avatar-circle.svg" alt="Круглая аватарка (WhatsApp / Instagram / TikTok)" />
-        </div>
-        <div class="meta">
-          <div class="code">02-icon-avatar-circle</div>
-          <div class="title">Круглая аватарка (WhatsApp / Instagram / TikTok)</div>
-          <div class="desc">Идеально вписана в круг для профилей соцсетей и мессенджеров</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/02-icon-avatar-circle.svg" download="02-icon-avatar-circle.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/02-icon-avatar-circle.png" download="02-icon-avatar-circle.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/03-icon-shield-transparent-dark.svg" alt="Контур филина без плашки (для светлого фона)" />
-        </div>
-        <div class="meta">
-          <div class="code">03-icon-shield-transparent-dark</div>
-          <div class="title">Контур филина без плашки (для светлого фона)</div>
-          <div class="desc">Чистый силуэт щита филина на прозрачном фоне</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/03-icon-shield-transparent-dark.svg" download="03-icon-shield-transparent-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/03-icon-shield-transparent-dark.png" download="03-icon-shield-transparent-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-dark">
-          <img src="./svg/04-icon-shield-transparent-light.svg" alt="Контур филина без плашки (для тёмного фона)" />
-        </div>
-        <div class="meta">
-          <div class="code">04-icon-shield-transparent-light</div>
-          <div class="title">Контур филина без плашки (для тёмного фона)</div>
-          <div class="desc">Силуэт щита с белым контуром и зелёной оптикой на прозрачном фоне</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/04-icon-shield-transparent-light.svg" download="04-icon-shield-transparent-light.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/04-icon-shield-transparent-light.png" download="04-icon-shield-transparent-light.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/05-icon-mono-black.svg" alt="Монохромный чёрно-белый знак" />
-        </div>
-        <div class="meta">
-          <div class="code">05-icon-mono-black</div>
-          <div class="title">Монохромный чёрно-белый знак</div>
-          <div class="desc">Для печати, документов, штампов, лазерной гравировки</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/05-icon-mono-black.svg" download="05-icon-mono-black.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/05-icon-mono-black.png" download="05-icon-mono-black.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-dark">
-          <img src="./svg/06-icon-mono-white.svg" alt="Монохромный белый контурный знак" />
-        </div>
-        <div class="meta">
-          <div class="code">06-icon-mono-white</div>
-          <div class="title">Монохромный белый контурный знак</div>
-          <div class="desc">Прозрачный фон — для тёмной спецодежды, плоттерной резки, наклеек</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/06-icon-mono-white.svg" download="06-icon-mono-white.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/06-icon-mono-white.png" download="06-icon-mono-white.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div></div><h2 class="cat-title">2. Горизонтальный логотип (Знак + PROCAM без подписи)</h2><div class="grid">
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/07-horizontal-procam-light.svg" alt="Горизонтальный: Знак + PROCAM (Светлая тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">07-horizontal-procam-light</div>
-          <div class="title">Горизонтальный: Знак + PROCAM (Светлая тема)</div>
-          <div class="desc">Прозрачный фон, лаконичный вариант без нижней подписи</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/07-horizontal-procam-light.svg" download="07-horizontal-procam-light.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/07-horizontal-procam-light.png" download="07-horizontal-procam-light.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-dark">
-          <img src="./svg/08-horizontal-procam-dark.svg" alt="Горизонтальный: Знак + PROCAM (Тёмная тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">08-horizontal-procam-dark</div>
-          <div class="title">Горизонтальный: Знак + PROCAM (Тёмная тема)</div>
-          <div class="desc">Прозрачный фон, белый текст для тёмных поверхностей</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/08-horizontal-procam-dark.svg" download="08-horizontal-procam-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/08-horizontal-procam-dark.png" download="08-horizontal-procam-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/09-horizontal-procam-on-dark-card.svg" alt="Горизонтальный: Знак + PROCAM на чёрной плашке" />
-        </div>
-        <div class="meta">
-          <div class="code">09-horizontal-procam-on-dark-card</div>
-          <div class="title">Горизонтальный: Знак + PROCAM на чёрной плашке</div>
-          <div class="desc">Готовый баннер на фоне #09090B</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/09-horizontal-procam-on-dark-card.svg" download="09-horizontal-procam-on-dark-card.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/09-horizontal-procam-on-dark-card.png" download="09-horizontal-procam-on-dark-card.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/10-horizontal-mono-black.svg" alt="Горизонтальный монохромный (Чёрный)" />
-        </div>
-        <div class="meta">
-          <div class="code">10-horizontal-mono-black</div>
-          <div class="title">Горизонтальный монохромный (Чёрный)</div>
-          <div class="desc">Для чёрно-белой печати, договоров, бланков и смет</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/10-horizontal-mono-black.svg" download="10-horizontal-mono-black.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/10-horizontal-mono-black.png" download="10-horizontal-mono-black.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-dark">
-          <img src="./svg/11-horizontal-mono-white.svg" alt="Горизонтальный монохромный (Белый)" />
-        </div>
-        <div class="meta">
-          <div class="code">11-horizontal-mono-white</div>
-          <div class="title">Горизонтальный монохромный (Белый)</div>
-          <div class="desc">Для вышивки на тёмной форме, гравировки и брендирования авто</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/11-horizontal-mono-white.svg" download="11-horizontal-mono-white.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/11-horizontal-mono-white.png" download="11-horizontal-mono-white.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div></div><h2 class="cat-title">3. Полный горизонтальный логотип (С подписью RU / KZ / EN)</h2><div class="grid">
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/12-horizontal-ru-light.svg" alt="Полный логотип RU — СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Светлая тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">12-horizontal-ru-light</div>
-          <div class="title">Полный логотип RU — СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Светлая тема)</div>
-          <div class="desc">Основной логотип шапки сайта на прозрачном фоне</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/12-horizontal-ru-light.svg" download="12-horizontal-ru-light.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/12-horizontal-ru-light.png" download="12-horizontal-ru-light.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-dark">
-          <img src="./svg/13-horizontal-ru-dark.svg" alt="Полный логотип RU — СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Тёмная тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">13-horizontal-ru-dark</div>
-          <div class="title">Полный логотип RU — СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Тёмная тема)</div>
-          <div class="desc">Прозрачный фон, для размещения на тёмном фоне</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/13-horizontal-ru-dark.svg" download="13-horizontal-ru-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/13-horizontal-ru-dark.png" download="13-horizontal-ru-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/14-horizontal-ru-on-dark-card.svg" alt="Полный логотип RU на фирменном тёмном фоне" />
-        </div>
-        <div class="meta">
-          <div class="code">14-horizontal-ru-on-dark-card</div>
-          <div class="title">Полный логотип RU на фирменном тёмном фоне</div>
-          <div class="desc">Готовая карточка на фоне #09090B</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/14-horizontal-ru-on-dark-card.svg" download="14-horizontal-ru-on-dark-card.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/14-horizontal-ru-on-dark-card.png" download="14-horizontal-ru-on-dark-card.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/15-horizontal-kz-light.svg" alt="Полный логотип KZ — БЕЙНЕБАҚЫЛАУ ЖҮЙЕЛЕРІ (Светлая тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">15-horizontal-kz-light</div>
-          <div class="title">Полный логотип KZ — БЕЙНЕБАҚЫЛАУ ЖҮЙЕЛЕРІ (Светлая тема)</div>
-          <div class="desc">Казахская версия на прозрачном фоне для светлой темы</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/15-horizontal-kz-light.svg" download="15-horizontal-kz-light.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/15-horizontal-kz-light.png" download="15-horizontal-kz-light.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-dark">
-          <img src="./svg/16-horizontal-kz-dark.svg" alt="Полный логотип KZ — БЕЙНЕБАҚЫЛАУ ЖҮЙЕЛЕРІ (Тёмная тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">16-horizontal-kz-dark</div>
-          <div class="title">Полный логотип KZ — БЕЙНЕБАҚЫЛАУ ЖҮЙЕЛЕРІ (Тёмная тема)</div>
-          <div class="desc">Казахская версия на прозрачном фоне для тёмной темы</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/16-horizontal-kz-dark.svg" download="16-horizontal-kz-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/16-horizontal-kz-dark.png" download="16-horizontal-kz-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/17-horizontal-en-light.svg" alt="Полный логотип EN — CCTV · ALMATY (Светлая тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">17-horizontal-en-light</div>
-          <div class="title">Полный логотип EN — CCTV · ALMATY (Светлая тема)</div>
-          <div class="desc">Короткая инженерная подпись CCTV · ALMATY на прозрачном фоне</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/17-horizontal-en-light.svg" download="17-horizontal-en-light.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/17-horizontal-en-light.png" download="17-horizontal-en-light.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-dark">
-          <img src="./svg/18-horizontal-en-dark.svg" alt="Полный логотип EN — CCTV · ALMATY (Тёмная тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">18-horizontal-en-dark</div>
-          <div class="title">Полный логотип EN — CCTV · ALMATY (Тёмная тема)</div>
-          <div class="desc">Короткая инженерная подпись CCTV · ALMATY для тёмного фона</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/18-horizontal-en-dark.svg" download="18-horizontal-en-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/18-horizontal-en-dark.png" download="18-horizontal-en-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div></div><h2 class="cat-title">4. Вертикальные и текстовые версии (Для визиток, сторис, наклеек)</h2><div class="grid">
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/19-vertical-procam-light.svg" alt="Вертикальный: Знак + PROCAM (без подписи, светлый)" />
-        </div>
-        <div class="meta">
-          <div class="code">19-vertical-procam-light</div>
-          <div class="title">Вертикальный: Знак + PROCAM (без подписи, светлый)</div>
-          <div class="desc">Центрированная композиция на прозрачном фоне</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/19-vertical-procam-light.svg" download="19-vertical-procam-light.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/19-vertical-procam-light.png" download="19-vertical-procam-light.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/20-vertical-procam-on-dark.svg" alt="Вертикальный: Знак + PROCAM (на чёрном фоне)" />
-        </div>
-        <div class="meta">
-          <div class="code">20-vertical-procam-on-dark</div>
-          <div class="title">Вертикальный: Знак + PROCAM (на чёрном фоне)</div>
-          <div class="desc">Центрированная композиция на фоне #09090B</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/20-vertical-procam-on-dark.svg" download="20-vertical-procam-on-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/20-vertical-procam-on-dark.png" download="20-vertical-procam-on-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/21-vertical-ru-light.svg" alt="Вертикальный RU: Знак + PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ" />
-        </div>
-        <div class="meta">
-          <div class="code">21-vertical-ru-light</div>
-          <div class="title">Вертикальный RU: Знак + PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ</div>
-          <div class="desc">Для обложек КП, презентаций и вертикальных баннеров</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/21-vertical-ru-light.svg" download="21-vertical-ru-light.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/21-vertical-ru-light.png" download="21-vertical-ru-light.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/22-vertical-ru-on-dark.svg" alt="Вертикальный RU на чёрном фоне #09090B" />
-        </div>
-        <div class="meta">
-          <div class="code">22-vertical-ru-on-dark</div>
-          <div class="title">Вертикальный RU на чёрном фоне #09090B</div>
-          <div class="desc">Премиальный вертикальный блок для визиток и Instagram Stories</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/22-vertical-ru-on-dark.svg" download="22-vertical-ru-on-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/22-vertical-ru-on-dark.png" download="22-vertical-ru-on-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/23-wordmark-only-light.svg" alt="Только текст PROCAM (Без иконки, светлая тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">23-wordmark-only-light</div>
-          <div class="title">Только текст PROCAM (Без иконки, светлая тема)</div>
-          <div class="desc">Чистый типографический логотип на прозрачном фоне</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/23-wordmark-only-light.svg" download="23-wordmark-only-light.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/23-wordmark-only-light.png" download="23-wordmark-only-light.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-dark">
-          <img src="./svg/24-wordmark-only-dark.svg" alt="Только текст PROCAM (Без иконки, тёмная тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">24-wordmark-only-dark</div>
-          <div class="title">Только текст PROCAM (Без иконки, тёмная тема)</div>
-          <div class="desc">Белый + серебристый текст на прозрачном фоне</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/24-wordmark-only-dark.svg" download="24-wordmark-only-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/24-wordmark-only-dark.png" download="24-wordmark-only-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-light">
-          <img src="./svg/25-wordmark-ru-light.svg" alt="Только текст PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Светлая тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">25-wordmark-ru-light</div>
-          <div class="title">Только текст PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Светлая тема)</div>
-          <div class="desc">Текстовый блок с подписью без иконки филина</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/25-wordmark-ru-light.svg" download="25-wordmark-ru-light.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/25-wordmark-ru-light.png" download="25-wordmark-ru-light.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="preview preview-dark">
-          <img src="./svg/26-wordmark-ru-dark.svg" alt="Только текст PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Тёмная тема)" />
-        </div>
-        <div class="meta">
-          <div class="code">26-wordmark-ru-dark</div>
-          <div class="title">Только текст PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Тёмная тема)</div>
-          <div class="desc">Текстовый блок с подписью без иконки филина для тёмного фона</div>
-          <div class="actions">
-            <a class="btn btn-svg" href="./svg/26-wordmark-ru-dark.svg" download="26-wordmark-ru-dark.svg">Скачать SVG</a>
-            <a class="btn btn-png" href="./png/26-wordmark-ru-dark.png" download="26-wordmark-ru-dark.png">Скачать PNG (HD)</a>
-          </div>
-        </div>
-      </div></div>
+
+    <!-- TABS NAVIGATION -->
+    <div class="tabs-wrapper">
+      <button class="tab-btn active" onclick="switchTab('cctv')">
+        <span>🏢 ProCam CCTV</span>
+        <span class="tab-badge">26 логотипов</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('radar')">
+        <span>📡 ProCam Radar</span>
+        <span class="tab-badge">26 логотипов</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('vms')">
+        <span>🖥️ ProCam VMS</span>
+        <span class="tab-badge">26 логотипов</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('all')">
+        <span>🌐 Все проекты</span>
+        <span class="tab-badge">78 логотипов</span>
+      </button>
+    </div>
+
+    <!-- PANES -->
+    <div class="project-pane active" id="pane-cctv">
+  <div class="project-header" style="border-left: 4px solid #10B981;">
+    <div class="project-header-badge" style="color: #10B981; background: #10B98115;">PROCAM · CCTV</div>
+    <h2 class="project-header-title">ProCam CCTV</h2>
+    <p class="project-header-desc">Мастер-бренд монтажа и проектирования IP-видеонаблюдения, PoE и 4K оптики</p>
   </div>
+
+  <h3 class="cat-title">1. Без текста (Только иконка / знак)</h3>
+  <div class="grid">
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/01-icon-badge-dark.svg" alt="Иконка на тёмной плашке (Основной знак)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">01-icon-badge-dark</div>
+        <div class="title">Иконка на тёмной плашке (Основной знак)</div>
+        <div class="desc">Для иконки сайта (Favicon), ярлыка приложения, водяного знака</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/01-icon-badge-dark.svg" download="cctv-01-icon-badge-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/01-icon-badge-dark.png" download="cctv-01-icon-badge-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/02-icon-avatar-circle.svg" alt="Круглая аватарка (WhatsApp / Instagram / Telegram)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">02-icon-avatar-circle</div>
+        <div class="title">Круглая аватарка (WhatsApp / Instagram / Telegram)</div>
+        <div class="desc">Идеально вписана в круг для профилей соцсетей и мессенджеров</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/02-icon-avatar-circle.svg" download="cctv-02-icon-avatar-circle.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/02-icon-avatar-circle.png" download="cctv-02-icon-avatar-circle.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/03-icon-shield-transparent-dark.svg" alt="Контур филина без плашки (для светлого фона)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">03-icon-shield-transparent-dark</div>
+        <div class="title">Контур филина без плашки (для светлого фона)</div>
+        <div class="desc">Чистый силуэт щита филина на прозрачном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/03-icon-shield-transparent-dark.svg" download="cctv-03-icon-shield-transparent-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/03-icon-shield-transparent-dark.png" download="cctv-03-icon-shield-transparent-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-dark">
+        <img src="./cctv/svg/04-icon-shield-transparent-light.svg" alt="Контур филина без плашки (для тёмного фона)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">04-icon-shield-transparent-light</div>
+        <div class="title">Контур филина без плашки (для тёмного фона)</div>
+        <div class="desc">Силуэт щита с белым контуром и зелёной оптикой на прозрачном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/04-icon-shield-transparent-light.svg" download="cctv-04-icon-shield-transparent-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/04-icon-shield-transparent-light.png" download="cctv-04-icon-shield-transparent-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/05-icon-mono-black.svg" alt="Монохромный чёрно-белый знак" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">05-icon-mono-black</div>
+        <div class="title">Монохромный чёрно-белый знак</div>
+        <div class="desc">Для печати, документов, штампов, лазерной гравировки</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/05-icon-mono-black.svg" download="cctv-05-icon-mono-black.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/05-icon-mono-black.png" download="cctv-05-icon-mono-black.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-dark">
+        <img src="./cctv/svg/06-icon-mono-white.svg" alt="Монохромный белый контурный знак" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">06-icon-mono-white</div>
+        <div class="title">Монохромный белый контурный знак</div>
+        <div class="desc">Прозрачный фон — для тёмной спецодежды, плоттерной резки, наклеек</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/06-icon-mono-white.svg" download="cctv-06-icon-mono-white.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/06-icon-mono-white.png" download="cctv-06-icon-mono-white.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-title">2. Горизонтальный логотип (Знак + Название продукта)</h3>
+  <div class="grid">
+    <div class="card" data-cat="2">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/07-horizontal-procam-light.svg" alt="Горизонтальный: Знак + PROCAM (Светлая тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">07-horizontal-procam-light</div>
+        <div class="title">Горизонтальный: Знак + PROCAM (Светлая тема)</div>
+        <div class="desc">Прозрачный фон, лаконичный вариант без нижней подписи</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/07-horizontal-procam-light.svg" download="cctv-07-horizontal-procam-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/07-horizontal-procam-light.png" download="cctv-07-horizontal-procam-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-dark">
+        <img src="./cctv/svg/08-horizontal-procam-dark.svg" alt="Горизонтальный: Знак + PROCAM (Тёмная тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">08-horizontal-procam-dark</div>
+        <div class="title">Горизонтальный: Знак + PROCAM (Тёмная тема)</div>
+        <div class="desc">Прозрачный фон, белый текст для тёмных поверхностей</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/08-horizontal-procam-dark.svg" download="cctv-08-horizontal-procam-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/08-horizontal-procam-dark.png" download="cctv-08-horizontal-procam-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/09-horizontal-procam-on-dark-card.svg" alt="Горизонтальный: Знак + PROCAM на чёрной плашке" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">09-horizontal-procam-on-dark-card</div>
+        <div class="title">Горизонтальный: Знак + PROCAM на чёрной плашке</div>
+        <div class="desc">Готовый баннер на фоне #09090B</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/09-horizontal-procam-on-dark-card.svg" download="cctv-09-horizontal-procam-on-dark-card.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/09-horizontal-procam-on-dark-card.png" download="cctv-09-horizontal-procam-on-dark-card.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/10-horizontal-mono-black.svg" alt="Горизонтальный монохромный (Чёрный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">10-horizontal-mono-black</div>
+        <div class="title">Горизонтальный монохромный (Чёрный)</div>
+        <div class="desc">Для чёрно-белой печати, договоров, бланков и смет</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/10-horizontal-mono-black.svg" download="cctv-10-horizontal-mono-black.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/10-horizontal-mono-black.png" download="cctv-10-horizontal-mono-black.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-dark">
+        <img src="./cctv/svg/11-horizontal-mono-white.svg" alt="Горизонтальный монохромный (Белый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">11-horizontal-mono-white</div>
+        <div class="title">Горизонтальный монохромный (Белый)</div>
+        <div class="desc">Для вышивки на тёмной форме, гравировки и брендирования авто</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/11-horizontal-mono-white.svg" download="cctv-11-horizontal-mono-white.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/11-horizontal-mono-white.png" download="cctv-11-horizontal-mono-white.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-title">3. Полный горизонтальный логотип (С подписью RU / KZ / EN)</h3>
+  <div class="grid">
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/12-horizontal-ru-light.svg" alt="Полный логотип RU — СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Светлая тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">12-horizontal-ru-light</div>
+        <div class="title">Полный логотип RU — СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Светлая тема)</div>
+        <div class="desc">Основной логотип шапки сайта на прозрачном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/12-horizontal-ru-light.svg" download="cctv-12-horizontal-ru-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/12-horizontal-ru-light.png" download="cctv-12-horizontal-ru-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-dark">
+        <img src="./cctv/svg/13-horizontal-ru-dark.svg" alt="Полный логотип RU — СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Тёмная тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">13-horizontal-ru-dark</div>
+        <div class="title">Полный логотип RU — СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Тёмная тема)</div>
+        <div class="desc">Прозрачный фон, для размещения на тёмном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/13-horizontal-ru-dark.svg" download="cctv-13-horizontal-ru-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/13-horizontal-ru-dark.png" download="cctv-13-horizontal-ru-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/14-horizontal-ru-on-dark-card.svg" alt="Полный логотип RU на фирменном тёмном фоне" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">14-horizontal-ru-on-dark-card</div>
+        <div class="title">Полный логотип RU на фирменном тёмном фоне</div>
+        <div class="desc">Готовая карточка на фоне #09090B</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/14-horizontal-ru-on-dark-card.svg" download="cctv-14-horizontal-ru-on-dark-card.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/14-horizontal-ru-on-dark-card.png" download="cctv-14-horizontal-ru-on-dark-card.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/15-horizontal-kz-light.svg" alt="Полный логотип KZ — БЕЙНЕБАҚЫЛАУ ЖҮЙЕЛЕРІ (Светлая тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">15-horizontal-kz-light</div>
+        <div class="title">Полный логотип KZ — БЕЙНЕБАҚЫЛАУ ЖҮЙЕЛЕРІ (Светлая тема)</div>
+        <div class="desc">Казахская версия на прозрачном фоне для светлой темы</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/15-horizontal-kz-light.svg" download="cctv-15-horizontal-kz-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/15-horizontal-kz-light.png" download="cctv-15-horizontal-kz-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-dark">
+        <img src="./cctv/svg/16-horizontal-kz-dark.svg" alt="Полный логотип KZ — БЕЙНЕБАҚЫЛАУ ЖҮЙЕЛЕРІ (Тёмная тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">16-horizontal-kz-dark</div>
+        <div class="title">Полный логотип KZ — БЕЙНЕБАҚЫЛАУ ЖҮЙЕЛЕРІ (Тёмная тема)</div>
+        <div class="desc">Казахская версия на прозрачном фоне для тёмной темы</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/16-horizontal-kz-dark.svg" download="cctv-16-horizontal-kz-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/16-horizontal-kz-dark.png" download="cctv-16-horizontal-kz-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/17-horizontal-en-light.svg" alt="Полный логотип EN — CCTV · ALMATY (Светлая тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">17-horizontal-en-light</div>
+        <div class="title">Полный логотип EN — CCTV · ALMATY (Светлая тема)</div>
+        <div class="desc">Короткая инженерная подпись CCTV · ALMATY на прозрачном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/17-horizontal-en-light.svg" download="cctv-17-horizontal-en-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/17-horizontal-en-light.png" download="cctv-17-horizontal-en-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-dark">
+        <img src="./cctv/svg/18-horizontal-en-dark.svg" alt="Полный логотип EN — CCTV · ALMATY (Тёмная тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">18-horizontal-en-dark</div>
+        <div class="title">Полный логотип EN — CCTV · ALMATY (Тёмная тема)</div>
+        <div class="desc">Короткая инженерная подпись CCTV · ALMATY для тёмного фона</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/18-horizontal-en-dark.svg" download="cctv-18-horizontal-en-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/18-horizontal-en-dark.png" download="cctv-18-horizontal-en-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-title">4. Вертикальные и текстовые версии (Для визиток, сторис, наклеек)</h3>
+  <div class="grid">
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/19-vertical-procam-light.svg" alt="Вертикальный: Знак + PROCAM (без подписи, светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">19-vertical-procam-light</div>
+        <div class="title">Вертикальный: Знак + PROCAM (без подписи, светлый)</div>
+        <div class="desc">Центрированная композиция на прозрачном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/19-vertical-procam-light.svg" download="cctv-19-vertical-procam-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/19-vertical-procam-light.png" download="cctv-19-vertical-procam-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/20-vertical-procam-on-dark.svg" alt="Вертикальный: Знак + PROCAM (на чёрном фоне)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">20-vertical-procam-on-dark</div>
+        <div class="title">Вертикальный: Знак + PROCAM (на чёрном фоне)</div>
+        <div class="desc">Центрированная композиция на фоне #09090B</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/20-vertical-procam-on-dark.svg" download="cctv-20-vertical-procam-on-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/20-vertical-procam-on-dark.png" download="cctv-20-vertical-procam-on-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/21-vertical-ru-light.svg" alt="Вертикальный RU: Знак + PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">21-vertical-ru-light</div>
+        <div class="title">Вертикальный RU: Знак + PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ</div>
+        <div class="desc">Для обложек КП, презентаций и вертикальных баннеров</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/21-vertical-ru-light.svg" download="cctv-21-vertical-ru-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/21-vertical-ru-light.png" download="cctv-21-vertical-ru-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/22-vertical-ru-on-dark.svg" alt="Вертикальный RU на чёрном фоне #09090B" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">22-vertical-ru-on-dark</div>
+        <div class="title">Вертикальный RU на чёрном фоне #09090B</div>
+        <div class="desc">Премиальный вертикальный блок для визиток и Instagram Stories</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/22-vertical-ru-on-dark.svg" download="cctv-22-vertical-ru-on-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/22-vertical-ru-on-dark.png" download="cctv-22-vertical-ru-on-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/23-wordmark-only-light.svg" alt="Только текст PROCAM (Без иконки, светлая тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">23-wordmark-only-light</div>
+        <div class="title">Только текст PROCAM (Без иконки, светлая тема)</div>
+        <div class="desc">Чистый типографический логотип на прозрачном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/23-wordmark-only-light.svg" download="cctv-23-wordmark-only-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/23-wordmark-only-light.png" download="cctv-23-wordmark-only-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-dark">
+        <img src="./cctv/svg/24-wordmark-only-dark.svg" alt="Только текст PROCAM (Без иконки, тёмная тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">24-wordmark-only-dark</div>
+        <div class="title">Только текст PROCAM (Без иконки, тёмная тема)</div>
+        <div class="desc">Белый + серебристый текст на прозрачном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/24-wordmark-only-dark.svg" download="cctv-24-wordmark-only-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/24-wordmark-only-dark.png" download="cctv-24-wordmark-only-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./cctv/svg/25-wordmark-ru-light.svg" alt="Только текст PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Светлая тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">25-wordmark-ru-light</div>
+        <div class="title">Только текст PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Светлая тема)</div>
+        <div class="desc">Текстовый блок с подписью без иконки филина</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/25-wordmark-ru-light.svg" download="cctv-25-wordmark-ru-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/25-wordmark-ru-light.png" download="cctv-25-wordmark-ru-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-dark">
+        <img src="./cctv/svg/26-wordmark-ru-dark.svg" alt="Только текст PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Тёмная тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #10B981;">26-wordmark-ru-dark</div>
+        <div class="title">Только текст PROCAM + СИСТЕМЫ ВИДЕОНАБЛЮДЕНИЯ (Тёмная тема)</div>
+        <div class="desc">Текстовый блок с подписью без иконки филина для тёмного фона</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./cctv/svg/26-wordmark-ru-dark.svg" download="cctv-26-wordmark-ru-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./cctv/png/26-wordmark-ru-dark.png" download="cctv-26-wordmark-ru-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="project-pane " id="pane-radar">
+  <div class="project-header" style="border-left: 4px solid #059669;">
+    <div class="project-header-badge" style="color: #059669; background: #05966915;">PROCAM · RADAR v4.1</div>
+    <h2 class="project-header-title">ProCam Radar</h2>
+    <p class="project-header-desc">Инженерный комплекс поиска IP-камер, мультисети /32 и подбора свободных IP</p>
+  </div>
+
+  <h3 class="cat-title">1. Без текста (Только иконка / знак)</h3>
+  <div class="grid">
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./radar/svg/01-icon-badge-dark.svg" alt="Иконка на тёмной плашке (Основной знак Radar)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">01-icon-badge-dark</div>
+        <div class="title">Иконка на тёмной плашке (Основной знак Radar)</div>
+        <div class="desc">Радарный сканер со сканирующим лучом и IP-целями</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/01-icon-badge-dark.svg" download="radar-01-icon-badge-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/01-icon-badge-dark.png" download="radar-01-icon-badge-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./radar/svg/02-icon-avatar-circle.svg" alt="Круглая аватарка Radar (Соло-знак)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">02-icon-avatar-circle</div>
+        <div class="title">Круглая аватарка Radar (Соло-знак)</div>
+        <div class="desc">Круглый профиль радарного сканера для GitHub, Telegram, соцсетей</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/02-icon-avatar-circle.svg" download="radar-02-icon-avatar-circle.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/02-icon-avatar-circle.png" download="radar-02-icon-avatar-circle.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./radar/svg/03-icon-shield-transparent-dark.svg" alt="Сканер без плашки (для светлого фона)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">03-icon-shield-transparent-dark</div>
+        <div class="title">Сканер без плашки (для светлого фона)</div>
+        <div class="desc">Тёмный корпус сканера с изумрудными концентрическими кольцами</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/03-icon-shield-transparent-dark.svg" download="radar-03-icon-shield-transparent-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/03-icon-shield-transparent-dark.png" download="radar-03-icon-shield-transparent-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-dark">
+        <img src="./radar/svg/04-icon-shield-transparent-light.svg" alt="Сканер без плашки (для тёмного фона)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">04-icon-shield-transparent-light</div>
+        <div class="title">Сканер без плашки (для тёмного фона)</div>
+        <div class="desc">Неоновый изумрудный радар на прозрачном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/04-icon-shield-transparent-light.svg" download="radar-04-icon-shield-transparent-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/04-icon-shield-transparent-light.png" download="radar-04-icon-shield-transparent-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./radar/svg/05-icon-mono-black.svg" alt="Монохромный чёрно-белый радар" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">05-icon-mono-black</div>
+        <div class="title">Монохромный чёрно-белый радар</div>
+        <div class="desc">Чёрный знак для технической документации и печати</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/05-icon-mono-black.svg" download="radar-05-icon-mono-black.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/05-icon-mono-black.png" download="radar-05-icon-mono-black.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-dark">
+        <img src="./radar/svg/06-icon-mono-white.svg" alt="Монохромный белый контурный радар" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">06-icon-mono-white</div>
+        <div class="title">Монохромный белый контурный радар</div>
+        <div class="desc">Белые векторные линии сканера для тёмных поверхностей</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/06-icon-mono-white.svg" download="radar-06-icon-mono-white.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/06-icon-mono-white.png" download="radar-06-icon-mono-white.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-title">2. Горизонтальный логотип (Знак + Название продукта)</h3>
+  <div class="grid">
+    <div class="card" data-cat="2">
+      <div class="preview preview-light">
+        <img src="./radar/svg/07-horizontal-procam-light.svg" alt="Горизонтальный: Знак + PROCAM RADAR (Светлая тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">07-horizontal-procam-light</div>
+        <div class="title">Горизонтальный: Знак + PROCAM RADAR (Светлая тема)</div>
+        <div class="desc">Лаконичный инженерный логотип для светлых тем</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/07-horizontal-procam-light.svg" download="radar-07-horizontal-procam-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/07-horizontal-procam-light.png" download="radar-07-horizontal-procam-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-dark">
+        <img src="./radar/svg/08-horizontal-procam-dark.svg" alt="Горизонтальный: Знак + PROCAM RADAR (Тёмная тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">08-horizontal-procam-dark</div>
+        <div class="title">Горизонтальный: Знак + PROCAM RADAR (Тёмная тема)</div>
+        <div class="desc">Фирменный логотип для тёмного интерфейса и GUI</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/08-horizontal-procam-dark.svg" download="radar-08-horizontal-procam-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/08-horizontal-procam-dark.png" download="radar-08-horizontal-procam-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-light">
+        <img src="./radar/svg/09-horizontal-procam-on-dark-card.svg" alt="Горизонтальный: PROCAM RADAR на тёмной плашке" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">09-horizontal-procam-on-dark-card</div>
+        <div class="title">Горизонтальный: PROCAM RADAR на тёмной плашке</div>
+        <div class="desc">Готовый баннер карточки на фоне #09090B</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/09-horizontal-procam-on-dark-card.svg" download="radar-09-horizontal-procam-on-dark-card.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/09-horizontal-procam-on-dark-card.png" download="radar-09-horizontal-procam-on-dark-card.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-light">
+        <img src="./radar/svg/10-horizontal-mono-black.svg" alt="Горизонтальный монохромный RADAR (Чёрный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">10-horizontal-mono-black</div>
+        <div class="title">Горизонтальный монохромный RADAR (Чёрный)</div>
+        <div class="desc">Чертёжная и проектная документация, акты тестирования</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/10-horizontal-mono-black.svg" download="radar-10-horizontal-mono-black.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/10-horizontal-mono-black.png" download="radar-10-horizontal-mono-black.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-dark">
+        <img src="./radar/svg/11-horizontal-mono-white.svg" alt="Горизонтальный монохромный RADAR (Белый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">11-horizontal-mono-white</div>
+        <div class="title">Горизонтальный монохромный RADAR (Белый)</div>
+        <div class="desc">Трафареты, гравировка, маркировка инженерных стендов</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/11-horizontal-mono-white.svg" download="radar-11-horizontal-mono-white.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/11-horizontal-mono-white.png" download="radar-11-horizontal-mono-white.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-title">3. Полный горизонтальный логотип (С подписью RU / KZ / EN)</h3>
+  <div class="grid">
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./radar/svg/12-horizontal-ru-light.svg" alt="Полный логотип RU — СЕТЕВОЙ СКАНЕР IP-КАМЕР (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">12-horizontal-ru-light</div>
+        <div class="title">Полный логотип RU — СЕТЕВОЙ СКАНЕР IP-КАМЕР (Светлый)</div>
+        <div class="desc">Официальный логотип утилиты для сайтов и документации</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/12-horizontal-ru-light.svg" download="radar-12-horizontal-ru-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/12-horizontal-ru-light.png" download="radar-12-horizontal-ru-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-dark">
+        <img src="./radar/svg/13-horizontal-ru-dark.svg" alt="Полный логотип RU — СЕТЕВОЙ СКАНЕР IP-КАМЕР (Тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">13-horizontal-ru-dark</div>
+        <div class="title">Полный логотип RU — СЕТЕВОЙ СКАНЕР IP-КАМЕР (Тёмный)</div>
+        <div class="desc">Для тёмной темы интерфейса сетевого сканера</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/13-horizontal-ru-dark.svg" download="radar-13-horizontal-ru-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/13-horizontal-ru-dark.png" download="radar-13-horizontal-ru-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./radar/svg/14-horizontal-ru-on-dark-card.svg" alt="Полный логотип RU на фирменном тёмном фоне" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">14-horizontal-ru-on-dark-card</div>
+        <div class="title">Полный логотип RU на фирменном тёмном фоне</div>
+        <div class="desc">Готовый медиа-баннер утилиты сканирования</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/14-horizontal-ru-on-dark-card.svg" download="radar-14-horizontal-ru-on-dark-card.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/14-horizontal-ru-on-dark-card.png" download="radar-14-horizontal-ru-on-dark-card.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./radar/svg/15-horizontal-kz-light.svg" alt="Полный логотип KZ — IP-КАМЕРАЛАРДЫҢ ЖЕЛІЛІК СКАНЕРІ (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">15-horizontal-kz-light</div>
+        <div class="title">Полный логотип KZ — IP-КАМЕРАЛАРДЫҢ ЖЕЛІЛІК СКАНЕРІ (Светлый)</div>
+        <div class="desc">Казахская версия для локализованной документации</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/15-horizontal-kz-light.svg" download="radar-15-horizontal-kz-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/15-horizontal-kz-light.png" download="radar-15-horizontal-kz-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-dark">
+        <img src="./radar/svg/16-horizontal-kz-dark.svg" alt="Полный логотип KZ — IP-КАМЕРАЛАРДЫҢ ЖЕЛІЛІК СКАНЕРІ (Тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">16-horizontal-kz-dark</div>
+        <div class="title">Полный логотип KZ — IP-КАМЕРАЛАРДЫҢ ЖЕЛІЛІК СКАНЕРІ (Тёмный)</div>
+        <div class="desc">Казахская версия для тёмного интерфейса</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/16-horizontal-kz-dark.svg" download="radar-16-horizontal-kz-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/16-horizontal-kz-dark.png" download="radar-16-horizontal-kz-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./radar/svg/17-horizontal-en-light.svg" alt="Полный логотип EN — NETWORK IP CAMERA SCANNER (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">17-horizontal-en-light</div>
+        <div class="title">Полный логотип EN — NETWORK IP CAMERA SCANNER (Светлый)</div>
+        <div class="desc">Международная версия для GitHub и дистрибутивов</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/17-horizontal-en-light.svg" download="radar-17-horizontal-en-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/17-horizontal-en-light.png" download="radar-17-horizontal-en-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-dark">
+        <img src="./radar/svg/18-horizontal-en-dark.svg" alt="Полный логотип EN — NETWORK IP CAMERA SCANNER (Тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">18-horizontal-en-dark</div>
+        <div class="title">Полный логотип EN — NETWORK IP CAMERA SCANNER (Тёмный)</div>
+        <div class="desc">Международная версия для тёмной темы</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/18-horizontal-en-dark.svg" download="radar-18-horizontal-en-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/18-horizontal-en-dark.png" download="radar-18-horizontal-en-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-title">4. Вертикальные и текстовые версии (Для визиток, сторис, наклеек)</h3>
+  <div class="grid">
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./radar/svg/19-vertical-procam-light.svg" alt="Вертикальный: Знак + PROCAM RADAR (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">19-vertical-procam-light</div>
+        <div class="title">Вертикальный: Знак + PROCAM RADAR (Светлый)</div>
+        <div class="desc">Вертикальный постер для руководства пользователя</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/19-vertical-procam-light.svg" download="radar-19-vertical-procam-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/19-vertical-procam-light.png" download="radar-19-vertical-procam-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./radar/svg/20-vertical-procam-on-dark.svg" alt="Вертикальный: Знак + PROCAM RADAR (на чёрном фоне)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">20-vertical-procam-on-dark</div>
+        <div class="title">Вертикальный: Знак + PROCAM RADAR (на чёрном фоне)</div>
+        <div class="desc">Вертикальный промо-блок утилиты на фоне #09090B</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/20-vertical-procam-on-dark.svg" download="radar-20-vertical-procam-on-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/20-vertical-procam-on-dark.png" download="radar-20-vertical-procam-on-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./radar/svg/21-vertical-ru-light.svg" alt="Вертикальный RU: Знак + PROCAM RADAR + СЕТЕВОЙ СКАНЕР" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">21-vertical-ru-light</div>
+        <div class="title">Вертикальный RU: Знак + PROCAM RADAR + СЕТЕВОЙ СКАНЕР</div>
+        <div class="desc">Презентационная обложка отчёта аудита сети</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/21-vertical-ru-light.svg" download="radar-21-vertical-ru-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/21-vertical-ru-light.png" download="radar-21-vertical-ru-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./radar/svg/22-vertical-ru-on-dark.svg" alt="Вертикальный RU на чёрном фоне #09090B" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">22-vertical-ru-on-dark</div>
+        <div class="title">Вертикальный RU на чёрном фоне #09090B</div>
+        <div class="desc">Премиум обложка отчёта сканирования</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/22-vertical-ru-on-dark.svg" download="radar-22-vertical-ru-on-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/22-vertical-ru-on-dark.png" download="radar-22-vertical-ru-on-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./radar/svg/23-wordmark-only-light.svg" alt="Только текст PROCAM RADAR (Без иконки, светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">23-wordmark-only-light</div>
+        <div class="title">Только текст PROCAM RADAR (Без иконки, светлый)</div>
+        <div class="desc">Чистый текстовый брендлайн утилиты</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/23-wordmark-only-light.svg" download="radar-23-wordmark-only-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/23-wordmark-only-light.png" download="radar-23-wordmark-only-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-dark">
+        <img src="./radar/svg/24-wordmark-only-dark.svg" alt="Только текст PROCAM RADAR (Без иконки, тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">24-wordmark-only-dark</div>
+        <div class="title">Только текст PROCAM RADAR (Без иконки, тёмный)</div>
+        <div class="desc">Текстовый заголовок GUI приложения</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/24-wordmark-only-dark.svg" download="radar-24-wordmark-only-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/24-wordmark-only-dark.png" download="radar-24-wordmark-only-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./radar/svg/25-wordmark-ru-light.svg" alt="Только текст PROCAM RADAR + СЕТЕВОЙ СКАНЕР (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">25-wordmark-ru-light</div>
+        <div class="title">Только текст PROCAM RADAR + СЕТЕВОЙ СКАНЕР (Светлый)</div>
+        <div class="desc">Инженерный текстовый блок без графического знака</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/25-wordmark-ru-light.svg" download="radar-25-wordmark-ru-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/25-wordmark-ru-light.png" download="radar-25-wordmark-ru-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-dark">
+        <img src="./radar/svg/26-wordmark-ru-dark.svg" alt="Только текст PROCAM RADAR + СЕТЕВОЙ СКАНЕР (Тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #059669;">26-wordmark-ru-dark</div>
+        <div class="title">Только текст PROCAM RADAR + СЕТЕВОЙ СКАНЕР (Тёмный)</div>
+        <div class="desc">Инженерный текстовый блок для тёмной темы</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./radar/svg/26-wordmark-ru-dark.svg" download="radar-26-wordmark-ru-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./radar/png/26-wordmark-ru-dark.png" download="radar-26-wordmark-ru-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="project-pane " id="pane-vms">
+  <div class="project-header" style="border-left: 4px solid #2563EB;">
+    <div class="project-header-badge" style="color: #2563EB; background: #2563EB15;">PROCAM · VMS v4.1</div>
+    <h2 class="project-header-title">ProCam VMS</h2>
+    <p class="project-header-desc">Клиентская станция видеомониторинга, мультиэкранная видеостена, архив NVR и экспорт FFmpeg</p>
+  </div>
+
+  <h3 class="cat-title">1. Без текста (Только иконка / знак)</h3>
+  <div class="grid">
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./vms/svg/01-icon-badge-dark.svg" alt="Иконка на тёмной плашке (Основной знак VMS)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">01-icon-badge-dark</div>
+        <div class="title">Иконка на тёмной плашке (Основной знак VMS)</div>
+        <div class="desc">4-квадрантная видеостена: Live REC, AI BBox, NVR HDD, Waveform</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/01-icon-badge-dark.svg" download="vms-01-icon-badge-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/01-icon-badge-dark.png" download="vms-01-icon-badge-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./vms/svg/02-icon-avatar-circle.svg" alt="Круглая аватарка VMS (Видеостена)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">02-icon-avatar-circle</div>
+        <div class="title">Круглая аватарка VMS (Видеостена)</div>
+        <div class="desc">Круглая иконка рабочей станции видеонаблюдения для профилей и чатов</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/02-icon-avatar-circle.svg" download="vms-02-icon-avatar-circle.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/02-icon-avatar-circle.png" download="vms-02-icon-avatar-circle.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./vms/svg/03-icon-shield-transparent-dark.svg" alt="Видеостена без плашки (для светлого фона)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">03-icon-shield-transparent-dark</div>
+        <div class="title">Видеостена без плашки (для светлого фона)</div>
+        <div class="desc">Контур монитора с квадрантами на прозрачном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/03-icon-shield-transparent-dark.svg" download="vms-03-icon-shield-transparent-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/03-icon-shield-transparent-dark.png" download="vms-03-icon-shield-transparent-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-dark">
+        <img src="./vms/svg/04-icon-shield-transparent-light.svg" alt="Видеостена без плашки (для тёмного фона)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">04-icon-shield-transparent-light</div>
+        <div class="title">Видеостена без плашки (для тёмного фона)</div>
+        <div class="desc">Неоновый интерфейс видеостены для тёмного фона</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/04-icon-shield-transparent-light.svg" download="vms-04-icon-shield-transparent-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/04-icon-shield-transparent-light.png" download="vms-04-icon-shield-transparent-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-light">
+        <img src="./vms/svg/05-icon-mono-black.svg" alt="Монохромный чёрно-белый VMS знак" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">05-icon-mono-black</div>
+        <div class="title">Монохромный чёрно-белый VMS знак</div>
+        <div class="desc">Графический знак для инструкций операторов и техпаспортов</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/05-icon-mono-black.svg" download="vms-05-icon-mono-black.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/05-icon-mono-black.png" download="vms-05-icon-mono-black.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="1">
+      <div class="preview preview-dark">
+        <img src="./vms/svg/06-icon-mono-white.svg" alt="Монохромный белый контурный VMS знак" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">06-icon-mono-white</div>
+        <div class="title">Монохромный белый контурный VMS знак</div>
+        <div class="desc">Белые контуры видеостены для наклеек и плоттера</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/06-icon-mono-white.svg" download="vms-06-icon-mono-white.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/06-icon-mono-white.png" download="vms-06-icon-mono-white.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-title">2. Горизонтальный логотип (Знак + Название продукта)</h3>
+  <div class="grid">
+    <div class="card" data-cat="2">
+      <div class="preview preview-light">
+        <img src="./vms/svg/07-horizontal-procam-light.svg" alt="Горизонтальный: Знак + PROCAM VMS (Светлая тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">07-horizontal-procam-light</div>
+        <div class="title">Горизонтальный: Знак + PROCAM VMS (Светлая тема)</div>
+        <div class="desc">Лаконичный логотип для оконного заголовка и светлых страниц</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/07-horizontal-procam-light.svg" download="vms-07-horizontal-procam-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/07-horizontal-procam-light.png" download="vms-07-horizontal-procam-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-dark">
+        <img src="./vms/svg/08-horizontal-procam-dark.svg" alt="Горизонтальный: Знак + PROCAM VMS (Тёмная тема)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">08-horizontal-procam-dark</div>
+        <div class="title">Горизонтальный: Знак + PROCAM VMS (Тёмная тема)</div>
+        <div class="desc">Фирменный логотип для тёмного монитора охраны</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/08-horizontal-procam-dark.svg" download="vms-08-horizontal-procam-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/08-horizontal-procam-dark.png" download="vms-08-horizontal-procam-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-light">
+        <img src="./vms/svg/09-horizontal-procam-on-dark-card.svg" alt="Горизонтальный: PROCAM VMS на тёмной плашке" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">09-horizontal-procam-on-dark-card</div>
+        <div class="title">Горизонтальный: PROCAM VMS на тёмной плашке</div>
+        <div class="desc">Готовый баннер программного обеспечения VMS</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/09-horizontal-procam-on-dark-card.svg" download="vms-09-horizontal-procam-on-dark-card.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/09-horizontal-procam-on-dark-card.png" download="vms-09-horizontal-procam-on-dark-card.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-light">
+        <img src="./vms/svg/10-horizontal-mono-black.svg" alt="Горизонтальный монохромный VMS (Чёрный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">10-horizontal-mono-black</div>
+        <div class="title">Горизонтальный монохромный VMS (Чёрный)</div>
+        <div class="desc">Для договоров поставки ПО, лицензий и актов ввода</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/10-horizontal-mono-black.svg" download="vms-10-horizontal-mono-black.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/10-horizontal-mono-black.png" download="vms-10-horizontal-mono-black.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="2">
+      <div class="preview preview-dark">
+        <img src="./vms/svg/11-horizontal-mono-white.svg" alt="Горизонтальный монохромный VMS (Белый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">11-horizontal-mono-white</div>
+        <div class="title">Горизонтальный монохромный VMS (Белый)</div>
+        <div class="desc">Для гравировки на серверных стойках и NVR-шасси</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/11-horizontal-mono-white.svg" download="vms-11-horizontal-mono-white.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/11-horizontal-mono-white.png" download="vms-11-horizontal-mono-white.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-title">3. Полный горизонтальный логотип (С подписью RU / KZ / EN)</h3>
+  <div class="grid">
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./vms/svg/12-horizontal-ru-light.svg" alt="Полный логотип RU — СТАНЦИЯ ВИДЕОНАБЛЮДЕНИЯ И АРХИВ (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">12-horizontal-ru-light</div>
+        <div class="title">Полный логотип RU — СТАНЦИЯ ВИДЕОНАБЛЮДЕНИЯ И АРХИВ (Светлый)</div>
+        <div class="desc">Официальный логотип платформы видеомониторинга</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/12-horizontal-ru-light.svg" download="vms-12-horizontal-ru-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/12-horizontal-ru-light.png" download="vms-12-horizontal-ru-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-dark">
+        <img src="./vms/svg/13-horizontal-ru-dark.svg" alt="Полный логотип RU — СТАНЦИЯ ВИДЕОНАБЛЮДЕНИЯ И АРХИВ (Тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">13-horizontal-ru-dark</div>
+        <div class="title">Полный логотип RU — СТАНЦИЯ ВИДЕОНАБЛЮДЕНИЯ И АРХИВ (Тёмный)</div>
+        <div class="desc">Для тёмной темы рабочей станции оператора</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/13-horizontal-ru-dark.svg" download="vms-13-horizontal-ru-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/13-horizontal-ru-dark.png" download="vms-13-horizontal-ru-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./vms/svg/14-horizontal-ru-on-dark-card.svg" alt="Полный логотип RU на фирменном тёмном фоне" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">14-horizontal-ru-on-dark-card</div>
+        <div class="title">Полный логотип RU на фирменном тёмном фоне</div>
+        <div class="desc">Готовый баннер клиентской станции видеонаблюдения</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/14-horizontal-ru-on-dark-card.svg" download="vms-14-horizontal-ru-on-dark-card.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/14-horizontal-ru-on-dark-card.png" download="vms-14-horizontal-ru-on-dark-card.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./vms/svg/15-horizontal-kz-light.svg" alt="Полный логотип KZ — БЕЙНЕБАҚЫЛАУ СТАНЦИЯСЫ ЖӘНЕ АРХИВ (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">15-horizontal-kz-light</div>
+        <div class="title">Полный логотип KZ — БЕЙНЕБАҚЫЛАУ СТАНЦИЯСЫ ЖӘНЕ АРХИВ (Светлый)</div>
+        <div class="desc">Казахская версия для официальной документации</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/15-horizontal-kz-light.svg" download="vms-15-horizontal-kz-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/15-horizontal-kz-light.png" download="vms-15-horizontal-kz-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-dark">
+        <img src="./vms/svg/16-horizontal-kz-dark.svg" alt="Полный логотип KZ — БЕЙНЕБАҚЫЛАУ СТАНЦИЯСЫ ЖӘНЕ АРХИВ (Тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">16-horizontal-kz-dark</div>
+        <div class="title">Полный логотип KZ — БЕЙНЕБАҚЫЛАУ СТАНЦИЯСЫ ЖӘНЕ АРХИВ (Тёмный)</div>
+        <div class="desc">Казахская версия для тёмного интерфейса</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/16-horizontal-kz-dark.svg" download="vms-16-horizontal-kz-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/16-horizontal-kz-dark.png" download="vms-16-horizontal-kz-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-light">
+        <img src="./vms/svg/17-horizontal-en-light.svg" alt="Полный логотип EN — VIDEO MANAGEMENT SYSTEM & NVR (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">17-horizontal-en-light</div>
+        <div class="title">Полный логотип EN — VIDEO MANAGEMENT SYSTEM & NVR (Светлый)</div>
+        <div class="desc">Международный брендлайн для глобального дистрибутива</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/17-horizontal-en-light.svg" download="vms-17-horizontal-en-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/17-horizontal-en-light.png" download="vms-17-horizontal-en-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="3">
+      <div class="preview preview-dark">
+        <img src="./vms/svg/18-horizontal-en-dark.svg" alt="Полный логотип EN — VIDEO MANAGEMENT SYSTEM & NVR (Тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">18-horizontal-en-dark</div>
+        <div class="title">Полный логотип EN — VIDEO MANAGEMENT SYSTEM & NVR (Тёмный)</div>
+        <div class="desc">Международный брендлайн для тёмных панелей управления</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/18-horizontal-en-dark.svg" download="vms-18-horizontal-en-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/18-horizontal-en-dark.png" download="vms-18-horizontal-en-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-title">4. Вертикальные и текстовые версии (Для визиток, сторис, наклеек)</h3>
+  <div class="grid">
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./vms/svg/19-vertical-procam-light.svg" alt="Вертикальный: Знак + PROCAM VMS (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">19-vertical-procam-light</div>
+        <div class="title">Вертикальный: Знак + PROCAM VMS (Светлый)</div>
+        <div class="desc">Центрированная вертикальная компоновка станции</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/19-vertical-procam-light.svg" download="vms-19-vertical-procam-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/19-vertical-procam-light.png" download="vms-19-vertical-procam-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./vms/svg/20-vertical-procam-on-dark.svg" alt="Вертикальный: Знак + PROCAM VMS (на чёрном фоне)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">20-vertical-procam-on-dark</div>
+        <div class="title">Вертикальный: Знак + PROCAM VMS (на чёрном фоне)</div>
+        <div class="desc">Центрированный постер VMS на премиум чёрном фоне</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/20-vertical-procam-on-dark.svg" download="vms-20-vertical-procam-on-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/20-vertical-procam-on-dark.png" download="vms-20-vertical-procam-on-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./vms/svg/21-vertical-ru-light.svg" alt="Вертикальный RU: Знак + PROCAM VMS + СТАНЦИЯ" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">21-vertical-ru-light</div>
+        <div class="title">Вертикальный RU: Знак + PROCAM VMS + СТАНЦИЯ</div>
+        <div class="desc">Обложка руководства оператора видеонаблюдения</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/21-vertical-ru-light.svg" download="vms-21-vertical-ru-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/21-vertical-ru-light.png" download="vms-21-vertical-ru-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./vms/svg/22-vertical-ru-on-dark.svg" alt="Вертикальный RU на чёрном фоне #09090B" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">22-vertical-ru-on-dark</div>
+        <div class="title">Вертикальный RU на чёрном фоне #09090B</div>
+        <div class="desc">Премиум обложка каталога ПО ProCam VMS</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/22-vertical-ru-on-dark.svg" download="vms-22-vertical-ru-on-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/22-vertical-ru-on-dark.png" download="vms-22-vertical-ru-on-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./vms/svg/23-wordmark-only-light.svg" alt="Только текст PROCAM VMS (Без иконки, светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">23-wordmark-only-light</div>
+        <div class="title">Только текст PROCAM VMS (Без иконки, светлый)</div>
+        <div class="desc">Чистый текстовый логотип платформы</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/23-wordmark-only-light.svg" download="vms-23-wordmark-only-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/23-wordmark-only-light.png" download="vms-23-wordmark-only-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-dark">
+        <img src="./vms/svg/24-wordmark-only-dark.svg" alt="Только текст PROCAM VMS (Без иконки, тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">24-wordmark-only-dark</div>
+        <div class="title">Только текст PROCAM VMS (Без иконки, тёмный)</div>
+        <div class="desc">Текстовый заголовок верхнего бара видеостены</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/24-wordmark-only-dark.svg" download="vms-24-wordmark-only-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/24-wordmark-only-dark.png" download="vms-24-wordmark-only-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-light">
+        <img src="./vms/svg/25-wordmark-ru-light.svg" alt="Только текст PROCAM VMS + СТАНЦИЯ (Светлый)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">25-wordmark-ru-light</div>
+        <div class="title">Только текст PROCAM VMS + СТАНЦИЯ (Светлый)</div>
+        <div class="desc">Текстовый блок без знака матрицы для белых фонов</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/25-wordmark-ru-light.svg" download="vms-25-wordmark-ru-light.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/25-wordmark-ru-light.png" download="vms-25-wordmark-ru-light.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-cat="4">
+      <div class="preview preview-dark">
+        <img src="./vms/svg/26-wordmark-ru-dark.svg" alt="Только текст PROCAM VMS + СТАНЦИЯ (Тёмный)" loading="lazy" />
+      </div>
+      <div class="meta">
+        <div class="code" style="color: #2563EB;">26-wordmark-ru-dark</div>
+        <div class="title">Только текст PROCAM VMS + СТАНЦИЯ (Тёмный)</div>
+        <div class="desc">Текстовый блок без знака матрицы для тёмных фонов</div>
+        <div class="actions">
+          <a class="btn btn-svg" href="./vms/svg/26-wordmark-ru-dark.svg" download="vms-26-wordmark-ru-dark.svg">Скачать SVG</a>
+          <a class="btn btn-png" href="./vms/png/26-wordmark-ru-dark.png" download="vms-26-wordmark-ru-dark.png">Скачать PNG (HD)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  </div>
+
+  <script>
+    function switchTab(targetId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const buttons = document.querySelectorAll('.tab-btn');
+      if (targetId === 'cctv') buttons[0].classList.add('active');
+      else if (targetId === 'radar') buttons[1].classList.add('active');
+      else if (targetId === 'vms') buttons[2].classList.add('active');
+      else if (targetId === 'all') buttons[3].classList.add('active');
+
+      const panes = document.querySelectorAll('.project-pane');
+      if (targetId === 'all') {
+        panes.forEach(pane => pane.classList.add('active'));
+      } else {
+        panes.forEach(pane => {
+          if (pane.id === 'pane-' + targetId) {
+            pane.classList.add('active');
+          } else {
+            pane.classList.remove('active');
+          }
+        });
+      }
+    }
+
+    // Default activate CCTV
+    document.addEventListener('DOMContentLoaded', () => {
+      switchTab('cctv');
+    });
+  </script>
 </body>
 </html>

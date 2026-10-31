@@ -1,0 +1,22 @@
+<svg width="250" height="64" viewBox="0 0 250 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <style>
+    .pro { font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 900; letter-spacing: -0.03em; }
+    .cam { font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 400; letter-spacing: -0.03em; }
+    .sub { font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  </style>
+
+  <g transform="translate(0, 0) scale(1.0)">
+  <rect x="1.5" y="1.5" width="61" height="61" rx="13.5" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+  <path d="M11 15L23 21L32 14L41 21L53 15L55 34C55 46.5 44.5 54.5 32 57C19.5 54.5 9 46.5 9 34L11 15Z" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M13 21L32 31L51 21" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="22" cy="34" r="7.5" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+  <circle cx="22" cy="34" r="3.2" fill="none" stroke="#FFFFFF" stroke-width="1.6"/>
+  <circle cx="23.5" cy="32.5" r="1.6" fill="#FFFFFF"/>
+  <circle cx="42" cy="34" r="7.5" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+  <circle cx="42" cy="34" r="3.2" fill="none" stroke="#FFFFFF" stroke-width="1.6"/>
+  <circle cx="43.5" cy="32.5" r="1.6" fill="#FFFFFF"/>
+  <path d="M32 37L28.5 44L32 50L35.5 44L32 37Z" fill="#FFFFFF"/>
+  </g>
+  <text x="80" y="44" font-size="36"><tspan class="pro" fill="#FFFFFF">PRO</tspan><tspan class="cam" fill="#FFFFFF">CAM</tspan></text>
+</svg>
