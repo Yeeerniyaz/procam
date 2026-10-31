@@ -69,6 +69,7 @@ export default function AuthorProjectsModal({
       badge: isKz ? 'Алматы · Сервис' : 'Алматы · Услуги',
       category: isKz ? 'Бейнебақылау' : 'Видеонаблюдение',
       icon: Video,
+      logoUrl: '/logos/procam-cctv.svg',
       color: 'teal',
       description: isKz
         ? 'Hikvision, HiWatch және Dahua негізінде IP-бейнебақылау жүйелерін жобалау, таза PoE-монтаждау және смартфоннан 24/7 қашықтан қарау.'
@@ -86,6 +87,7 @@ export default function AuthorProjectsModal({
       badge: 'Windows & Linux',
       category: isKz ? 'Инженерлік БҚ' : 'Инженерное ПО',
       icon: Radar,
+      logoUrl: '/logos/procam-radar.svg',
       color: 'emerald',
       description: isKz
         ? 'IP-камераларды интернетті үзбей кабель мен Wi-Fi арқылы қатар іздеуге (/32), бос IP санын іріктеуге (1..245) және PDF-паспорт жасауға арналған десктоптық бағдарлама.'
@@ -107,6 +109,7 @@ export default function AuthorProjectsModal({
       badge: 'Windows & Linux',
       category: isKz ? 'VMS & Архив' : 'VMS и архив NVR',
       icon: Monitor,
+      logoUrl: '/logos/procam-vms.svg',
       color: 'cyan',
       description: isKz
         ? 'NVR бейнетіркегішінің архивін тікелей ойнатқыш және видеоқабырға. Камераларды тікелей эфирде бақылау, кесінділерді FFmpeg арқылы пакеттік жүктеу.'
@@ -354,9 +357,13 @@ export default function AuthorProjectsModal({
                 >
                   <Group justify="space-between" align="flex-start" mb="xs">
                     <Group gap="xs">
-                      <ThemeIcon color="teal" variant="light" size={32} radius="md">
-                        <Icon size={16} />
-                      </ThemeIcon>
+                      {'logoUrl' in p && p.logoUrl ? (
+                        <img src={p.logoUrl} width={32} height={32} style={{ borderRadius: 8, flexShrink: 0 }} alt={p.title} />
+                      ) : (
+                        <ThemeIcon color="teal" variant="light" size={32} radius="md">
+                          <Icon size={16} />
+                        </ThemeIcon>
+                      )}
                       <div>
                         <Text fw={700} fz="sm" c="white" lh={1.2}>
                           {p.title}
