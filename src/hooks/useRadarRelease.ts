@@ -16,22 +16,22 @@ export interface RadarReleaseData {
 }
 
 const DEFAULT_RELEASE: RadarReleaseData = {
-  version: '4.0.0',
-  tag: 'v4.0.0',
-  releasedAt: '2026-10-30',
+  version: '5.0.0',
+  tag: 'v5.0.0',
+  releasedAt: '2026-11-11',
   repoUrl: 'https://github.com/Yeeerniyaz/procam-radar',
   windowsUrl: 'https://github.com/Yeeerniyaz/procam-radar/releases/latest/download/ProCamRadar_Windows_x64.exe',
-  windowsSize: '7.7 MB',
+  windowsSize: '8.3 MB',
   linuxUrl: 'https://github.com/Yeeerniyaz/procam-radar/releases/latest/download/ProCamRadar_Linux_x64',
-  linuxSize: '7.5 MB',
+  linuxSize: '7.9 MB',
   linuxInstallCmd:
     'curl -fsSL https://raw.githubusercontent.com/Yeeerniyaz/procam-radar/main/dist/linux/install.sh | sudo bash',
   manualUrl: 'https://raw.githubusercontent.com/Yeeerniyaz/procam-radar/main/PROCAM_RADAR_MANUAL_RU.pdf',
   changelog: [
-    'Одновременная работа Кабеля (Ethernet/PoE) и Wi-Fi роутера без потери интернета (/32 маршрутизация)',
-    'Подбор свободных IP-адресов с точным выбором количества камер (1, 4, 8, 16, 32, 64 или 1..245)',
-    'Прямое открытие камеры по MAC-адресу при конфликте IP (192.168.1.64) без отключения кабелей',
-    'Беспарольный паспорт камеры (статус активации, часы ONVIF, порты) и тест кабеля RJ-45 (MTU 1500)',
+    'Строгая дедупликация камер и видеорегистраторов NVR по связке (IP + MAC) без дублирования строк',
+    'Мульти-сеть одновременно: 2× Кабеля Ethernet + 2× Wi-Fi + VPN / Tailscale с точечными маршрутами /32',
+    'Встроенный RTSP-видеоплеер и удобная панель паролей камер прямо над таблицей и внутри окна видео',
+    'Интерактивная матрица всех 254 адресов подсети (/24), инженерный калькулятор 3-в-1 и раздел экосистемы YEEE.KZ',
   ],
   isLiveFromGit: false,
 };

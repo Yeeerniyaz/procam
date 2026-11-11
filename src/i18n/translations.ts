@@ -205,21 +205,21 @@ const ru = {
     tagline: 'Системы IP-видеонаблюдения в Алматы.',
   },
   radar: {
-    eyebrow: '// 04 · ПРОГРАММА PROCAM RADAR v4.0',
+    eyebrow: '// 04 · ПРОГРАММА PROCAM RADAR v5.0',
     badge: 'Windows x64 · Linux x64',
-    title: 'ProCam Radar — поиск и диагностика IP\u2011камер',
+    title: 'ProCam Radar v5.0 — поиск и диагностика IP\u2011камер',
     subtitle:
-      'Собственная десктопная программа ProCam для Windows и Linux: находит камеры в чужих подсетях, работает одновременно по кабелю и Wi-Fi без обрыва интернета, подбирает нужное количество свободных IP и формирует PDF-паспорт объекта.',
+      'Собственная десктопная программа ProCam для Windows и Linux: находит камеры и NVR без дубликатов (IP + MAC), работает одновременно через 2×LAN + 2×Wi-Fi + Tailscale (/32), открывает живое RTSP-видео, подбирает свободные IP (254 матрица) и формирует PDF-паспорт объекта.',
     openPageBtn: 'Подробнее о программе',
     backToSiteBtn: 'На главную',
     downloadWin: 'Скачать для Windows (.exe)',
     downloadLinux: 'Скачать для Linux (x64)',
     downloadManual: 'Инструкция на русском (PDF)',
     highlights: [
-      { value: 'Кабель + Wi-Fi', label: 'Интернет не пропадает (/32)' },
-      { value: '1..245 IP', label: 'Выбор числа свободных IP' },
-      { value: 'L2 / ARP', label: 'Открытие по MAC при конфликте' },
-      { value: 'PDF-паспорт', label: 'Отчёт объекта в 1 клик' },
+      { value: '2×LAN + Wi-Fi', label: 'Мульти-сеть + Tailscale (/32)' },
+      { value: 'Без дублей', label: 'Строгая сверка IP + MAC' },
+      { value: 'RTSP Плеер', label: 'Живое видео + Пароль камер' },
+      { value: '254 IP Карта', label: 'Подбор IP и PDF-паспорт' },
     ],
     features: [
       {
@@ -457,9 +457,9 @@ const kz: Dictionary = {
     tagline: 'Алматыдағы IP-бейнебақылау жүйелері.',
   },
   radar: {
-    eyebrow: '// 04 · PROCAM RADAR v4.0 БАҒДАРЛАМАСЫ',
+    eyebrow: '// 04 · PROCAM RADAR v5.0 БАҒДАРЛАМАСЫ',
     badge: 'Windows x64 · Linux x64',
-    title: 'ProCam Radar — IP\u2011камераларды іздеу және диагностикалау',
+    title: 'ProCam Radar v5.0 — IP\u2011камераларды іздеу және диагностикалау',
     subtitle:
       'Windows және Linux үшін ProCam төл десктоптық бағдарламасы: бөтен ішкі желілердегі камераларды табады, интернетті жоғалтпай кабель мен Wi-Fi арқылы қатар жұмыс істейді, қажетті бос IP санын таңдайды және PDF-паспорт жасайды.',
     openPageBtn: 'Бағдарлама туралы толығырақ',

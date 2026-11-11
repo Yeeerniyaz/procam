@@ -42,24 +42,31 @@ const FEATURE_ICONS = [Wifi, Network, ShieldCheck, Cable];
 const SCREENSHOT_SLIDES = [
   {
     id: 'main',
-    label: '1. Главный экран (Кабель + Wi-Fi)',
-    src: '/screenshots/procam-radar-main.png',
+    label: '1. Главный экран v5.0 (Радар + RTSP)',
+    src: '/screenshots/procam-radar-main.png?v=5.0',
     caption:
-      'Одновременный поиск камер по кабелю Ethernet (PoE) и Wi-Fi роутеру без обрыва интернета (/32 маршрутизация).',
+      'Строгая дедупликация камер (IP + MAC), панель паролей камер для RTSP и одновременная работа 2×LAN + 2×Wi-Fi + Tailscale (/32 маршрутизация).',
   },
   {
     id: 'free',
-    label: '2. Подбор свободных IP (1..245)',
-    src: '/screenshots/procam-radar-free-ip.png',
+    label: '2. Карта подсети (254 IP)',
+    src: '/screenshots/procam-radar-free-ip.png?v=5.0',
     caption:
-      'Выбор точного количества свободных IP-адресов (1, 4, 8, 16, 32, 64 или любое число вручную) с проверкой всей подсети.',
+      'Интерактивная матрица всех 254 адресов подсети (/24) и подбор нужного количества свободных IP-адресов (1, 4, 8, 16, 32, 64).',
   },
   {
     id: 'cable',
-    label: '3. Паспорт камеры и тест кабеля',
-    src: '/screenshots/procam-radar-cable-diag.png',
+    label: '3. Тест кабеля RJ-45 (MTU 1500)',
+    src: '/screenshots/procam-radar-cable-diag.png?v=5.0',
     caption:
-      'Беспарольный опрос серийного номера, статуса активации и стресс-тест кабеля RJ-45 пакетами 64B и 1472B (MTU 1500).',
+      'Беспарольный опрос паспорта камеры и стресс-тест физической линии RJ-45 пакетами 64B и тяжелыми кадрами 1472B (MTU 1500).',
+  },
+  {
+    id: 'about',
+    label: '4. Автор и Проекты (YEEE.KZ)',
+    src: '/screenshots/procam-radar-about.png?v=5.0',
+    caption:
+      'Досье автора (Ернияз Талғатулы) и экосистема проектов: ProCam CCTV, ProCam Radar v5.0, ProCam Viewer, Royal Banners, TezTap и Smart Mirror VECTOR.',
   },
 ] as const;
 
